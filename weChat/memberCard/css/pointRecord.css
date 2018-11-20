@@ -1,0 +1,136 @@
+  body,
+        html {
+            height: 100%;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            font-size: 100px;
+        }
+
+        body,
+        .wrap {
+            font-size: 12px;
+            background: #F4F4F4;
+        }
+
+        .wrap ul {
+            margin-top: 0.1rem !important;
+        }
+
+        .listBox{
+            background: #ffffff;
+            margin: .1rem;
+        }
+        .divbox {
+            width: 67px;
+            height: 100px;
+            background: red;
+        }
+        .tabBox{
+            width: 100%;
+            background: rgb(60,66,94);
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .tabtitle{
+            text-align: center;
+            color: #ffffff;
+            padding: .2rem 0;
+        }
+        .tabtitle p:last-child{
+            font-size: .36rem;
+        }
+       .tabbot{
+           position: relative;
+           display: flex;
+       }
+       .tabbotList{
+           /*line-height: .3rem;*/
+           color: #ffffff;
+           font-size: .14rem;
+           flex: 1;
+           text-align: center;
+           margin-bottom: .1rem;
+       }
+       .borbot{
+           position: absolute;
+           left: 0;
+           bottom: 0px;
+           width: 30%;
+           height: 2px;
+           background: rgb(255,221,0);
+       }
+      .listBoxUl li{
+            height: .5rem !important;
+            margin: 0 .1rem;
+            display: flex;
+            -webkit-justify-content:space-between;
+            -webkit-align-items:center;
+            border-bottom: 1px solid rgb(230, 230, 230);
+      }
+     .desc{
+         font-size: .14rem;
+         color: rgb(51,51,51);
+     }
+     .time{
+         font-size: .12rem;
+         color: rgb(128,128,128);
+     }
+     .point{
+         font-size: .14rem;
+     }
+
+
+     .stateR {
+         color: rgb(233, 5, 77);
+     }
+
+     .stateG {
+         color: rgb(0, 192, 163);
+     }
+     /*没有数据 显示 */
+     .nodata{
+        position: fixed;
+        top: 2rem;
+
+     }
+     .nodata img{
+         width:50%;
+         margin-left: 25%;
+     }
+     .nodata p{
+         text-align: center;
+         font-size: .22rem;
+         color: rgb(51,51,51);
+         margin-top: .1rem;
+     }
+
+     .morebtn{
+        width: 100%;
+        line-height: .45rem;
+        text-align: center;
+        color: #9C9C9C;
+        /*background: rgb(255,221,0);*/
+     }
+     .ccc{
+         background: rgb(230,230,230);
+     }
+
+    .cartype{
+        position: absolute;
+        right: .2rem;
+        top: .2rem;
+    }
+    .cartype p{
+        font-size: .13rem;
+        color: rgb(158, 161, 175);
+    }
+    .cartype img{
+        height: .2rem;
+    }

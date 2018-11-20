@@ -1,0 +1,142 @@
+<style>
+    * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -o-user-select: none;
+    }
+
+    input {
+        -webkit-user-select: auto;
+        /*webkit浏览器*/
+    }
+
+    /*修改 2*/
+
+    #shoujihao,
+    #yanzhengmaBtn {
+        -webkit-user-select: auto !important;
+    }
+
+    .mengcengTishi {
+        width: 100%;
+        height: 100%;
+        background: #333333;
+        opacity: 0.9;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        display: none;
+    }
+
+    .mengcengTishi p {
+        text-align: center;
+        margin-top: 60%;
+        color: #FFFFFF;
+        font-size: 0.2rem;
+    }
+
+    .yanzheng {
+        width: 100%;
+        height: 100%;
+        padding: 0.15rem;
+        padding-top: 0px;
+    }
+
+    .yangzhengChange {
+        background: #FFFFFF;
+    }
+
+    .boxImg {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cenImg {
+        width: 0.76rem;
+        margin-bottom: 0.355rem;
+    }
+
+    .shoujihao,
+    .yanzhengma {
+        height: 0.57rem;
+        width: 100%;
+        margin-left: 0%;
+        padding: 0 0.15rem;
+    }
+
+    .yanzhengma,
+    .shoujihao {
+        border: none;
+    }
+
+    .shoujihao {
+        border-bottom: 1px solid #e6e6e6;
+    }
+
+    .getyzm {
+        width: 1.015rem;
+        height: 0.25rem;
+        float: right;
+        text-align: center;
+        border: 1px solid #FFDD10;
+        border-radius: 0.125rem;
+        line-height: 0.25rem;
+        color: #333333;
+        font-size: 0.14rem;
+        margin-top: 0.18rem;
+        background: #FFFFFF;
+        outline: none;
+    }
+
+    .boundBtn {
+        width: 75%;
+        height: 0.45rem;
+        background: #CCCCCC;
+        color: #333333;
+        font-size: 0.16rem;
+        margin-top: 0.45rem;
+        margin-left: 12.5%;
+        border-radius: 0.225rem;
+        outline: none;
+        border: none;
+    }
+
+    .shoujihao #shoujihao {
+        font-size: 0.15rem;
+    }
+
+    .yanzhengma input {
+        font-size: 0.15rem;
+    }
+
+    #shoujihao,
+    .getyzm,
+    #yanzhengmaBtn,
+    #boundBtn {
+        outline: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    /*修改 2*/
+
+    #shoujihao,
+    #yanzhengmaBtn {
+        -webkit-user-select: auto !important;
+    }
+
+    .ceshi {
+        width: 100%;
+        height: 30px;
+    }
+
+    #shoujihao {
+        height: auto;
+    }
+
+    /*a,button,input{
+         -webkit-tap-highlight-color: rgb(0,0,0) !important;
+     }*/

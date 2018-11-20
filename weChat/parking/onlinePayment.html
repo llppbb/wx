@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="format-detection" content="email=no" />
+		<!--禁止页面缩放-->
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+		<title>停车管理</title>
+		<!-- 图片轮播 -->
+		<link type="text/css" href="../common/css/styleLunbo.css" rel="stylesheet" />
+		<link type="text/css" href="css/onlinePayment.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../common/css/common.css" />
+	</head>
+
+	<body>
+		<div class="img_gallery" style="display:none">
+			<div class="point">
+				<a href="#">1</a>
+				<a href="#">2</a>
+				<a href="#">3</a>
+			</div>
+			<div class="main_img">
+				<ul id="img_box"></ul>
+				<a href="javascript:;" id="btn_prev"></a>
+				<a href="javascript:;" id="btn_next"></a>
+			</div>
+		</div>
+		<div class="tabBox" id="tabBox">
+			<div id="gocarList"><img src="pic/icon_plate_number.png" />
+				<p>车牌管理</p>
+			</div>
+			<div id="parkingRecord"><img src="pic/icon_parking_record1.png" />
+				<p>停车记录</p>
+			</div>
+			<div id="insetboot"><img src="pic/icon_membernotice.png" />
+				<p>会员须知</p>
+			</div>
+		</div>
+		<div class="wrap">
+			<div class="center">
+				<div class="havecar">
+					<!-- 车牌号 -->
+					<div class="carnumber"></div>
+					<!-- 显示城市 和 减免是否可用 -->
+					<div class="citybox">
+						<div class="cityName">
+							<img src="pic/P.png" /><span id="parkName" style="font-size:.14rem"></span>
+						</div>
+						<div class="redfont" id="redfont"></div>
+					</div>
+					<!-- 入场时间  时长  金额 -->
+					<div class="timeboxF"></div>
+					<div class="countdown" style="display:none">
+						<p class="cdtitle">离场倒计时</p>
+						<p class="cdtime cdtimeb" id="cdtime0" style="display:none">--分--秒</p>
+						<p class="cdtime cdtimeb" id="cdtime1" style="display:none">--分--秒</p>
+						<p class="cdtime cdtimeb" id="cdtime2" style="display:none">--分--秒</p>
+						<p class="cdmes" id="cdmes0" style="display:none">请在倒计时结束前驶离车场，<br>超时请至人工收费处确认是否需补缴费用</p>
+						<p class="cdmes" id="cdmes1" style="display:none">请在倒计时结束前驶离车场，<br>超时请至人工收费处确认是否需补缴费用</p>
+						<p class="cdmes" id="cdmes2" style="display:none">请在倒计时结束前驶离车场，<br>超时请至人工收费处确认是否需补缴费用</p>
+					</div>
+					<div class="botiput" act="go"><img src="pic/btn_payment.png" /></div>
+				</div>
+				<div class="nocar" style="display:none">
+					<img src="pic/img_no_parking.png" />
+					<p>当前无车辆在场</p>
+				</div>
+			</div>
+			<div class="nocarnum" style="display:none">
+				<p class="nocarnumMes">绑定车牌，享受积分停车福利</p>
+				<p class="nocarnumBtn">+ 绑定车牌号</p>
+			</div>
+			<div class="bgdiv"></div>
+			<!-- 华熙停车场 -->
+			<div class="parkingArea">
+				<div class="parkingTitle"><span style="position: relative;"><span class="parkingTitle_ parkingTitle_L"></span> 华熙停车场 <span class="parkingTitle_ parkingTitle_R"></span></span>
+				</div>
+				<div class="parkingAreaLists">
+					<!-- <div class="parkingAreaList">
+                   <div class="parkingName">北京 华熙LIVE停车场</div>
+                   <div class="parkingMes">北京市海淀区复兴路</div>
+               </div> -->
+				</div>
+			</div>
+		</div>
+		<div class="trackMatte"></div>
+
+		<!-- 引导开卡 -->
+		<div class="repast">
+			<div class="rtitle">
+				<p class="rtitleH">尊敬的华熙会员</p>
+				<p class="rtitleC">建议您识别下方二维码关注华熙会员中心公众号，以接收消息通知，如餐饮排号信息、停车计费信息、积分变动信息等。您可按以下步骤使用该功能：</p>
+			</div>
+			<div class="rcenter">
+				<p>1.识别二维码关注公众号</p>
+				<p>2.点击公众号下方菜单“会员服务”</p>
+				<p>3.在“会员服务”中选择相应功能</p>
+				<img src="pic/weixinicon.png" class="codeImg" />
+			</div>
+			<div class="skipbtn">关闭</div>
+			<div class="skipbtnMew">关闭后想接收消息请自行关注华熙会员中心</div>
+		</div>
+
+	</body>
+	<script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+	<script src="../common/officialJs/fontSize.js"></script>
+	<script src="../common/officialJs/md5.js"></script>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+	<script src="js/common.js"></script>
+	<!-- 图片轮播 -->
+	<script type="text/javascript" src="../common/officialJs/jquery.event.drag.js"></script>
+	<script type="text/javascript" src="../common/officialJs/jquery.touchSlider.js"></script>
+	<script type="text/javascript" src="../common/officialJs/jqlunbo.js"></script>
+	<script type="text/javascript" src="../common/customJs/URL.js"></script>
+	<script type="text/javascript" src="../common/customJs/AJAX.js"></script>
+	<script type="text/javascript" src="../common/customJs/time.js"></script>
+	<script src="../common/customJs/wxShare.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/onlinePayment.js"></script>
+</html>

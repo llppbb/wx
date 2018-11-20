@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>地址列表</title>
+    <link rel="stylesheet" href="css/getadress.css">
+    <link rel="stylesheet" href="css/dizhiliebiao.css">
+    <link rel="stylesheet" href="../common/css/common.css">
+    <style>
+        .zengjiadizhi {
+            line-height: .16rem;
+            color: #333333;
+            font-size: .13rem;
+            text-align: right;
+            padding: .16rem .14rem 0rem 0rem;
+        }
+
+        .zengjiadizhi span {
+            position: relative;
+        }
+
+        .zengjiadizhi span img {
+            position: absolute;
+            width: .16rem;
+            height: .16rem;
+            left: -.2rem;
+            top: 0rem;
+        }
+
+        .dizhi {
+            width: 96%;
+            margin-left: 2%;
+            background: none;
+            border: 1px solid #E6E6E6;
+        }
+
+        html,
+        body,
+        .wrap {
+            background: #ffffff;
+        }
+
+        .dizhi_state {
+            padding: 0.07rem !important;
+            height: .3rem;
+            margin-top: 0.14rem;
+            border-top: 1px solid rgb(230, 230, 230);
+            background: #FCFCFC;
+        }
+
+        .xingmingshoujihao p {
+            margin-top: 0.14rem;
+            margin-bottom: 0.14rem;
+        }
+
+        .dizhi_liebiao {
+            margin-bottom: 0rem;
+        }
+
+        .dizhi_state_right {
+            float: right;
+            padding-bottom: 0rem;
+        }
+
+        .xingmingshoujihao p:nth-of-type(2) {
+            color: #808080;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="zengjiadizhi"><span><img src="pic/icon_add.png"/>添加收货地址</span></div>
+    </div>
+
+    <!--蒙层-->
+    <div class="mengceng"></div>
+    <!--取消订单-->
+    <div class="quxiaodingyaoBox" style="z-index:22">
+        <p>确定要删除此收货地址信息？</p>
+        <div class="anniu anniuQx">
+            <div class="quxiaodingdan quxiaodingdanQx" id="fou">否</div>
+            <div class="zhifu" id="shi">是</div>
+        </div>
+    </div>
+    <!-- </div> -->
+    <div class="shezhi_tishi">
+        <P>设置成功</P>
+    </div>
+    <script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+    <script src="../common/officialJs/fontSize.js"></script>
+    <script src="../common/customJs/URL.js"></script>
+    <script src="../common/customJs/AJAX.js"></script>
+    <script src="../common/customJs/toastDialog.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+    
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+        if (!getStorage("userData")) {
+            window.location.href = WX_URL + "HXXCServiceWeChat/wechat/wechat_verify";
+        } else {
+            var userData = getStorage("userData");
+        }
+        var aid = '';
+        var uid = userData.uid;
+        // var addressData = getAddress(uid);
+        renderingHtml(getAddress(uid));
+
+        $(".removeBtn").click(function(event) {
+            if ($(this).attr('defaultValue') == 'true') {
+                tishi('不能删除默认地址！');
+                return;
+            }
+            aid = $(this).attr('aid');
+            $('.mengceng').show();
+            $('.quxiaodingyaoBox').show();
+        });
+
+        $("#fou").click(function(event) {
+            $('.mengceng').hide();
+            $('.quxiaodingyaoBox').hide();
+        });
+
+        $("#shi").click(function(event) {
+            var delAddressBack=delAddress({'uid': uid,'id': aid});
+            if (parseInt(delAddressBack.state)  == 0) {
+                $('#ad_' + aid).remove();
+                $('.quxiaodingyaoBox').hide();
+                setTimeout(function() {
+                    $('.mengceng').hide();
+                }, 50);
+            } else {
+                tishi(delAddressBack.message);
+            }
+        });
+
+        $(".bianjiBtn").click(function(event) {
+            var aid = $(this).attr('dataType');
+            location.href = "addOrEditTicketAddress.html?type=edit&aid=" + aid;
+        });
+
+        $(".dizhi_state_left").click(function(event) {
+            var that = this;
+            var defaultValue = $(this).attr('defaultValue');
+            if (defaultValue == 'true') {
+                return;
+            } else {
+                defaultValue = 'true';
+            }
+            var data = {
+                uid: uid,
+                id: $(this).attr('dataType'),
+                defaultValue: defaultValue,
+                name: $(this).parent().parent().children(":first").find('p:first').text(),
+                mobile: $(this).parent().parent().children(":first").find('p:eq(1)').text(),
+                address: $(this).parent().parent().children(":nth-child(2)").find('p').text()
+            }
+            var updateAddressBack=updateAddress(JSON.stringify(data));
+            if (updateAddressBack.state == 0) {
+                $(that).attr('defaultValue', 'true');
+                $(that).siblings(".dizhi_state_right").children(".removeBtn").attr('defaultValue', 'true');
+                $(that).find("img").attr("src", "pic/icon_sec.png")
+                $(that).parents(".dizhi").siblings().find(".morendizhi_btn_img").attr("src", "pic/icon_mr_gray.png");
+                $(that).parents(".dizhi").siblings().find(".dizhi_state_left").attr('defaultValue', 'false');
+                $(that).parents(".dizhi").siblings().find(".dizhi_state_left").siblings(".dizhi_state_right").children(".removeBtn").attr('defaultValue', 'false');
+            } else {
+                tishi(res.message);
+                return;
+            }
+        });
+
+        $(".zengjiadizhi").on("click", function() {
+            var uid = $("#uid").val();
+            location.href = "addOrEditTicketAddress.html?type=add";
+        })
+        // 禁用微信分享
+        function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        }
+
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            onBridgeReady();
+        }
+
+        //渲染结构
+        function renderingHtml(addressData) {
+            var addressHtml = "";
+            $.each(addressData.list, function(i, k) {
+                var defaultValue = "";
+                var defaultValueImg = "";
+                if (k.defaultValue) {
+                    defaultValue = "false";
+                } else {
+                    defaultValue = "true";
+                }
+                if (k.defaultValue == 0) {
+                    defaultValueImg ='<img src ="pic/icon_sec.png" class="img_img morendizhi_btn_img"/>';
+                } else {
+                    defaultValueImg ='<img src="pic/icon_mr_gray.png" class="img_img morendizhi_btn_img"/>';
+                }
+                addressHtml += '<div class="dizhi" id="ad_' + k.id + '">' +
+                    '<div class="dizhi_liebiao">' +
+                    '<div class="xingmingshoujihao">' +
+                    '<p>' + k.name + '</p>' +
+                    '<p>' + k.mobile + '</p>' +
+                    '</div>' +
+                    '<div class="xiangxidizhi">' +
+                    '<p>' + k.address + '</p>' +
+                    '<div class="jianhao"></div>' +
+                    '</div>' +
+                    '<div class="dizhi_state">' +
+                    '<div class="dizhi_state_left" dataType="' + k.id + '" defaultValue="' + defaultValue + '">' +
+                    '<div class="dizhi_state_img_moren">'+defaultValueImg+'</div>' +
+                    '<div class="morendizhi_wenzi">默认地址</div>' +
+                    '</div>' +
+                    '<div class="dizhi_state_right">' +
+                    '<div class="dizhi_state_img_bianji">' +
+                    '<img src="pic/icon_bj.png" class="img_img" />' +
+                    '</div>' +
+                    '<div class="bianjiBtn" dataType="' + k.id + '" defaultValue="' + defaultValue + '">编辑</div>' +
+                    '<div class="dizhi_state_img_remove">' +
+                    '<img src="pic/icon_delete.png" class="img_img" />' +
+                    '</div>' +
+                    '<div class="removeBtn" aid="' + k.id + '" defaultValue="' + defaultValue + '">删除</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+            });
+            $(".wrap").append(addressHtml);
+        }
+    </script>
+</body>
+
+</html>

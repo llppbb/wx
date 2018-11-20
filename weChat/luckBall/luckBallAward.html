@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>开奖信息</title>
+    <link rel="stylesheet" type="text/css" href="css/luckBallAward.css" />
+</head>
+
+<body>
+    <div class="wrap">
+         <div class="dateBox">
+             <!-- <di class="date_list date_list_on">222222</di>
+             <di class="date_list">222222</di>
+             <di class="date_list">222222</di>
+             <di class="date_list">222222</di>
+             <di class="date_list">222222</di> -->
+         </div>
+        <!-- 我的中奖信息 开始-->
+         <div class="mymes">
+             <div class="title" style="margin-left:-.1rem;">我的中奖信息</div>
+             <div class="mymesbox">
+                 <!-- <div class="flex_box flex_between font_14_color_333 bor_top_333"><p>3333</p><p>二等奖</p></div>
+                 <div class="flex_box flex_between font_14_color_333 bor_top_333"><p>4444</p><p>二等奖</p></div> -->
+             </div>
+         </div>
+        <!-- 视频展示 -->
+        <div class="video">
+            <div class="title">开奖视频回放</div>
+            <iframe frameborder="0" style="margin-left:2%;margin-top:10px" width="94%" height="" src="" allowfullscreen id="iframe"></iframe>
+        </div>
+        <!-- 奖项设置 -->
+        <div class="winning_message">
+            <div class="title">中奖信息</div>
+            <table id="tbody">
+                <tr>
+                    <td><span style="margin-left:.1rem">奖项</span></td>
+                    <td style="text-align:left"><span style="margin-left:.1rem">中奖号码</span></td>
+                </tr>
+            </table>
+        </div>
+         <!-- 奖项设置 -->
+         <div class="awards">
+             <div class="title" style="margin-left:-.1rem;margin-bottom:.24rem">奖项设置</div>
+             <div class="awardsbox">
+                 <!-- <div class="flex_box flex_between font_14_color_706 bor_bot_D5C"><p>一等奖：现金20000（税前）</p><p>数量：1</p></div>
+                 <div class="flex_box flex_between font_14_color_706 bor_bot_D5C"><p>4444</p><p>二等奖</p></div> -->
+             </div>
+             <div class="lotmes">特别幸运奖以现场活动明示信息为准，轮空现金奖项将自动累计到下一期。</div>
+             <div class="actrule">活动规则 <img src="pic/icon_rule.png" class="jianhaonew"/></div>
+         </div>
+    </div>
+    <!--无历史开奖信息-->
+    <div id="jifenNo" class="goupiaoNo" style="display: none;">
+        <img src="pic/icon_jqqd.png" />
+        <h2>大奖尚未开启<br/>敬请期待～</h2>
+    </div>
+
+	<script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+	<script src="../common/officialJs/fontSize.js"></script>
+    <script src="../common/officialJs/md5.js"></script>
+    <script type="text/javascript" src="../common/customJs/URL.js"></script>
+	<script type="text/javascript" src="../common/customJs/AJAX.js"></script>
+	<script type="text/javascript" src="../common/customJs/time.js"></script>
+    <script src="js/common.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="http://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script src="../common/customJs/wxShare.js"></script>
+    <script src="js/luckBallAward.js"></script>
+</body>
+
+</html>

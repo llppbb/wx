@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>积分记录</title>
+    <link rel="stylesheet" type="text/css" href="css/pointRecordNew.css"/>
+	<script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+	<script src="../common/officialJs/fontSize.js"></script>
+	<script src="../common/customJs/URL.js"></script>
+	<script src="../common/customJs/AJAX.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+
+<body>
+    <div class="tabBox">
+         <div class="tabtitle">
+             <!-- <p id="used">总积分</p> -->
+             <div class="tabtitleTop flex_between">
+                 <!-- <p class="address">复兴路69号</p> -->
+                 <p class="mobile"></p>
+             </div>
+             <p class="allpointBox"><span class="allpointFont">积分</span><span class="allpoint"></span></p>
+         </div>
+         <div class="tabbotNew">
+             <div class="tabAllpoint"><div class="tabListShow" status="open" pointStatus="all"><p  style="margin-right:.02rem" id="tabListShowFont">全部积分</p><img src="pic/icon_takeback.png" id="tabListShowImg"/></div></div>
+             <div class="tabListBox">
+                 <div class="tabbotList flex_between" typedata="all" id="taball"><div>全部积分</div><div class="checkedImg"><img src="pic/icon_mark.png" /></div></div>
+                 <div class="tabbotList flex_between" typedata="daily" id="tabdaily"><div>日常积分</div><div class="checkedImg"><img src="pic/icon_mark.png" /></div></div>
+                 <div class="tabbotList flex_between" typedata="game" id="tabgame"><div>游戏积分</div><div class="checkedImg"><img src="pic/icon_mark.png" /></div></div>
+                 <div class="tabbotList flex_between" typedata="community" id="tabcommunity"><div>社区积分</div><div class="checkedImg"><img src="pic/icon_mark.png" /></div></div>
+             </div>
+         </div>
+
+         <!-- <div class="tabbot">
+             <div class="tabbotList" typedata="daily" id="tabdaily">日常积分</div>
+             <div class="tabbotList" typedata="game" id="tabgame">游戏积分</div>
+             <div class="tabbotList" typedata="community" id="tabcommunity">社区积分</div>
+             <div class="borbot"></div>
+         </div> -->
+         <div class="cartype">
+             <!-- <img class="icon_img" src=""/> -->
+         </div>
+    </div>
+    <div id="boxall" class="listBox">
+        <div class="ulTaost"></div>
+        <ul class="listBoxUl"></ul>
+        <div class="morebtn" style="display:none">点击加载更多↓↓</div>
+    </div>
+    <div id="boxdaily" class="listBox" style="display:none">
+        <div class="ulTaost"></div>
+        <ul class="listBoxUl"></ul>
+        <div class="morebtn" style="display:none">点击加载更多↓↓</div>
+    </div>
+    <div id="boxgame" class="listBox" style="display:none">
+        <div class="ulTaost"></div>
+        <ul class="listBoxUl"></ul>
+        <div class="morebtn" style="display:none">点击加载更多↓↓</div>
+    </div>
+    <div id="boxcommunity" class="listBox" style="display:none">
+        <div class="ulTaost"></div>
+        <ul class="listBoxUl"></ul>
+        <div class="morebtn" style="display:none">点击加载更多↓↓</div>
+    </div>
+    <div class="nodata" style="display:none">
+           <img src="pic/img_anonymous.png" />
+          <p>暂无记录</p>
+    </div>
+    <div class="mengcengNew"></div>
+    <script src="../common/customJs/wxShare.js"></script>
+    <script src="js/pointRecordNew.js"></script>
+</body>
+
+</html>

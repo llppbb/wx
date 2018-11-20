@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!-- <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport"> -->
+    <title>选择座位</title>
+    <link rel="stylesheet" href="css/choose_session_price_num.css">
+    <style>
+        .productmes {
+            background: #ffffff;
+            padding: .14rem;
+        }
+
+        .productName {
+            font-size: .15rem;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: .07rem;
+        }
+
+        .productScreenings {
+            font-size: .10rem;
+            color: #B3B3B3;
+            margin-bottom: .14rem;
+        }
+
+        .productPrices {
+            display: flex;
+            flex-wrap: wrap;
+            -webkit-flex-wrap: wrap;
+        }
+
+        .priceList {
+            padding: .065rem .065rem .065rem .28rem;
+            border-radius: .02rem;
+            border: 1px solid #E6E6E6;
+            margin-right: .1rem;
+            margin-bottom: 0.1rem;
+            position: relative;
+            font-size: .1rem;
+            color: #B3B3B3;
+        }
+
+        .svg {
+            width: .2rem;
+            height: .2rem;
+            position: absolute;
+            left: .05rem;
+            top: 0.05rem;
+        }
+
+        .svgtab {
+            width: 100%;
+            height: 100%;
+        }
+
+        .tabimg {
+            height: .19rem;
+            width: .19rem;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -.08rem;
+            margin-top: -.08rem;
+        }
+
+        .seats {
+            width: 100%;
+            height: 2.5rem;
+            overflow: scroll;
+            background: #F9F9F9;
+        }
+
+        .seats table tr td {
+            width: .25rem !important;
+            height: .19rem;
+            /*margin: .1rem;*/
+            position: relative;
+            /*background: #ccc;*/
+        }
+
+        .yourseats {
+            padding: .14rem;
+            border-top: 1px solid #E6E6E6;
+        }
+
+        .seatmes {
+            font-size: .11rem;
+            color: #E8375E;
+            margin-bottom: .14rem;
+        }
+
+        .yourseatsList {
+            height: .33rem;
+            line-height: .33rem;
+            background: #F4F4F4;
+            margin-bottom: .1rem;
+            border: 1px solid #E6E6E6;
+            font-size: .12rem;
+            color: #808080;
+        }
+
+        .yourseatsList p:first-child {
+            float: left;
+            padding-left: .14rem;
+        }
+
+        .yourseatsList p:last-child {
+            float: right;
+            padding-right: .14rem;
+        }
+
+        html,
+        body,
+        .wrap {
+            background: #ffffff !important;
+        }
+
+        .footerNextNew {
+            background: none;
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+        }
+
+        .footerNextNew div {
+            float: left;
+            height: .45rem;
+        }
+
+        .footerNextNew div:first-child {
+            width: 70%;
+            font-size: .16rem;
+            color: #808080;
+            background: #FBFBFB;
+            text-align: right !important;
+            padding-right: .14rem;
+            line-height: .45rem;
+        }
+
+        .footerNextNew div:last-child {
+            line-height: .45rem;
+            width: 30%;
+            font-size: .16rem;
+            color: #333333;
+            text-align: center;
+        }
+
+        .priceon {
+            border: 1px solid #F9D500;
+        }
+
+        .colosebtn {
+            width: .1rem;
+            height: .1rem;
+            position: absolute;
+            right: .14rem;
+            top: .115rem;
+        }
+
+        .seatmesfont {
+            width: 100%;
+            background: url(pic/img_wutai.png) no-repeat;
+            background-size: 100% 100%;
+            line-height: .185rem;
+            color: #ffffff;
+            font-size: .1rem;
+            text-align: center;
+        }
+
+        .seatmesicon {
+            height: .43rem;
+            display: flex;
+            padding: 0 1.2rem;
+            justify-content: space-between;
+            color: #b3b3b3;
+        }
+
+        .selected,
+        .nochoose {
+            position: relative;
+            padding-left: .3rem;
+            line-height: .43rem;
+        }
+
+        .selected img,
+        .nochoose img {
+            width: .17rem;
+            height: .17rem;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -0.1rem;
+        }
+
+        .nextBtn {
+            background: #ffdd10;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="productmes">
+            <div class="productName"></div>
+            <div class="productScreenings"></div>
+            <div class="productPrices"></div>
+        </div>
+
+        <div class="seatmesfont">舞台方向</div>
+        <div class="seats" id="seatArea"></div>
+
+        <div class="seatmesicon">
+            <div class="selected"><img src="pic/seat.png" />已选</div>
+            <div class="nochoose"><img src="pic/icon_noseat.png" />不可选</div>
+        </div>
+
+        <div class="yourseats">
+            <?php if($buylimit) {?>
+            <div class="seatmes">同一账号同一场次限购<span class="xgnumber"><?php echo $buylimit?></san>张</div>
+            <?php  }?>
+            <div class="yourseatsBox"></div>
+        </div>
+        <div class="footerNextNew">
+            <div>
+                <P style="font-size:.12rem">总价 <span id="price">0</span><span>元</span></P>
+            </div>
+            <div class="nextBtn" click="true">下一步</div>
+        </div>
+    </div>
+    <div class="mengceng"></div>
+    <div class="shezhi_tishi" style="display: none">
+        <P>设置成功</P>
+    </div>
+    <!--有未支付订单提示-->
+    <div class="yidenglu_tihsi weizhifudingdan_tihsi" style="display: none;">
+        <div class="yidenglu_tihsi_title">
+            <p class="yidenglu_tihsi_title_p2 weizhifudingdan_tihsi_title_p2">
+                <!-- <span id="buyLimit_tihsi">该场次限购x张，</span>检测到您还有未支付订单，故无法重复购买，你可以前往继续支付或取消订单 -->
+                检测到您还有未支付订单，故无法重复购买，您可以继续支付或取消订单
+            </p>
+        </div>
+        <div class="yidenglu_tihsi_bottom">
+            <div class="quexiaoBtn">关闭</div>
+            <div id="ViewUnpaidOrders">查看未支付订单</div>
+        </div>
+    </div>
+    <script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+    <script src="../common/officialJs/fontSize.js"></script>
+    <script src="../common/customJs/URL.js"></script>
+    <script src="../common/customJs/AJAX.js"></script>
+    <!-- <script src="../common/customJs/common.js"></script> -->
+    <script src="../common/customJs/toastDialog.js"></script>
+    <!-- <script src="../common/customJs/bindMobile.js"></script> -->
+    <script src="../buyTicket/js/AJAXFuntion.js"></script>
+    <script src="js/Judge_state.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+         if(!getStorage("userData")) {
+            window.location.href = WX_URL + "HXXCServiceWeChat/wechat/wechat_verify";
+        } else {
+            var userData = getStorage("userData");
+        }
+        var uid = userData.uid;
+        var mobile = userData.mobile;
+        var onlineID = getUrlParam("programId");
+        var scheduleId = getUrlParam("scheduleId");
+        var ticketPriceId = getUrlParam("ticketPriceId");
+        var venueAreaId = getUrlParam("venueAreaId");
+        var venueAreaName = getUrlParam("venueAreaName");
+        var packTicketId = getUrlParam("packTicketId");
+        var buylimit = getUrlParam("buylimit"); //限购数 0不限
+        var tishiBox = '';
+        var allprice = '';
+        var yourseatsListprice = ''; // 已选座位列表 价格显示
+
+        getSeatInfo(onlineID, scheduleId, ticketPriceId, venueAreaId);
+        $(".quexiaoBtn").click(function(event) {
+            $(".mengceng").hide();
+            tishiBox.hide();
+            return;
+        });
+        $("#ViewUnpaidOrders").click(function(event) {
+            tishiBox.hide();
+            $(".mengceng").hide();
+            location.href = WX_URL + "user.php?ticketFolder=1";
+            return;
+        });
+        $(".nextBtn").click(function(event) {
+            if ($(this).attr("click") == "true") {
+                console.log("111111")
+                $(".nextBtn").css("background", "gray");
+                $(".nextBtn").attr("click", "false");
+                var seatsarr = [];
+                $(".sendseatarr").each(function(i, k) {
+                    var x = $(k).attr("lineno");
+                    var y = $(k).attr("rankno");
+                    var obj = {
+                        "lineno": x,
+                        "rankno": y
+                    };
+                    seatsarr.push(obj);
+                });
+                // 选择座位规则
+                // selecteRule(seatsarr);
+                // return false;
+                if (seatsarr.length == 0) {
+                    tishi("请选座位！");
+                    $(".nextBtn").css("background", "#ffdd10");
+                    $(".nextBtn").attr("click", "true");
+                    return false;
+                }
+                var seatinfo = {
+                    "venueAreaId": venueAreaId,
+                    "venueAreaName": venueAreaName,
+                    "seats": seatsarr
+                };
+                //    选座规则
+                if (!chooseSeatRule(seatsarr)) {
+                    return false;
+                }
+                // uid, onlineID,scheduleId,ticketPriceId, packTicketId,seatsarr.length,seatinfo,
+                var ticketNum = seatsarr.length;
+
+                // lockSeat(uid, onlineID,scheduleId,ticketPriceId, packTicketId,ticketNum,seatinfo);
+                var data = {
+                    "uid": uid,
+                    "onlineID": onlineID,
+                    "scheduleId": scheduleId,
+                    "ticketPriceId": ticketPriceId,
+                    'packTicketId': packTicketId,
+                    "ticketNum": ticketNum,
+                    "seatInfo": seatinfo,
+                }
+                var returnLockSeatAjax = lockSeatAjax(data);
+                if (!returnLockSeatAjax) {
+                    console.log("请求lockSeatAjax失败");
+                } else {
+                    if (returnLockSeatAjax.state == 1) {
+                        $(".nextBtn").css("background", "#ffdd10");
+                        $(".nextBtn").attr("click", "true");
+                        if (returnLockSeatAjax.message.indexOf('未支付') != -1) {
+                            tishiBox = $('.weizhifudingdan_tihsi');
+                            $(".mengceng").show();
+                            var buyLimit = $(".choose_seesion_time_on").attr('buyLimit');
+                            if (buyLimit > 0) {
+                                $("#buyLimit_tihsi").text("该场次限购" + buyLimit + "张");
+                            } else {
+                                $("#buyLimit_tihsi").text('');
+                            }
+                            tishiBox.show();
+                        } else {
+                            console.log(res.message);
+                            tishi(res.message);
+                        }
+                        return;
+                    } else if (res == -1) {
+                        $(".nextBtn").css("background", "#ffdd10");
+                        $(".nextBtn").attr("click", "true");
+                        tishi("订单创建失败，请重新操作！");
+                        return;
+                    } else {
+                        $(".nextBtn").css("background", "#ffdd10");
+                        $(".nextBtn").attr("click", "true");
+
+                        // location.href = WX_URL + "user.php?placeOrder=1&orderNo=" + res.orderNo + "&programId=" + onlineID;
+                    }
+                }
+            }
+        });
+
+        // CreateTable(51, 51);
+        // 创建表格
+        function CreateTable(rowCount, cellCount, minx, miny) {
+            var tabH = parseInt(cellCount - miny) * 35;
+            var tabW = parseInt(rowCount - minx) * 29;
+            var minx = parseInt(minx);
+            var miny = parseInt(miny);
+            $("#seatArea").html("");
+            var table = $("<table border=\"0\" style='width:" + tabW + "px;height:" + tabH + "px'>");
+            table.appendTo($("#seatArea"));
+            for (var i = miny; i <= cellCount; i++) {
+                var tr = $("<tr id='tr_" + i + "'></tr>");
+                tr.appendTo(table);
+                for (var j = minx; j <= rowCount; j++) {
+                    // var td = $("<td id='td_lineno_" + i + "_rankno_" + j + "' class='table_td' style='width:25px;height:19px' onclick='tdclick(this)'>" + i + "," + j + "</td>");
+                    var td = $("<td id='td_lineno_" + i + "_rankno_" + j + "' class='table_td' style='width:25px;height:19px' onclick='tdclick(this)'></td>");
+                    td.appendTo(tr);
+                }
+            }
+            $("#seatArea").append("</table>");
+            // $("#seatArea").css('-webkit-transform', 'translate3d(200px,0,0)');
+        }
+        //  选择座位
+        function tdclick(obj) {
+            var lineno = $(obj).attr("lineno");
+            var rankno = $(obj).attr("rankno");
+            var isSold = $(obj).attr("isSold");
+            var venueareaname = $(obj).attr("venueareaname");
+            if (isSold == 'true' || lineno == undefined || rankno == undefined) {
+                // 座位不可选
+                console.log("不可点击");
+            } else {
+                // 可选区域
+                var cclik = $(obj).attr("clicktf");
+                var flagtype = 1; // 选座
+                if (cclik == "false") {
+                    console.log('取消已选座位');
+                    // 取消已选座位
+                    var clicktf = $(obj).attr("clicktf", "true");
+                    var seatcolor = $(obj).attr("seatcolor");
+                    // $(obj).css("background","green");
+                    $(obj).html(svg("svg", seatcolor));
+                    $("#area" + lineno + rankno).remove();
+                    $("#td_lineno_" + lineno + "_rankno_" + rankno + "").removeClass('choosetrue');
+                    allprice = parseInt(yourseatsListprice) * parseInt($(".yourseatsList").length);
+                    $("#price").html(allprice);
+                    flagtype = 2; //取消座位
+                } else {
+                    console.log('已选座位');
+                    if (buylimit != 0 && $(".choosetrue").length >= buylimit) {
+                        tishi("最多可选" + buylimit + "个座位");
+                    } else {
+                        var clicktf = $(obj).attr("clicktf", "false");
+                        $(obj).addClass("choosetrue");
+                        $(obj).html("<img class='tabimg' src='pic/seat.png' />");
+                        var html = '<div class="yourseatsList" id="area' + lineno + '' + rankno + '">' +
+                            '<p><span>' + lineno + '排' + rankno + '座</span><span style="margin-right:.5rem;margin-left:.5rem;">' + venueareaname + '</span><span>' + yourseatsListprice + '元</span></p>' +
+                            '<p style="position: relative;" class="sendseatarr" lineno=' + lineno + ' rankno=' + rankno + ' onclick="delseat(this,yourseatsListprice)"><img src="pic/bt_close.png" class="colosebtn"/></p>' +
+                            '</div>';
+                        $(".yourseatsBox").append(html);
+                        allprice = parseInt(yourseatsListprice) * parseInt($(".yourseatsList").length);
+                        $("#price").html(allprice);
+                    }
+                }
+                var seatsarr = [];
+                var obj = {
+                    "lineno": lineno,
+                    "rankno": rankno
+                };
+                seatsarr.push(obj);
+                var seatinfo = {
+                    "venueAreaId": venueAreaId,
+                    "venueAreaName": venueAreaName,
+                    "seats": seatsarr
+                };
+                // localLockSeat(uid,onlineID, scheduleId, ticketPriceId , packTicketId, seatinfo, flagtype);
+            }
+        }
+        //    svg 座位图icon
+        function svg(svgclass, svgcolor) {
+            var svg = '<svg class=' + svgclass + '  viewBox="0 0 34 34" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">' +
+                '<defs>' +
+                '<path d="M32.6298599,27.5743114 C32.4823528,29.6453524 30.7441716,31.28 28.6395844,31.28 L6.04041561,31.28 C4.10756532,31.28 2.49487737,29.9090767 2.12147532,28.0927664 C0.859196234,27.4207154 0,26.0924266 0,24.5629994 L0,8.75700061 C0,6.54951813 1.79203193,4.76 4.00021236,4.76 L29.9997876,4.76 C32.2090439,4.76 34,6.54886821 34,8.75700061 L34,24.5629994 C34,25.7641857 33.4693942,26.8416163 32.6298599,27.5743114 Z" id="path-1"></path>' +
+                '<path d="M4.08,5.99316406 C4.08,2.68323095 6.77220677,0 10.0731641,0 L23.9268359,0 C27.2367691,0 29.92,2.69220677 29.92,5.99316406 L29.92,25.84 L4.08,25.84 L4.08,5.99316406 Z" id="path-2"></path>' +
+                '</defs>' +
+                '<g id="切图板" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-3063.000000, -798.000000)"><g id="Group-2-Copy-85" transform="translate(3063.000000, 799.000000)"><g id="Group-9"><g id="Combined-Shape"><use fill="#' +
+                svgcolor +
+                '" fill-rule="evenodd" xlink:href="#path-1"></use><path stroke="#666666" stroke-width="1" d="M32.1311233,27.5387896 L32.1457692,27.3331561 L32.30109,27.1976015 C33.0579953,26.53702 33.5,25.5862125 33.5,24.5629994 L33.5,8.75700061 C33.5,6.82533758 31.9332286,5.26 29.9997876,5.26 L4.00021236,5.26 C2.0676921,5.26 0.5,6.82614246 0.5,8.75700061 L0.5,24.5629994 C0.5,25.8697395 1.22285024,27.047879 2.35645237,27.6514209 L2.56390574,27.7618713 L2.6112328,27.9920807 C2.94226265,29.6022833 4.37150068,30.78 6.04041561,30.78 L28.6395844,30.78 C30.4740694,30.78 32.0017044,29.355867 32.1311233,27.5387896 Z"></path></g>' +
+                '<g id="Rectangle-34"><use fill="#' + svgcolor +
+                '" fill-rule="evenodd" xlink:href="#path-2"></use><path stroke="#666666" stroke-width="1" d="M4.58,25.34 L29.42,25.34 L29.42,5.99316406 C29.42,2.96513349 26.9574141,0.5 23.9268359,0.5 L10.0731641,0.5 C7.04513349,0.5 4.58,2.96258591 4.58,5.99316406 L4.58,25.34 Z"></path></g></g></g></g></svg>';
+            return svg;
+        }
+
+        function priceList(obj) {
+            $(".yourseatsBox").html("");
+            $("#price").html("0");
+            $(obj).addClass('priceon').siblings().removeClass('priceon');
+            ticketPriceId = $(obj).attr("ticketPriceId");
+            yourseatsListprice = $(obj).html();
+            getSeatInfo(onlineID, scheduleId, ticketPriceId, venueAreaId);
+        }
+        // 取消 （删除座位）
+        function delseat(obj) {
+            var lineno = $(obj).attr("lineno");
+            var rankno = $(obj).attr("rankno");
+            $("#area" + lineno + rankno).remove();
+            var seatcolor = $("#td_lineno_" + lineno + "_rankno_" + rankno + "").attr("seatcolor");
+            $("#td_lineno_" + lineno + "_rankno_" + rankno + "").html(svg("svg", seatcolor));
+            $("#td_lineno_" + lineno + "_rankno_" + rankno + "").removeClass('choosetrue');
+            $("#td_lineno_" + lineno + "_rankno_" + rankno + "").attr("clicktf", "true");
+            allprice = parseInt(yourseatsListprice) * parseInt($(".yourseatsList").length);
+            $("#price").html(allprice);
+        }
+
+        //声明对象
+        function ObjStory(lineno, ranknoarr) {
+            this.lineno = lineno;
+            this.ranknoarr = ranknoarr;
+        }
+
+        // 选座规则
+        function chooseSeatRule(seatsarr) {
+            var newarr = unique1(seatsarr);
+            //   var arr={}; // {1:"选中"，2：“选中”}
+            for (var j = 0; j < newarr.length; j++) {
+                var obj = {};
+                $("#tr_" + newarr[j]).find('td').each(function(i, k) {
+                    if ($(k).attr("issold")) {
+                        var seatstatus = $(k).attr("issold");
+                        var idx = i + 1;
+                        console.log(seatstatus);
+                        if (seatstatus == "true") { //不可选
+                            console.log("true");
+                            obj[idx] = "notChoose";
+                        } else { //可选 （选中）（）
+                            if ($(k).hasClass('choosetrue')) { //选中
+                                obj[idx] = "chooseYet";
+                            } else {
+                                obj[idx] = "canChoose";
+                            }
+                        }
+                    }
+                })
+                // 选座规则
+                var result = chooseSeatRuleAJAX(obj);
+                if (result.state != 0) {
+                    // 不符合选座规则
+                    tishi(result.result);
+                    $(".nextBtn").css("background", "#ffdd10");
+                    $(".nextBtn").attr("click", "true");
+                    return false;
+                }
+                console.log(obj);
+            }
+            return true;
+        }
+
+        function chooseSeatRuleAJAX(arr) {
+            var result = '';
+            $.ajax({
+                url: WX_URL + "requestAjax.php",
+                type: 'POST',
+                dataType: 'json',
+                async: false,
+                data: {
+                    "seatArr": arr,
+                    "identity": 'chooseSeatRule'
+                },
+                success: function(data) {
+                    console.log(data);
+                    result = data;
+                }
+            })
+            return result;
+        }
+        // 数组去重
+        function unique1(array) {
+            var n = []; //一个新的临时数组
+            //遍历当前数组
+            for (var i = 0; i < array.length; i++) {
+                //如果当前数组的第i已经保存进了临时数组，那么跳过，
+                //否则把当前项push到临时数组里面
+                if (n.indexOf(array[i].lineno) == -1) n.push(array[i].lineno);
+            }
+            return n;
+        }
+        // 禁用微信分享
+        function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        }
+
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            onBridgeReady();
+        }
+    </script>
+</body>
+
+</html>

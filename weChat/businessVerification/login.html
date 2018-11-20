@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>核销登陆</title>
+    <link rel="stylesheet" href="css/boundmobile.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <section class="section">
+            <div class="boxImg">
+                <img src="pic/icon_bd.png" class="cenImg" />
+            </div>
+            <div class="yanzheng">
+                <div class="yangzhengChange">
+                    <div class="shoujihao">
+                        <input type="number" placeholder="请输入手机号" id="shoujihao" />
+                        <input type="button" class="getyzm" value="获取验证码" id="get_code" />
+                        <!-- <div class="getyzm">获取验证码</div> -->
+                    </div>
+                    <div class="yanzhengma">
+                        <input type="number" placeholder="4位验证码" id="yanzhengmaBtn" />
+                    </div>
+                </div>
+                <input type="button" value="登录" class="boundBtn" id="boundBtn" />
+                <input type="hidden" id="user" />
+            </div>
+        </section>
+        <div class="mengcengTishi">
+            <p>绑 定 中, 请 稍 后...</p>
+        </div>
+        <div class="shezhi_tishi">
+            <p></p>
+        </div>
+</body>
+<script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+<script src="../common/officialJs/fontSize.js"></script>
+<script src="../common/customJs/URL.js"></script>
+<script src="../common/customJs/AJAX.js"></script>
+<script src="../common/customJs/toastDialog.js"></script>
+<script src="js/common.js"></script>
+<!-- <script src="../common/customJs/bindMobile.js"></script> -->
+<script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+<script>
+    var openId = getUrlParam("openid");
+    var URLverifyCode = getUrlParam("verifyCode");
+    var verifyCode = URLverifyCode.substring(0,URLverifyCode.length-8);
+    console.log(verifyCode)
+
+    if (window.location.href.indexOf("openid=1")!=-1) {
+        window.location.href = APP_URL + "HXXCServiceWeChat/auth/getOpenid.json?verifyCode=" + verifyCode;
+    }
+
+    var obj = $("#get_code");
+
+    //获取验证码
+    $("#get_code").on("click", function() {
+        var mobile_number = $("#shoujihao").val();
+        //alert("mobile"+mobile_number);
+        verGetyzm(mobile_number, obj)
+    })
+
+    //绑定手机
+    var verifyCode = getUrlParam("verifyCode");
+    var returnData = checkVerify(openId, verifyCode);
+    var newFlag = parseInt(returnData.flag);
+    // alert("newFlag");
+    // alert(newFlag);
+    if (!newFlag) {
+        console.log("获取openid出错")
+    } else {
+        if (newFlag == 2) {
+            // 没有读取到二维吗
+            window.location.href = "notReadQrcode.html";
+        } else if (newFlag == 3) {
+                // 可以核销
+            window.location.href = "verificationQrcode.html?verifyCode=" + verifyCode +"&openid="+openId;
+        }
+    }
+
+    $("#boundBtn").on("click", function() {
+        var mobile_number = $("#shoujihao").val();
+        var mobile_number_peo = $("#yanzhengmaBtn").val();
+        // var yzm = checkMobileAndSMSCode(mobile_number, mobile_number_peo);
+        // if (!yzm) {
+        //     alert("验证码错误");
+        //     return false;
+        // }
+        //alert(openid)
+        //location.href=WX_URL+"verify.php?userMobile="+mobile_number
+        loginIn(openId, mobile_number, mobile_number_peo,verifyCode);
+    })
+
+
+    function verGetyzm(mobile, obj) {
+        if (obj.attr('canClick') == 0) {
+            console.log("别动");
+            return false;
+        } else {
+            console.log("走起")
+            obj.css("background", "rgb(125,125,125)");
+            obj.attr('canClick', 0);
+        }
+        if (!(/^1\d{10}$/.test(mobile))) {
+            // tishi("请输入正确的手机号");
+            alert("请输入正确的手机号");
+            obj.css("background", "rgb(255, 211, 16)");
+            obj.attr('canClick', 1);
+            console.log("shahha");
+            return false;
+        } else {
+            var count = 60;
+            var t = setInterval(function() {
+                obj.val(count + "s");
+                if (count == 0) {
+                    obj.val("重新获取");
+                    obj.attr('canClick', 1);
+                    obj.css("background", "rgb(255, 211, 16)");
+                    clearInterval(t);
+                }
+                count--;
+            }, 1000);
+            var sendUrl = APP_URL + 'HXXCServiceWeChat/verify/send.json?mobile=' + mobile;
+            fnAjax(sendUrl, "get", false, "", function(data) {}, function(error) {
+                console.log(error)
+            })
+        }
+    }
+
+    /**
+     * 校验手机号和验证码
+     */
+    function checkMobileAndSMSCode(mobile, VerifiyCode) {
+        if (!(/^1\d{10}$/.test(mobile))) {
+            alert("请填写正确的手机号码！");
+            return false;
+        } else if (VerifiyCode != SMSCode || VerifiyCode == '') {
+            alert("请填写正确的验证码！");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+</script>
+
+</html>

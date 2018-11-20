@@ -1,0 +1,111 @@
+ * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    html{
+        background: url(../pic/img_bg.png) no-repeat;
+        background-size: 100% 100%;
+        font-size: 100px;
+    }
+    body{
+        font-size: 12px;
+    }
+    .wrap {
+        width: 100%;
+        height: 100%;
+    }
+
+    .quxiaoBtn {
+        width: 1.2rem;
+        height: 0.4rem;
+        border: 1px solid rgb(255, 221, 16);
+        text-align: center;
+        line-height: 0.4rem;
+        margin-top: 0.12rem;
+        border-radius: 0.2rem;
+        float: left;
+        font-weight: bold;
+        color: rgb(51,51,51);
+        font-size: .16rem;
+    }
+
+    .chakandingdanBtn {
+        margin-left: 0.22rem;
+        background:rgb(255, 221, 16);
+    }
+
+    .btnBox {
+        padding-left: 0.32rem;
+    }
+
+   .showfff{
+      margin: .54rem .25rem 0 .25rem;
+      background: #fff;
+      padding-bottom: 1rem;
+      position:relative;
+   }
+   .title{
+      text-align: center;
+      padding-top: .5rem;
+      margin-bottom: .19rem;
+      color: #333333;
+      font-size: .18rem;
+      font-weight: bold;
+   }
+   .center{
+       padding-left: .43rem;
+       padding-right: .43rem;
+   }
+
+   .centerlist{
+       color: #333333;
+       font-size: .13rem;
+       margin-bottom: .15rem;
+       display: flex;
+   }
+   .centerlist p:nth-child(1){
+       width: .84rem;
+   }
+   .centerlist p:nth-child(2){
+      flex: 1;
+      margin-left: .1rem;
+   }
+    .bg{
+        background: #FFDD10;
+        font-weight: bold;
+        padding: .02rem .05rem;
+        border-radius: .02rem;
+    }
+    .mes{
+        color:#FFCC02;
+        font-size: .14rem;
+        margin: .12rem .32rem 0 .32rem;
+    }
+    /*针对iphone5*/
+    @media screen and (max-width: 320px) {
+        .center{
+            padding-left: .3rem;
+            padding-right: .3rem;
+        }
+        .centerlist p:nth-child(1){
+            width: .9rem;
+        }
+        .centerlist{
+            margin-bottom: .1rem;
+        }
+    }
+    /*兑换成功 icon*/
+    .sucIcon{
+        width: .8rem;
+        position: absolute;
+        left: 50%;
+        margin-left: -.4rem;
+        top: -.35rem;
+    }

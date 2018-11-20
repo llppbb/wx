@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>选择收货地址</title>
+    <link rel="stylesheet" href="css/getadress.css">
+    <!-- <link rel="stylesheet" href="css/zhifu_choose_dizhi.css"> -->
+</head>
+<style>
+    .wrap {
+        background: rgb(244, 244, 244);
+    }
+
+    .dizhi {
+        display: block;
+        margin-top: 0.21rem;
+        height: auto;
+        padding: 0.14rem;
+        margin: .14rem .14rem 0rem .14rem;
+        position: relative;
+        width: auto;
+    }
+
+    .dizhi_state {
+        padding: 0.14rem 0 !important;
+        padding-top: 0.1rem !important;
+    }
+
+    .dizhi_state_left,
+    .dizhi_state_left div {
+        float: left;
+    }
+
+    .dizhi_state_left {
+        margin-bottom: 0.1rem;
+    }
+
+    .dizhi_state_left div {
+        background: rgb(255, 50, 1);
+        color: #FFFFFF;
+        padding: 0.03rem;
+    }
+
+    .dizhi_state_right {
+        float: right;
+        padding-bottom: 0.14rem;
+    }
+
+    .dizhi_state_right div {
+        float: left;
+        font-size: 0.14rem;
+        color: rgb(51, 51, 51)
+    }
+
+    .dizhi_state_img_moren,
+    .dizhi_state_img_bianji {
+        width: 0.15rem;
+        height: 0.15rem;
+        margin-right: 0.07rem;
+    }
+
+    .bianjiBtn {
+        font-size: 0.14rem;
+        color: rgb(51, 51, 51)
+    }
+
+    .xiangxidizhi p {
+        line-height: 0.2rem;
+    }
+
+    .tianjiadizhi {
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        height: 0.45rem;
+        margin-left: 0px;
+        border-radius: 0px;
+        line-height: 0.45rem;
+    }
+
+    .moren_img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0.15rem;
+        height: 0.15rem;
+    }
+
+    .img_img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .dizhi_liebiao {
+        margin-bottom: 10px;
+    }
+
+    p.red_color {
+        color: rgb(255, 50, 1);
+    }
+
+
+    .tianjiadizhi1 {
+        margin: .15rem .14rem;
+        margin-bottom: 0px;
+        text-align: right;
+    }
+
+    .addImg {
+        position: absolute;
+        left: -.2rem;
+        top: 0px;
+        width: .16rem;
+    }
+
+    .xingmingshoujihao p {
+        color: #808080;
+        font-weight: normal;
+        font-size: 0.13rem;
+        margin-top: 0;
+        margin-bottom: 0.105rem;
+    }
+
+    .xiangxidizhi {
+        font-size: 0.13rem;
+        color: #808080;
+    }
+
+    .dizhi_state_left div {
+        background: #E8375E;
+        color: #FFFFFF;
+        width: .47rem;
+        line-height: .18rem;
+        text-align: center;
+        border-radius: .02rem;
+    }
+
+    .dizhi_state_left {
+        margin-bottom: 0px;
+    }
+
+    .dizhi_liebiao {
+        margin-bottom: 0px;
+    }
+
+    .dizhi_state_left {
+        margin-top: .1rem;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+
+        <div class="tianjiadizhi1 tianjiaAddress"><span style="position:relative"><img src="pic/icon_add.png" class="addImg"/>添加地址</span></div>
+        <div id="addressBox"></div>
+        <!-- <?php foreach ($addresslist as $v) {?>
+        <div class="dizhi" status="false" aid="<?php echo $v['id']?>">
+            <div class="moren_img">
+                <img src="pic/icon_select_gray.png" class="img_img changepng" />
+            </div>
+            <div class="dizhi_liebiao">
+                <div class="xingmingshoujihao">
+                    <p>收货人：
+                        <?php echo $v['name']?>
+                    </p>
+                    <p>
+                        <?php echo $v['mobile']?>
+                    </p>
+                </div>
+                <div class="xiangxidizhi">
+                    <p>收货地址：
+                        <?php echo $v['address']?>
+                    </p>
+                </div>
+                <?php if (!empty($v['defaultValue'])) {?>
+                <div class="dizhi_state_left">
+                    <div>默认</div>
+                </div>
+                <?php }?>
+            </div>
+        </div>
+        <?php }?> -->
+
+    </div>
+    <script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+    <script src="../common/officialJs/fontSize.js"></script>
+    <script src="../common/customJs/URL.js"></script>
+    <script src="../common/customJs/AJAX.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+        if (!getStorage("userData")) {
+            window.location.href = WX_URL + "HXXCServiceWeChat/wechat/wechat_verify";
+        } else {
+            var userData = getStorage("userData");
+        }
+        var uid = userData.uid;
+        // 渲染地址
+        renderingAddress(getAddress(uid));
+        var contacts =  getUrlParam("cids");
+        var switch_ = getUrlParam("switch_");
+        var programId = getUrlParam("programId");
+        var productid = getUrlParam("productid");
+        var orderNo = getUrlParam("orderNo");
+        $('.dizhi').click(function(event) {
+            $('.xingmingshoujihao').children().each(function(index, el) {
+                $(el).removeClass('red_color');
+            });
+            $(this).find('.changepng').attr("src", "pic/tab_default.png");
+            $(this).siblings().find(".changepng").attr("src", "pic/icon_select_gray.png");
+
+            $(this).find('.xingmingshoujihao').children().each(function(index, el) {
+                $(el).addClass('red_color');
+            });
+            var aid = $(this).attr('aid');
+            setTimeout(function() {
+                if (productid != '') { // 商讯
+                    location.href = "../shop/createOrderNeedName.html?productid=" + productid + "&aid=" + aid
+                } else { // 一手票 购票
+                    location.href = "../schedule/pay.html?orderNo=" + orderNo + "&aid=" + aid + "&contacts=" + contacts + "&switch_=" + switch_ + "&programId=" + programId;
+                }
+            }, 1000);
+        });
+        $(".tianjiaAddress").click(function(event) {
+            location.href = "addOrEditTicketAddress.html?type=add";
+        });
+
+        // 禁用微信分享
+        function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        }
+
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            onBridgeReady();
+        }
+
+        // // 实名制商品须填写 收货地址
+        // function getAddress(uid) {
+        //     var newData = "";
+        //     var sendUrl = APP_URL + 'HXXCServiceWeChat/product/get_address.json';
+        //     var sendData = {
+        //         "uid": uid
+        //     }
+        //     fnAjaxJava(sendUrl, "get", false, sendData, function(data) {
+        //         newData = data.result;
+        //     }, function() {});
+        //     return newData;
+        // }
+        // 渲染地址
+        function renderingAddress(addressArr) {
+            var addressHtml = "";
+            $.each(addressArr.list, function(i, k) {
+                console.log(k)
+                var morenAddress = "";
+                if (k.defaultValue) {
+                    morenAddress += '<div class="dizhi_state_left">' +
+                        '<div>默认</div>' +
+                        '</div>';
+                } else {
+                    morenAddress = ""
+                }
+                addressHtml += '<div class="dizhi" status="false" aid=' + k.id + '>' +
+                    '<div class="moren_img">' +
+                    '<img src="pic/icon_select_gray.png" class="img_img changepng" />' +
+                    '</div>' +
+                    '<div class="dizhi_liebiao">' +
+                    '<div class="xingmingshoujihao">' +
+                    '<p>收货人：' + k.name + '</p>' +
+                    '<p>' + k.mobile + '</p>' +
+                    '</div>' +
+                    '<div class="xiangxidizhi">' +
+                    '<p>收货地址：' + k.address + '</p>' +
+                    '</div>' + morenAddress + '</div></div>';
+            });
+            $(".wrap").append(addressHtml);
+        }
+    </script>
+</body>
+
+</html>

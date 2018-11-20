@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>订单详情</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="format-detection" content="email=no" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../common/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/listDetail.css" />
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="shangpinxinxi">
+            <div class="shangpinxinxi_name_number border_bottom">
+                <div class="shangpinxinxi_name font_16_color_51" id="prodcut_name"></div>
+                <div class="shangpinxinxi_number font_14_color_128" style="margin-top:.14rem;margin-bottom:.14rem;"> 数量：<span id="ballsCount"></span></div>
+            </div>
+            <div class="shangpinxinxi_youxianqi_erweima">
+                <div class="shangpinxinxi_youxianqi">
+                    <p class="font_14_color_128" id="timeto"><span id="timetofont">本期已选号码：</span><span class="font_14_color_233" id="orderexptime"></span></p>
+                    <div class="ballsbox"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shangpinxinxi_erweima">
+                <!-- <div class="erweima_tupian bigerweima_btn">
+                    <div class="erweima_list">二维码<span class="see_youhuiquan" style="color:green;margin-left:0.1rem">（点击查看二维码)</span></div>
+                    <div class="img_state"></div>'
+                    </div> -->
+        </div>
+
+        <div class="danhaoshijian_xiaohao">
+            <div class="danhaoshijian bor_bottom">
+                <p class="font_14_color_51">开奖时间：<span id="lotteryTime"></span></p>
+                <p class="font_14_color_51">开奖地点：<span id="lotteryAddr"></span></p>
+            </div>
+        </div>
+
+        <div class="wenxin_tishi">
+            <div class="wenxin_tishi_title">温馨提示</div>
+            <div class="wenxin_tishi_centen">
+                <p>1、现金奖项获得者，需凭本页面及本人身份证原件领取作为领奖凭证；</p>
+                <p>2、本页面截图无效；</p>
+                <p>3、领奖时间：发布获奖通知后，请于15个工作日内领取，逾期未兑奖视为弃奖。（请工作日领取，周末及节假日不受理）</p>
+                <p>4、发放形式：以现金形式发放，奖项为税前金额，需缴纳的个人所得税（税前金额的20%），由华熙代扣代缴。</p>
+            </div>
+        </div>
+
+    </div>
+    <!--点击二位码  弹出 开始-->
+    <div class="mengceng" style="display: none;"></div>
+
+    <div class="erweima_tishi" style="display: none;">
+        <div class="shangpinxinxi_erweima_tupian tishi_shangpinxinxi_erweima_tupian"><img id="big_erweima" src="" />
+            <div class="img_state" id="img_statesmal"></div>
+        </div>
+        <p class="erweima_name_tishi"></p>
+        <p class="erweima_state_tishi" id="reueire_click">立即使用</p>
+        <!-- 已使用 已过期  立即使用-->
+        <div class="closeBtn"><img class="close_btn_img" src="pic/btn_close.png" /></div>
+    </div>
+    <!--点击二位码  弹出 结束 -->
+
+    <div class="mobile_html"></div>
+    <div class="shezhi_tishi">
+        <P>设置成功</P>
+    </div>
+
+    <script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+	<script src="../common/officialJs/fontSize.js"></script>
+    <script src="../common/officialJs/md5.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript" src="../common/customJs/URL.js"></script>
+	<script type="text/javascript" src="../common/customJs/AJAX.js"></script>
+    <script src="../common/customJs/wxShare.js"></script>
+    <script type="text/javascript" src="js/listDetail.js"></script>
+
+</body>
+
+</html>

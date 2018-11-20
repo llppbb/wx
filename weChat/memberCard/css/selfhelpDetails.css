@@ -1,0 +1,42 @@
+    html,
+    .wrap {
+        background: #fff;
+    }
+
+    .recordList {
+        border: none;
+    }
+
+    .recordList div {
+        border-bottom: 1px solid rgb(230, 230, 230);
+        line-height: .31rem;
+    }
+
+    .recordList div p {
+        line-height: .31rem;
+    }
+
+    .stateR,
+    .stateG {
+        font-size: .14rem !important;
+    }
+
+    .imgBox {
+        height: 4rem;
+        margin: 0px .2rem .2rem .2rem;
+        background: rgb(230, 230, 230);
+        padding: .24rem;
+    }
+
+    .errordescribe {
+        font-size: .15rem;
+        color: rgb(102, 102, 102);
+        line-height: .2rem;
+        padding: 0px .1rem .1rem .1rem;
+    }
+
+    .imgBox img {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }

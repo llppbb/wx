@@ -1,0 +1,876 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html, body, .wrap {
+    width: 100%;
+    min-height: 100%;
+    background: #fff;
+}
+
+input, select, button, textarea {
+    -webkit-appearance: none;
+}
+
+li {
+    list-style: none;
+}
+
+.full {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+html {
+    font-size: 100px;
+}
+
+body, .wrap {
+    font-size: 12px;
+}
+
+
+/*------wrap-----------------*/
+
+.wrap {
+    width: 100%;
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+}
+
+
+/*积分记录tab*/
+
+.tab {
+    height: .71rem;
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.tab div {
+    width: 50%;
+    float: left;
+    text-align: center;
+    margin-top: .1rem;
+}
+
+.tab div p:nth-of-type(1) {
+    font-size: .22rem;
+    /*color: rgb(29,29,29);/*修改会员等级*/
+    margin-bottom: .05rem;
+}
+
+.tab div p:nth-of-type(2) {
+    font-size: .13rem;
+    color: rgb(29, 29, 29);
+}
+
+.head {
+    /*background: rgb(244,244,244);*/
+    position: relative;
+}
+
+
+/*修改 9.5 */
+
+.codeImg {
+    position: absolute;
+    right: .5rem;
+    top: .15rem;
+    width: .2rem;
+    /*box-shadow: 0px 0px 6px #000;*/
+}
+
+.codeImg img {
+    width: 100%;
+}
+
+.codeBox {
+    text-align: center;
+    width: 76%;
+    position: fixed;
+    left: 12%;
+    top: .25rem;
+    background: url(../pic/pop_bg.png) no-repeat;
+    background-size: 100% 100%;
+    z-index: 9999;
+    display: none;
+}
+
+.coloeCode {
+    position: absolute;
+    right: -.11rem;
+    top: -.11rem;
+    width: .22rem;
+    height: .22rem;
+}
+
+.codeBoxtop {
+    height: 1.6rem;
+}
+
+.codeBoxbot {
+    height: 1.9rem;
+}
+
+.codeBoxbot img {
+    width: 1.16rem;
+}
+
+.coloeCode img {
+    width: 100%;
+}
+
+.codeBoxbotfont {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: .3rem;
+    background: rgb(56, 34, 72);
+    font-size: .14rem;
+    color: #fff;
+    line-height: .3rem;
+}
+
+.headbg {
+    width: 80%;
+    height: 1.87rem;
+    margin: .1rem 10%;
+    height: auto;
+    background: url(../pic/img_VIP.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.headbgT {
+    height: 1.25rem;
+    padding: .2rem;
+}
+
+.carlog {
+    width: .4rem;
+    display: block;
+    border-radius: 100%;
+    float: left;
+}
+
+.carname {
+    float: left;
+    margin-left: .15rem;
+    font-size: .15rem;
+    color: #fff;
+    line-height: .22rem;
+}
+
+.carnum {
+    font-size: .18rem;
+    color: #fff;
+    padding-bottom: .21rem;
+    margin-left: .2rem;
+    position: relative;
+}
+
+
+/*9.14 新增 姓名*/
+
+.cardname {
+    position: absolute;
+    left: 0;
+    top: -.2rem;
+    font-size: .14rem;
+    color: #fff;
+}
+
+.centen {
+    height: 100%;
+    background: rgb(255, 255, 255);
+}
+
+.centenY {
+    display: flex;
+    -webkit-flex-direction: row;
+    margin-top: .3rem;
+}
+
+.centenCom {
+    flex: 1;
+    text-align: center;
+}
+
+.centenCom p {
+    color: #666666;
+}
+
+.comImg {
+    width: .4rem;
+    height: .4rem;
+    margin-bottom: .1rem;
+    margin: 0 auto;
+    background: rgb(237, 237, 237);
+    /*background: #666666;*/
+    border-radius: 100%;
+}
+
+.comImg img {
+    margin-top: .08rem;
+    width: .24rem;
+}
+
+.carState {
+    width: 60%;
+    height: .4rem;
+    font-size: .16rem;
+    border-radius: .2rem;
+    text-align: center;
+    line-height: .4rem;
+    margin-left: 20%;
+    margin-top: .15rem;
+}
+
+
+/*激活*/
+
+.activate {
+    background: rgb(255, 221, 16);
+    color: rgb(51, 51, 51);
+}
+
+
+/*领取*/
+
+.getCar {
+    border: 1px solid rgb(194, 157, 5);
+    color: rgb(194, 157, 5);
+}
+
+
+/*绑定 手机   开始    大盒子  */
+
+.bindmobile {
+    width: 86%;
+    margin-top: 1rem;
+    margin-left: 7%;
+    position: fixed;
+    z-index: 555;
+    border-radius: 0.14rem;
+    overflow: hidden;
+    text-align: center;
+    left: 0px;
+    top: 0px;
+    background: rgb(255, 255, 255);
+    padding-bottom: 0.2rem;
+}
+
+
+/*上边的标题*/
+
+.bmtitle {
+    font-size: 0.18rem;
+    color: rgb(51, 51, 51);
+    padding-top: 0.155rem;
+}
+
+
+/*包含 手机号 验证码 盒子 */
+
+.bmboxT {
+    position: relative;
+}
+
+
+/*输入手机号*/
+
+.bmmobilenum {
+    width: 87%;
+    height: 0.57rem;
+    border: 1px solid rgb(227, 227, 227);
+    margin-top: 0.19rem;
+    text-indent: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+
+/*获取验证码*/
+
+.bmgetCode {
+    display: inline-block;
+    width: 1.015rem;
+    height: 0.25rem;
+    font-size: 0.14rem;
+    text-align: center;
+    line-height: 0.25rem;
+    color: rgb(51, 51, 51);
+    border: 1px solid rgb(255, 211, 16);
+    position: absolute;
+    border-radius: 0.50rem;
+    z-index: 10;
+    top: 0.35rem;
+    left: 1.80rem;
+    background: #ffffff;
+}
+
+
+/*验证码 车牌号*/
+
+.bmauthcCode, .bmcar {
+    width: 87%;
+    height: 0.57rem;
+    border: 1px solid rgb(227, 227, 227);
+    text-indent: 10px;
+    border-top: none;
+}
+
+
+/*提示文字*/
+
+.bmpromptText {
+    width: 87%;
+    color: rgb(185, 185, 185);
+    font-size: .12rem;
+    margin: 0 auto;
+    margin-top: .05rem;
+    margin-bottom: .2rem;
+    text-align: left;
+}
+
+
+/*两个 按钮的盒子*/
+
+.bmboxB {
+    width: 100%;
+    margin-top: .2rem;
+    border-top: 1px solid rgb(230, 230, 230);
+}
+
+
+/*取消 按钮*/
+
+.bmabolish {
+    display: inline-block;
+    width: 1.20rem;
+    height: 0.40rem;
+    text-align: center;
+    line-height: 0.40rem;
+    border-radius: 0.50rem;
+    border: 1px solid rgb(255, 221, 16);
+    font-size: 0.16rem;
+    color: rgb(51, 51, 51);
+    margin-top: 0.20rem;
+}
+
+
+/*确定 按钮*/
+
+.bmconfirm {
+    display: inline-block;
+    width: 1.20rem;
+    height: 0.40rem;
+    text-align: center;
+    line-height: 0.40rem;
+    border-radius: 0.50rem;
+    background: rgb(255, 221, 16);
+    font-size: 0.16rem;
+    color: rgb(51, 51, 51);
+    margin-top: 0.20rem;
+    margin-left: 0.22rem;
+}
+
+
+/*绑定手机 结束*/
+
+.qiandaoxiangqing {
+    display: none;
+    width: 75%;
+    height: 4.3rem;
+    background: #fff;
+    position: fixed;
+    left: 12.5%;
+    top: .5rem;
+    border-radius: .15rem;
+    padding: .1rem;
+    z-index: 9999
+}
+
+.qiandaoxiangqing h2 {
+    text-align: center;
+    font-family: "微软雅黑";
+    margin: .25rem 0 .2rem 0;
+    font-weight: normal
+}
+
+.qiandaoxiangqing p {
+    font-family: "微软雅黑";
+    font-size: .12rem;
+    color: #8a8a8a;
+    text-align: center;
+    margin-top: .08rem
+}
+
+.guocheng {
+    height: 2.25rem
+}
+
+.guocheng ul {
+    width: 70%;
+    text-align: center
+}
+
+.guocheng ul li {
+    position: relative;
+    font-size: .12rem;
+    font-family: "微软雅黑";
+    color: #808080
+}
+
+.jifenF {
+    position: relative
+}
+
+.dijitian {
+    color: #fff;
+    width: .17rem;
+    height: .17rem;
+    border-radius: 100%;
+    background: #e3e3e3;
+    display: inline-block;
+    margin: 0 .05rem
+}
+
+.zaidijitian {
+    color: #000;
+    background: #fbda10
+}
+
+.songjifen {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #333
+}
+
+.lianxi7tian {
+    color: #b3b3b3;
+    font-size: .12rem
+}
+
+.shuxian {
+    margin: 0 auto;
+    width: .025rem;
+    height: .16rem;
+    background: #e3e3e3
+}
+
+.onshuxian {
+    background: #fbda10
+}
+
+.iknow {
+    width: 80%;
+    height: .4rem;
+    text-align: center;
+    margin-left: 10%;
+    line-height: .4rem;
+    color: #333;
+    font-family: "微软雅黑";
+    background: #ffb30b;
+    border-radius: .1rem;
+    margin-top: .2rem;
+    font-size: .16rem
+}
+
+.qiandaowenzi {
+    margin-top: .15rem!important;
+    background: url(../botton.png) no-repeat;
+    background-size: 100%;
+    font-size: .16rem;
+    color: #333
+}
+
+.closeBtn {
+    position: absolute;
+    right: .16rem;
+    top: .1rem;
+    width: .245rem;
+    height: .245rem;
+    text-align: center;
+    line-height: .245rem;
+    font-family: "微软雅黑";
+    font-size: .245rem
+}
+
+.closeBtn img {
+    width: 100%;
+    height: 100%
+}
+
+.ptext {
+    z-index: 200;
+    font-size: .19rem;
+    width: 36%;
+    height: .8rem;
+    background-color: #3f3f3f;
+    margin: 0 auto;
+    position: absolute;
+    top: 2.5rem;
+    left: 32%;
+    color: #fff;
+    opacity: .9;
+    border-radius: .05rem;
+    text-align: center;
+    display: none
+}
+
+.pspan {
+    display: inline-block;
+    margin-top: .13rem
+}
+
+.pnumber {
+    display: inline-block
+}
+
+.closeBtn {
+    position: absolute;
+    right: .16rem;
+    top: .1rem;
+    width: .14rem;
+    height: .14rem;
+    text-align: center;
+    line-height: .14rem;
+    font-family: "微软雅黑";
+    font-size: .14rem
+}
+
+.iknow {
+    background: #ffdd10;
+    border-radius: .2rem;
+    margin-top: .1rem;
+    font-size: .16rem
+}
+
+.mengceng {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .7;
+    display: none
+}
+
+
+/*修改 9.6*/
+
+.tiaobox {
+    width: 1.7rem;
+    margin: 0 auto;
+    height: .75rem;
+    margin-top: .3rem;
+}
+
+.tiaobox img {
+    width: 100%;
+    height: 100%;
+}
+
+.tiaoboxcode {
+    font-size: .18rem;
+    color: rgb(51, 51, 51);
+    margin-top: .1rem;
+}
+
+
+/*新增 10.13*/
+
+#shopmes {
+    position: relative !important;
+}
+
+.shopredmes {
+    position: absolute;
+    left: -.02rem;
+    bottom: 0;
+    width: .46rem;
+    height: .12rem;
+    border-radius: .06rem;
+    color: #fff;
+    background: rgb(232, 54, 94);
+    line-height: .12rem;
+    font-size: .1rem;
+}
+
+.usepoint {
+    font-size: .14rem;
+    position: relative;
+    background: #E8375E;
+    height: .19rem;
+    line-height: .19rem;
+    border-bottom-right-radius: .08rem;
+    border-top-right-radius: .08rem;
+    color: #ffffff;
+    padding-right: .15rem;
+}
+
+.usepointfont {
+    margin-left: .3rem;
+}
+
+.colorp {
+    background: rgb(232, 55, 94);
+}
+
+.colory {
+    background: rgb(190, 190, 190);
+}
+
+.colorj {
+    background: rgb(210, 167, 66);
+}
+
+.colorh {
+    background: rgb(51, 51, 51);
+}
+
+.colorz {
+    /*margin-left: .6rem;*/
+    background: rgb(97, 180, 240);
+}
+
+.icon_img {
+    position: absolute;
+    left: 0.125rem;
+    top: .03rem;
+    width: .12rem;
+}
+
+.dengjifont {
+    margin-top: 0.05rem !important;
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+}
+
+.carmiaoshu {
+    font-size: .14rem;
+    color: rgb(51, 51, 51) !important;
+}
+
+
+/*幸运球弹窗*/
+
+.luckball {
+    display: none;
+    width: 80%;
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    z-index: 100;
+}
+
+.luckballbigpic {
+    width: 100%;
+    display: block;
+}
+
+.luckballbigpic img {
+    width: 100%;
+}
+
+.receiveBtn {
+    width: 50%;
+    height: .45rem;
+    background: #FF5687;
+    border-radius: 4px;
+    text-align: center;
+    line-height: .45rem;
+    color: #ffffff;
+    font-size: .18rem;
+    margin-top: .2rem;
+    margin-left: 25%;
+}
+
+.closeluckball {
+    position: absolute;
+    right: -.1rem;
+    top: -.1rem;
+    width: .2rem;
+}
+
+.closeluckball img {
+    width: 100%;
+}
+
+.headbg {
+    position: relative;
+}
+
+.hyqi {
+    background: #E09AAA;
+    width: .645rem;
+    height: .12rem;
+    border-radius: .04rem;
+    color: #ffffff;
+    font-size: .11rem;
+    line-height: .12rem;
+    padding-left: .05rem;
+    padding-right: .05rem;
+    margin-left: .1rem;
+}
+
+#havepoint {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.tab {
+    border: none;
+    background: none;
+    height: auto;
+}
+
+.tab div {
+    width: 48%;
+    float: left;
+    text-align: center;
+    height: .71rem;
+    padding-top: .17rem;
+    background: #f4f4f4;
+    margin-top: 0px;
+}
+
+#nowpoint {
+    position: relative;
+}
+
+.hyqipk {
+    background: #E09AAA;
+}
+
+.hyqiyk {
+    background: #DEDEDE;
+}
+
+.hyqijk {
+    background: #E4C578;
+}
+
+.hyqihk {
+    background: #787878;
+}
+
+.hyqizsk {
+    background: #A6D4ED;
+}
+
+.luckballBox {
+    width: .78rem;
+    position: absolute;
+    right: .03rem;
+    top: 38%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.luckballIcon {
+    width: 100%;
+    position: absolute;
+    z-index: 50;
+    right: .03rem;
+    top: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.luckballFloatIcon {
+    /*width: .8rem;*/
+    height: .21rem;
+    position: absolute;
+    left: -.3rem;
+    top: .26rem;
+}
+
+.select {
+    width: 100%;
+    padding: .11rem 0 .11rem .31rem;
+    font-size: .13rem;
+    color: #333333;
+    outline: none;
+    border: none;
+    box-shadow: 1px 1px 3px #ccc;
+}
+
+.selectBox {
+    position: relative;
+    display: none;
+}
+
+.icon_address {
+    position: absolute;
+    left: .14rem;
+    top: 50%;
+    margin-top: -.07rem;
+    height: .13rem;
+}
+
+.icon_arrow {
+    position: absolute;
+    left: 1.8rem;
+    top: 50%;
+    height: .1rem;
+    margin-top: -.05rem;
+}
+
+.mengceng {
+    z-index: 66;
+}
+
+#cityBox {
+    background: #fff;
+}
+
+
+/*会员卡领取成功提示*/
+
+.actsuccess {
+    display: none;
+    width: 70%;
+    background:#fff;
+    position: fixed;
+    left: 15%;
+    top: 25%;
+    text-align: center;
+    border-radius: .04rem;
+    padding-top: .2rem;
+    z-index: 100;
+}
+.actsuccess img{
+     width: 30%;
+     margin-bottom: .05rem;
+}
+.actsuccessMes{
+    margin-bottom: .2rem;
+    font-size: -2rem;
+}
+.actsuccessBtn{
+    width: 80%;
+    height: .35rem;
+    background: rgb(255, 221, 16);
+    border-radius: .04rem;
+    margin-bottom: .1rem;
+    line-height: .35rem;
+    font-size: .16rem;
+    margin-left: 10%;
+}

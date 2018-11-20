@@ -1,0 +1,9 @@
+var WX_URL = "https://melive.2018.huaxiweiying.com/"; // 定义URL
+var COUPON_URL = "https://coupon.2018.huaxiweiying.com/"; // 定义URL
+var APP_URL="https://app.2018.huaxiweiying.com/";  // 定义幸运球URL
+var APP_URL_PARKING="http://app.2018.huaxiweiying.com/";  // 定义停车URL 获取banner图  http
+var forum_code = '6lo40d7ffc'; // 微贝社区
+var coupon_sign = 'SDE45FHW6KL'; // 商讯签名
+var SMSCode = ''; // 短信验证码
+var AUCTION_URL = 'https://app.2018.huaxiweiying.com/HXXCAuction/goods/'; //竞拍
+var APP_PARKING_URL = 'https://app.2018.huaxiweiying.com/HXWYParkingMain/'; // 停车业务调用地址

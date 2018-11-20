@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <title>订单详情</title>
+    <link rel="stylesheet" href="css/orderdetail.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="xiangqing_dazhixinxi">
+            <div class="xiangqing_dazhixinxi_name" id="scheduleName">
+                <?php echo $orderdetail[0]['scheduleName']?>
+            </div>
+            <div class="xiangqing_dazhixinxi_num_price">
+                <p><span id="ticketNumber"><?php echo $orderdetail[0]['ticketNumber']?></span>张 <span id="payAmount"><?php echo $orderdetail[0]['payAmount']?></span>元</p>
+            </div>
+            <div class="xiangqing_dazhixinxi_time">
+                <p id="showPlayTime">
+                    <?php echo $orderdetail[0]['showPlayTime']?>
+                </p>
+            </div>
+            <div class="xiangqing_dazhixinxi_address">
+                <p id="stadiumName">
+                    <?php echo $orderdetail[0]['stadiumName']?>
+                </p>
+            </div>
+        </div>
+
+        <div class="weizhi_piaojia_box">
+            <div class="weizhi_box">
+                <p id="tickets">
+
+                </p>
+            </div>
+            <!-- <div class="piaojia_box">
+                <p>价格：<span><?php echo $v['price']?></span>元</p>
+            </div>-->
+            <!--<div class="xiangyoujianhao">
+                <img src="pic/gengduo.png" />
+            </div>
+            <div class="weibangdingshoujihao_tishi">
+                未绑定身份证
+            </div>-->
+        </div>
+        <div class="goupiaorendianhua">
+            <p>购票人手机号：<span orderMobile></span></p>
+            <?php if ($orderdetail[0]['ticketType'] == 0) {?>
+            <div class="peisongxinxi" id="addressMes" style="display:none">
+                <div class="peisongxinxi_wenzi">配送信息</div>
+                <div class="peisongxinxi_name_mobile">
+                    <div class="peisongxinxi_name" id="name">
+                        <?php echo $orderdetail[0]['name']?>
+                    </div>
+                    <div class="peisongxinxi_mobile" id="mobile">
+                        <?php echo $orderdetail[0]['mobile']?>
+                    </div>
+                </div>
+                <div class="peisongxinxi_address" id="address">
+                    <?php echo $orderdetail[0]['address']?>
+                </div>
+            </div>
+            <div class="peisongzhuangtai" id="addressStatus" style="display:none">
+                <div>配送状态：
+                    <span id="orderStatus">
+                    <?php switch ($orderdetail[0]['status']) {
+                        case 0:
+                            echo "待发货";
+                            break;
+                        case 1:
+                            echo "已发货";
+                            break;
+                        case 2:
+                            echo "已签收";
+                            break;
+
+                        default:
+                            echo "未知状态";
+                            break;
+                    }?>
+                    </span>
+                </div>
+                <div>物流信息：<span id="expressMes"><?php echo $orderdetail[0]['expressName']?> <?php echo $orderdetail[0]['expressNo']?></span></div>
+            </div>
+            <?php }?>
+        </div>
+        <!--<div class="weizhi_piaojia_box">
+            <div class="weizhi_box">
+                <p><span>118</span>通道<span>5</span>排<span>44</span>号</p>
+            </div>
+            <div class="piaojia_box">
+                <p>价格：<span>80</span>元</p>
+            </div>
+            <div class="xiangyoujianhao">
+                <img src="pic/gengduo.png" />
+            </div>
+            <div class="weibangdingshoujihao_tishi">
+                未绑定身份证
+            </div>
+        </div>-->
+        <div class="dinghanhao_xiadantime_kouqian_box">
+            <div class="dingdanhao_box">
+                <p>订单号：<span id="orderNo"></span>
+                    <?php echo $orderdetail[0]['orderNo']?>
+                </p>
+            </div>
+            <div class="xiadantime_box">
+                <p>下单时间：<span id="orderTime"></span>
+                    <?php echo date("Y.m.d H:i", $orderdetail[0]['orderTime'])?>
+                </p>
+            </div>
+            <div class="kouqian_box">
+                <div>
+                    <p>积分抵扣 </p>
+                    <p class="kouqian_box_kouqian" id="kouqian_box_kouqian">
+                        <?php echo empty($orderdetail[0]['pointDeduction'])?0:$orderdetail[0]['pointDeduction']?>元</p>
+                </div>
+                <div>
+                    <p>实付款</p>
+                    <p id="payAmount">
+                        <?php echo $orderdetail[0]['payAmount']?>元</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+    <script src="../common/officialJs/fontSize.js"></script>
+    <script src="../common/customJs/URL.js"></script>
+    <script src="../common/customJs/AJAX.js"></script>
+    <script src="../common/customJs/time.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+        if (!getStorage("userData")) {
+            window.location.href = WX_URL + "HXXCServiceWeChat/wechat/wechat_verify";
+        } else {
+            var userData = getStorage("userData");
+        }
+        var uid = userData.uid;
+        var orderNo = getUrlParam("orderNo");;
+
+        $("#placeBtn").on("click", function() {
+            $(".mengceng").show();
+        })
+        $(".mengceng").on("click", function() {
+            $(this).hide();
+        })
+
+        function renderingHtml(uid, orderNo) {
+            var backOrderDetail = getTicketOrderDetail(uid, orderNo);
+            if (!backOrderDetail) {
+                console.log("获取列表详情出错！")
+            } else {
+
+                $("#scheduleName").html(backOrderDetail[0].scheduleName);
+                $("#ticketNumber").html(backOrderDetail[0].ticketNumber);
+                $("#payAmount").html(backOrderDetail[0].payAmount);
+                $("#showPlayTime").html(backOrderDetail[0].showPlayTime);
+                $("#stadiumName").html(backOrderDetail[0].stadiumName);
+                $("#orderMobile").html(backOrderDetail[0].orderMobile);
+
+                // 订单信息 start
+                $("#orderNo").html(backOrderDetail[0].orderNo);
+                $("#orderTime").html(timestampToTime(backOrderDetail[0].orderTime), "y-m-d h:m");
+                var pointDeduction = backOrderDetail[0].pointDeduction == null ? 0 : backOrderDetail[0].pointDeduction;
+                $("#kouqian_box_kouqian").html(pointDeduction + "元");
+                $("#payAmount").html(backOrderDetail[0].payAmount + "元");
+                // 订单信息 end
+
+                //   渲染座位  start
+                var seatsHtml = "";
+                $.each(backOrderDetail[0]['tickets'], function(i, k) {
+                    seatsHtml = k.seatDesc + " "
+                });
+                $("#tickets").html(seatsHtml);
+                //   渲染座位  end
+
+                if (backOrderDetail[0]['ticketType'] == 0) {
+                    $("#addressMes").show();
+                    $("#addressStatus").show();
+                    $("#name").html(backOrderDetail[0].name);
+                    $("#mobile").html(backOrderDetail[0].mobile);
+                    $("#address").html(backOrderDetail[0].address);
+
+                    var orderStatusFont = "";
+                    switch (backOrderDetail[0]['status']) {
+                        case 0:
+                            orderStatusFont = "待发货";
+                            break;
+                        case 1:
+                            orderStatusFont = "已发货";
+                            break;
+                        case 2:
+                            orderStatusFont = "已签收";
+                            break;
+                        default:
+                            orderStatusFont = "未知状态";
+                            break;
+                    }
+                    $("#orderStatus").html("orderStatusFont");
+
+                    $("#expressMes").html(backOrderDetail[0].expressName + " " + backOrderDetail[0].expressNo)
+                }
+
+            }
+        }
+
+        // 禁用微信分享
+        function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        }
+
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            onBridgeReady();
+        }
+    </script>
+</body>
+
+</html>

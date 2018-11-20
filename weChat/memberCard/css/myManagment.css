@@ -1,0 +1,55 @@
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        html{
+            font-size: 100px;
+        }
+        body{
+            font-size: 12px;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        .wrap {
+            width: 100%;
+            height: 100%;
+            background: #F4F4F4 ;
+        }
+        .list {
+            display: flex;
+            -webkit-flex-direction: row;
+            justify-content:space-between;
+            -webkit-justify-content:space-between;
+            background: #fff;
+            height: .55rem;
+
+        }
+         .listFont{
+             line-height: .55rem;
+             font-size:.15rem;
+             color: #808080;
+             padding-left: .45rem;
+             position: relative;
+         }
+         .listmore{
+             padding-right: .28rem;
+             height: .12rem;
+             margin-top: .21rem;
+         }
+        .listmore img{
+            height: 100%;
+            display: block;
+        }
+        .icon{
+            width: .17rem;
+            height: .17rem;
+            position: absolute;
+            left: 0.2rem;
+            top: 50%;
+            margin-top: -0.085rem;
+        }
+        .boxshadow{
+            box-shadow:-2px -2px 8px rgba(0,0,0,.05);
+        }

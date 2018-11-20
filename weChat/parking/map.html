@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="email=no" />
+	<!--禁止页面缩放-->
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+	<title>测试地图</title>
+	<link rel="stylesheet" type="text/css" href="../common/css/common.css" />
+	<style>
+		.mapButton {
+			font-size: .2rem;
+			width: 1rem;
+			height: .3rem;
+			background: #f1f1f1;
+			text-align: center;
+			line-height: .3rem;
+			margin: .2rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="mapButton">开启地图</div>
+</body>
+<script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+<script src="../common/officialJs/fontSize.js"></script>
+<script src="../common/officialJs/md5.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+<script src="js/common.js"></script>
+<!-- 图片轮播 -->
+<script type="text/javascript" src="../common/officialJs/jquery.event.drag.js"></script>
+<script type="text/javascript" src="../common/officialJs/jquery.touchSlider.js"></script>
+<script type="text/javascript" src="../common/officialJs/jqlunbo.js"></script>
+<script type="text/javascript" src="../common/customJs/URL.js"></script>
+<script type="text/javascript" src="../common/customJs/AJAX.js"></script>
+<script type="text/javascript" src="../common/customJs/time.js"></script>
+<script src="../common/customJs/wxShare.js"></script>
+<script>
+	$(".mapButton").on("click", function() {
+		wxShareNew("");
+	})
+
+	function wxShareNew(share) {
+		var signPackage = getSignPackage();
+		// 微信分享
+		wx.config({
+			debug: false,
+			appId: signPackage.appId,
+			timestamp: signPackage.timestamp,
+			nonceStr: signPackage.nonceStr,
+			signature: signPackage.signature,
+			jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'hideMenuItems', 'showMenuItems', 'hideAllNonBaseMenuItem', 'showAllNonBaseMenuItem', 'translateVoice', 'startRecord',
+				'stopRecord', 'onRecordEnd', 'playVoice', 'pauseVoice', 'stopVoice', 'uploadVoice', 'downloadVoice', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage', 'getNetworkType', 'openLocation', 'getLocation',
+				'hideOptionMenu', 'showOptionMenu', 'closeWindow', 'scanQRCode', 'chooseWXPay', 'openProductSpecificView', 'addCard', 'chooseCard', 'openCard'
+			]
+		})
+		// 微信分享给朋友
+		wx.error(function(res) {
+			alert("出错了：");
+			alert(res.errMsg);
+		});
+		wx.ready(function() {
+			wx.checkJsApi({
+				jsApiList: ['checkJsApi', 'openLocation', 'getLocation'],
+				success: function(res) {}
+			});
+			wx.getLocation({
+				type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+				success: function(res) {
+					//使用微信内置地图查看位置接口
+					wx.openLocation({
+						latitude:39.919504 , // 纬度，浮点数，范围为90 ~ -90  //我的位置 res.latitude
+						longitude:116.286234 , // 经度，浮点数，范围为180 ~ -180。 //我的位置 res.latitude  res.longitude
+						name: '卓展购物中心(B1南十二门)', // 位置名
+						address: '北京市海淀区复兴路69号卓展购物中心B1', // 地址详情说明
+						scale: 28, // 地图缩放级别,整形值,范围从1~28。默认为最大
+						infoUrl: 'http://www.gongjuji.net' // 在查看位置界面底部显示的超链接,可点击跳转（测试好像不可用）
+					});
+				},
+				cancel: function(res) {
+					alert(res);
+				}
+			});
+			console.log('已注册获取“发送给朋友”状态事件');
+		})
+	}
+</script>
+<!--
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/onlinePayment.js"></script> -->
+
+</html>

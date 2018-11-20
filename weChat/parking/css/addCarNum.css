@@ -1,0 +1,77 @@
+    html{
+        font-size: 100px;
+    }
+    body{
+        font-size: 12px;
+    }
+    .introduce {
+        width: 96%;
+        margin-top: .5rem;
+        margin-left: 2%;
+        position: static;
+        border-top: 1px solid #f2f2f2;
+        padding-top: .14rem;
+        color: rgb(185, 185, 185);
+        font-size: .14rem;
+        line-height: .22rem;
+        padding-bottom: .14rem;
+    }
+
+    #online {
+        background: rgb(255, 221, 16);
+    }
+
+    .delbtn {
+        width: .14rem;
+        height: .14rem;
+    }
+
+    .delbtn img {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #addplateNumber {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+        position: relative;
+    }
+
+    #online {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .addicon {
+        height: .2rem;
+        position: absolute;
+        left: 18%;
+        top: 50%;
+        margin-top: -.1rem;
+    }
+
+    /* 车牌号输入框 */
+    .parkingInputBox{
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .confirm{
+      width: 66%;
+      height: .42rem;
+      line-height: .42rem;
+      margin-left: 17%;
+      margin-top: .45rem;
+    }
+    .confirm img{
+        width: 100%;
+    }
+    .borlfno{
+        border-right:none !important;
+        border-left:none !important;
+    }
+    #message{
+         color: #D20A23;
+         font-size: .14rem;
+         padding: .11rem 17%;
+    }

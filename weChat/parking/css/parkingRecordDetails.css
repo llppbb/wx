@@ -1,0 +1,78 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    font-size: 100px;
+}
+
+body {
+    font-size: 12px;
+    padding-bottom: .2rem;
+}
+
+.head {
+    background: url(../pic/img_bg.png) no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    line-height: .75rem;
+    color: #ffffff;
+    font-size: .14rem;
+    /*background: #000;*/
+    position: relative;
+}
+
+.centen {
+    margin: 0 .2rem;
+    margin-top: .36rem;
+}
+
+.centerList {
+    display: flex;
+    font-size: .14rem;
+    line-height: .42rem;
+    border-bottom: 1px dashed rgb(249, 249, 249);
+    -webkit-justify-content: space-between;
+}
+
+.carnum {
+    text-align: center;
+    line-height: .24rem;
+    background: rgb(255, 224, 147);
+    margin-bottom: .22rem;
+    font-size: .16rem;
+}
+
+.redColor {
+    color: rgb(233, 6, 78);
+}
+
+.truePay {
+    border-bottom: none;
+    font-size: .16rem;
+}
+
+.memberBox {
+    position: relative;
+    padding-left: .2rem;
+}
+
+.memberBox img {
+    height: .15rem;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -.075rem;
+}
+.carnum{
+    position: absolute;
+    left: 35%;
+    bottom:-.32rem;
+    width: 30%;
+    background: #FDD361;
+    text-align: center;
+    line-height: .24rem;
+    color: #ffffff;
+    border-radius: .12rem;
+}

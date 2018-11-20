@@ -1,0 +1,111 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+/* 完整页面 */
+.recordMain{
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+    align-items: center;
+    /* min-height: 6.1rem;
+    background-color:#f4f4f4; */
+}
+/* 一行记录 */
+.lineRecordRed{
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   font-size: 0.11rem;
+   height: 0.36rem;
+   align-items: center;
+   background-color: white;
+   border-bottom: 0.005rem solid rgb(230, 230, 230);
+   color: #e8365e;
+}
+
+/* 一行记录 */
+.lineRecordRedBig{
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   height: 0.36rem;
+   font-size: 0.14rem;
+   font-weight: 500;
+   align-items: center;
+   background-color: white;
+   border-bottom: 0.005rem solid rgb(230, 230, 230);
+   color: #e8365e;
+}
+
+.lineRecordBlack{
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   height: 0.36rem;
+   font-size: 0.11rem;
+   align-items: center;
+   background-color: white;
+   border-bottom: 0.005rem solid rgb(230, 230, 230);
+   color: #333333;
+}
+
+.lineRecordBlackBig{
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   height: 0.36rem;
+   align-items: center;
+   font-size: 0.14rem;
+   font-weight: 500;
+   background-color: white;
+   border-bottom: 0.005rem solid rgb(230, 230, 230);
+   color: #333333;
+}
+
+.name{
+ 
+  margin-left: 0.24rem;
+  width: 0.68rem;
+  text-align: left;
+  overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.types{
+   
+    width: 0.58rem;
+    text-align: left;
+}
+
+.data{
+   
+    width: 0.67rem;
+    text-align: left;
+}
+
+.time{
+  
+    width: 0.84rem;
+    text-align: left;
+}
+
+.point{
+    text-align: left;
+   
+}
+
+.loadingImg1{
+    width: 1.2rem;
+    height: 1.77rem;
+    margin-top: 1.25rem;
+}
+
+.waittitle{
+    font-size: 0.14rem;
+    color: #808080;
+    margin-top: 0.2rem;
+    text-align: center;
+}

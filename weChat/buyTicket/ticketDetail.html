@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title class="title"></title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/goupiaoxiangqing.css">
+</head>
+<style>
+    .section {
+        padding-bottom: .5rem;
+    }
+
+    #closebtn {
+        width: .36rem;
+        position: fixed;
+        bottom: .7rem;
+        left: 50%;
+        display: none;
+        margin-left: -.18rem;
+        z-index: 99;
+    }
+
+    #closebtn img {
+        width: 100%;
+    }
+
+    .weidenglu_tishi {
+        position: absolute;
+    }
+
+    .pp12 {
+        font-family: serif;
+    }
+</style>
+
+<body>
+
+    <div class="wrap">
+        <header class="header">
+            <img id="posterImage" src="" class="posterImage" style="box-shadow: 1px 1px 5px rgba(0,0,0,.4);" />
+            <div class="headertop">
+                <h4 class="h4" id="showTitle2"></h4>
+                <p class="pp12" style="margin-top:.1rem;margin-bottom:.06rem;" id="showDate"></p>
+                <p class="pp12" id="showTime2"></p>
+            </div>
+            <div class="navBottom" id="showlabel"></div>
+        </header>
+        <div class="place">
+            <div class="leftPlace"><img src="img/icon_address.png" /></div>
+            <div class="cententPlace">
+                <P class="pp" id="showVenue"></P>
+                <P id="venueName"></P>
+            </div>
+            <div class="rightPlace" id="gengduoBtn"><img src="img/gengduo.png" />
+                <P class="pp" id="placeBtn">座位图</P>
+            </div>
+        </div>
+        <section class="section">
+            <div class="tupianwenzi" id="matchDesc">
+            </div>
+        </section>
+    </div>
+    <div class="aseter" oneclick=0 id="statusName" style="font-weight: bold;"></div>
+    <p id="closebtn"><img src="img/btn_close.png" /></p>
+    <div class="mengceng">
+        <img src="" id="seatMapImage" />
+    </div>
+    <div class="mengceng1"></div>
+    <!--<div class="dengluchenggong_tishi">登陆成功！</div>-->
+    <div class="weidenglu_tishi" id="nomobile">
+        <div class="weidenglu_tishi_title">
+            <p class="weidenglu_tishi_title_p1" id="nomobile_title">开票提醒</p>
+        </div>
+        <div class="yangzhengChange">
+            <div class="shoujihao">
+                <input type="number" placeholder="请输入手机号" id="shoujihao" class="numberShoujihao" style="height:.57rem;margin-top:0px" />
+                <input type="button" class="getyzm" value="获取验证码" />
+            </div>
+            <div class="yanzhengma">
+                <input type="number" placeholder="4位验证码" id="yanzhengmaBtn" class="yazhengmaIput" />
+            </div>
+        </div>
+        <div class="weidenglu_tishi_title">
+            <p class="weidenglu_tishi_title_p2" id="nomobile_des">开票后，我们将第一时间通过手机短信通知您</p>
+        </div>
+        <div class="weidenglu_tishi_bottom">
+            <div class="quexiaoBtn">取消</div>
+            <div class="quedingBtn">确定</div>
+        </div>
+    </div>
+
+    <div class="shezhi_tishi" style="display: none">
+        <p>设置成功</p>
+    </div>
+
+    <script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+    <script src="../common/officialJs/fontSize.js"></script>
+    <script src="../common/customJs/URL.js"></script>
+    <script src="../common/customJs/AJAX.js"></script>
+    <script src="../common/customJs/common.js"></script>
+    <script src="../common/customJs/toastDialog.js"></script>
+    <script src="../common/customJs/bindMobile.js"></script>
+    <script src="js/Judge_state.js"></script>
+    <script src="js/AJAXFuntion.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+        <script src="../common/customJs/wxShare.js"></script>
+    <script>
+        if (!getStorage("userData")) {
+            window.location.href = WX_URL + "HXXCServiceWeChat/wechat/wechat_verify";
+        } else {
+            var userData = getStorage("userData");
+        }
+        var uid = userData.uid;
+        var mobile = userData.mobile;
+        // var showMobile = "<?php echo $showMobile?>";
+        var onlineID = getUrlParam("programid");
+        var tishiBox = $("#nomobile");
+        var share = '';
+        var canChooseSeat = '';
+        getProgramDetail(onlineID);
+        $("#shoujihao").val(mobile);
+        function tishi(message) { //提示信息
+            $('.shezhi_tishi p').html(message);
+            $('.shezhi_tishi').show();
+            var windowWidth = $(window).width();
+            var tiShiBoxWidth = $(".shezhi_tishi").width();
+            var leftMargin = (windowWidth - tiShiBoxWidth) / 2;
+            console.log(tiShiBoxWidth);
+            console.log(windowWidth);
+            $(".shezhi_tishi").css("left", leftMargin + "px");
+            $('.shezhi_tishi').css('opacity', '0.7');
+            setTimeout(function() {
+                $('.shezhi_tishi').fadeOut(1000);
+            }, 1500)
+        }
+        $("#gengduoBtn").on("click", function() {
+            $("#closebtn").show();
+            $(".mengceng").show();
+            $(".mengceng1").show();
+            $("body").on('touchmove', function(e) {
+                e.preventDefault();
+            })
+        })
+        $("#closebtn").on("click", function() {
+            $(this).hide();
+            $(".mengceng").hide();
+            $(".mengceng1").hide();
+            $("body").unbind('touchmove');
+        })
+        $(".aseter").on('click', function(event) {
+            console.log($(window).scrollTop())
+            if ($(this).attr("saleStatus") == 2) {
+                $(".mengceng1").show();
+                $(".mengceng1").css('opacity', '0.7');
+                $("#nomobile").show();
+                $(".weidenglu_tishi").css("top", $(window).scrollTop() + 100 + "px");
+                $("body").on('touchmove', function(e) {
+                    e.preventDefault();
+                })
+                return;
+            } else if ($(this).attr("saleStatus") == 3) {
+                return false;
+            } else if ($(this).attr("saleStatus") == "已售罄") {
+                $(".mengceng1").show();
+                $(".mengceng1").css('opacity', '0.7');
+                $("#nomobile").show();
+                return;
+            } else {
+                if ($(this).attr("oneclick") == 0) {
+                    if (false == programInfoAjax(onlineID)) {
+                        tishi("您来晚了，活动已结束！");
+                        return false;
+                    }
+                    if(canChooseSeat==1){
+                        // 选座
+                        location.href='../schedule/constituency.html?onlineID='+onlineID;
+                    }else{
+                        location.href='../schedule/Selfhelp.html?onlineID='+onlineID;
+                    }
+                    $(this).attr("oneclick") = 1;
+                }
+            }
+        });
+        $(".quexiaoBtn").click(function(event) {
+            $(".mengceng1").hide();
+            $("#nomobile").hide();
+            $("body").unbind('touchmove');
+        });
+        $(".quedingBtn").click(function(event) {
+            var shoujihao = $("#shoujihao").val();
+            var yanzhengma = $("#yanzhengmaBtn").val();
+            var checkResult = checkMobileAndSMSCode(shoujihao, yanzhengma);
+            if (!checkResult) {
+                return false;
+            }
+            // 3.开售提醒
+            mobile = shoujihao;
+            SaleReminder(uid, shoujihao, onlineID, tishiBox);
+            $(".mengceng1").hide();
+            $("body").unbind('touchmove');
+        });
+        // 1.获取验证码
+        $(".getyzm").click(function(event) {
+            var mobile = $("#shoujihao").val();
+            var obj = $(".getyzm");
+            getyzm(mobile, obj);
+        });
+
+        // 获取项目详情
+        function getProgramDetail(programId) {
+            var data = {
+                "id":parseInt(programId)
+            }
+            var returnDetailAjax = detailAjax(data);
+            if (!returnDetailAjax) {
+                console.log("请求detailAjax失败");
+            } else {
+                if (parseInt(returnDetailAjax.state) == 0) {
+                    var dataReturn = returnDetailAjax.result;
+                    $(".title").html(dataReturn.showTitle);
+                    canChooseSeat = dataReturn.canChooseSeat;
+                    share = {
+                        "shareTitle": dataReturn.shareTitle,
+                        "shareDesc": dataReturn.shareDesc,
+                        "programId": dataReturn.programId,
+                        "posterImage": dataReturn.posterImage,
+                         "shareLink":WX_URL+"weChat/buyTicket/ticketDetail.html?programId="+dataReturn.programId,
+                    };
+                    $("#posterImage").attr("src", dataReturn.posterImage);
+                    $("#showTitle2").html(dataReturn.showTitle2);
+                    $("#showDate").html(dataReturn.showDate);
+                    if (dataReturn.showTime2 != '') {
+                        $("#showTime2").html("时长：" + dataReturn.showTime2 + " 分钟");
+                    }
+                    if (dataReturn.showLabel) {
+                        var showLabelarr = dataReturn.showLabel.split(",");
+                    }
+                    console.log(showLabelarr);
+                    var showLabelhtml = '';
+                    $.each(showLabelarr, function(i, k) {
+                        showLabelhtml += '<div>' + k + '</div>'
+                    });
+                    $("#showlabel").html(showLabelhtml);
+                    $("#showVenue").html(dataReturn.showVenue);
+                    $("#venueName").html(dataReturn.venueName);
+                    $("#matchDesc").html(dataReturn.matchDesc);
+                    if (dataReturn.saleStatus == 3) {
+                        $("#statusName").hide();
+                    } else {
+                        $("#statusName").html(dataReturn.statusName);
+                        $("#statusName").attr("saleStatus", dataReturn.saleStatus);
+                    }
+                    $("#seatMapImage").attr("src", dataReturn.seatMapImage);
+                    // 不显示场馆座位图
+                    if (dataReturn.seatsmap == false) {
+                        $("#gengduoBtn").hide();
+                    }
+                    setTimeout(function() {
+                        panduanColorDetail();
+                    }, 100)
+                }
+            }
+        }
+        
+        wxShare(share);
+    </script>
+</body>
+
+</html>

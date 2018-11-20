@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>吃喝玩乐</title>
+    <link rel="stylesheet" href="../shop/css/shop_zhuye.css">
+    <link rel="stylesheet" href="css/eatPlay.css">
+    <script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+	<script src="../common/officialJs/fontSize.js"></script>
+    <script src="../common/officialJs/md5.js"></script>
+    <script src="../shop/js/common.js"></script>
+    <script src="../shop/js/common_ajaxnew.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+</head>
+
+<body>
+    <div class="selectBox">
+        <select class="select" name="" id="cityBox">
+            <option value="1" city="北京市">华熙LIVE·北京五棵松</option>
+            <option value="2" city="重庆市">华熙LIVE·重庆鱼洞</option>
+            <option value="3" city="成都市">华熙LIVE·成都528艺术村</option>
+        </select>
+        <img src="../memberCard/pic/icon_address.png" class="icon_address" />
+        <img src="pic/cityLogoNew.png" class="icon_arrow" />
+    </div>
+    <div class="wrap">
+        <header class="head_zhuye">
+            <div class="xianshi" id="survey">
+                <img src="pic/icon_gk.png" class="headericon"/>
+                <p id="xianshi_btn" class="tabOn headerfont">华熙概况</p>
+            </div>
+            <div class="quanbu" id="HIUP">
+                <img src="pic/icon_hiup_gray.png" class="headericon"/>
+                <p class="headerfont">HI-UP</p>
+            </div>
+            <div class="quanbu" id="coupon">
+                <img src="pic/icon_coupon_gray.png" class="headericon"/>
+                <p class="headerfont">优惠券</p>
+            </div>
+        </header>
+
+        <section class="section">
+            <div id="survey" class="sectionCenter">
+                <div class="surveyList wukesong">
+                    <img src="pic/img_logo_1.png"/>
+                    <p>华熙LIVE五棵松</p>
+                </div>
+                <div class="surveyList kaidilake">
+                    <img src="pic/img_logo_2.png"/>
+                    <p>凯迪拉克中心</p>
+                </div>
+                <div class="surveyList hiup">
+                    <img src="pic/img_logo_3.png"/>
+                    <p>华熙LIVE Hi-UP</p>
+                </div>
+                <div class="surveyList hipark">
+                    <img src="pic/img_logo_4.png"/>
+                    <p>Hi-Park</p>
+                </div>
+                <div class="surveyList meishuguan">
+                    <img src="pic/img_logo_5.png"/>
+                    <p>美术馆</p>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    <div class="nodata" id="nodataWrap">
+        <img src="pic/pic_ontheway.png" style="width:30%" />
+        <p style="font-size:.14rem;color:#808080">精彩内容在路上，敬请期待</p>
+    </div>
+
+    <script>
+        // var nohouse="<?php echo $nohouse?>";
+        // if(nohouse!=1){
+        //     // 返回  商城 主页
+        //     goHomeBtn('body');
+        // }
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+
+        $(".wukesong").on("click",function(){
+             window.location.href="wukesong.html";
+        })
+        $(".kaidilake").on("click",function(){
+             window.location.href="kaidilake.html"
+        })
+        $(".hiup").on("click",function(){
+             window.location.href="hiup.html"
+        })
+        $(".hipark").on("click",function(){
+             window.location.href="hipark.html"
+        })
+        $(".meishuguan").on("click",function(){
+             window.location.href="meishuguan.html"
+        })
+
+        $("#HIUP").on("click",function(){
+             window.location.href = "eatPlayHiup.html";
+        })
+        $("#coupon").on("click",function(){
+            // alert("敬请期待！");
+            window.location.href ="eatPlayCoupon.html";
+        })
+
+        $("#cityBox").on("change", function() {
+            var cityId = $(this).val();
+            if (cityId != 1) {
+                // 隐藏主体
+                $(".wrap").hide();
+                $(".nodata").show();
+            } else {
+                $(".wrap").show();
+                $(".nodata").hide();
+            }
+        })
+
+        //  进入 抽奖页面
+        //  infoSlyder();
+
+        // var appId = '<?php echo APPID?>';
+        // var nonceStr = '<?php echo $nonceStr;?>';
+        // var timestamp = '<?php echo $timestamp;?>';
+        // var signature = '<?php echo $signature;?>';
+
+        // 微信分享
+        // <?php echo $jsapi?>
+        // wx.ready(function() {
+        //     wx.checkJsApi({
+        //         jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'],
+        //         success: function(res) {
+        //             console.log(res);
+        //         }
+        //     });
+        //     wx.onMenuShareAppMessage({
+        //         title: '吃喝玩乐 华熙LIVE一卡通', // 分享标题
+        //         desc: '越多积分，越多实惠！', // 分享描述
+        //         link: WX_URL + 'user.php?eatPlay=1', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        //         imgUrl: WX_URL + 'tmp/title.png', // 分享图标
+        //         type: '', // 分享类型,music、video或link，不填默认为link
+        //         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        //         success: function() {
+        //             // 用户确认分享后执行的回调函数
+        //             console.log("分享成功");
+        //         },
+        //         cancel: function() {
+        //             // 用户取消分享后执行的回调函数
+        //             console.log("取消分享");
+        //         }
+        //     });
+        //      // 分享到朋友圈
+        //     wx.onMenuShareTimeline({
+        //         title: '吃喝玩乐 华熙LIVE一卡通',
+        //         desc: '越多积分，越多实惠！',
+        //         link:  WX_URL + 'user.php?eatPlay=1',
+        //         imgUrl:  WX_URL + 'tmp/title.png',
+        //         trigger: function(res) {
+        //             // 用户确认分享后执行的回调函数
+        //         },
+        //         success: function(res) {
+        //             // 用户确认分享后执行的回调函数
+        //         },
+        //         cancel: function(res) {
+        //             console.log("取消分享：");
+        //             console.log(JSON.stringify(res));
+        //             // 用户取消分享后执行的回调函数
+        //         },
+        //         fail: function(res) {
+        //             console.log("分享失败：");
+        //             console.log(JSON.stringify(res));
+        //         }
+        //     });
+        // });
+        // wx.error(function(res) {
+        //     // console.log(res);
+        // });
+        $("#luckballlogo").on("click",function(){
+            window.location.href=WX_URL+"user.php?luckballact=1";
+        })
+    </script>
+
+</body>
+
+</html>

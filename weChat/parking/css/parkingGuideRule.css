@@ -1,0 +1,98 @@
+  html {
+        font-size: 100px;
+    }
+
+    body {
+        font-size: 12px;
+        padding: .1rem;
+    }
+
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    html,
+    body,
+    .wrap {
+        font-size: .14rem;
+        color: rgb(153, 153, 153);
+        background: rgb(255, 255, 255);
+    }
+
+    /*车位引导图*/
+
+    .parkingGuide {
+        width: 100%;
+        height: 100%;
+        padding-top: .1rem;
+        padding-bottom: .1rem;
+    }
+
+    .pgzhu {
+        text-align: right;
+    }
+
+    .yindaoimg {
+        width: 100%;
+    }
+
+    .title {
+        text-align: center;
+        line-height: .38rem;
+    }
+
+    p {
+        line-height: .22rem;
+    }
+    /* 车牌号管理 停车记录 会员须知 */
+    .tabBox{
+        width: 96%;
+        margin-left: 2%;
+        margin-top: .1rem;
+        display: flex ;
+        height: .47rem;
+        background: #fff;
+        border-radius: .4rem;
+        align-items:center;
+        -webkit-align-items:center;
+        box-shadow: 0px 1px 7px 0px rgba(0,0,0,.08);
+        background: #fff;
+        overflow: hidden;
+    }
+    .tabBox div{
+        vertical-align: middle;
+        flex: 1;
+        height: .47rem;
+        line-height: .47rem;
+        text-align: center;
+    }
+    .tabBoxOn{
+        background:#FDD361;
+        color: #fff;
+    }
+
+    .beijingOn{
+        background: url("weixin/parkingNew/picnew/tab_yellow.png") no-repeat;
+        background-size: 100% 100%;
+    }
+    .chengduOn{
+        background: url("weixin/parkingNew/picnew/tip_yellow.png") no-repeat;
+        background-size: 100% 100%;
+    }
+    .chongqingOn{
+        background: url("weixin/parkingNew/picnew/tab_yellow_2.png") no-repeat;
+        background-size: 100% 100%;
+    }
+    .center{
+        padding: .13rem;
+    }
+    .nodata{
+        text-align: center;
+        margin-top: 2rem;
+        font-size: .14rem;
+        color: #333333;
+    }
+    .center img{
+        width: 100%;
+    }

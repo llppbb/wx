@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>自助积分</title>
+    <link rel="stylesheet" type="text/css" href="../common/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/selfhelp.css" />
+</head>
+
+<body>
+    <div class="wrap">
+
+        <div class="takePicture">
+            <p class="takePictureH">积分方式</p>
+            <div class="illustrate">
+                <p>1、结账时，请直接到商家前台，告知收银员进行增加积分的操作（小票当天有效）；</p>
+                <p>2、凭消费小票至hi-up客服中心，请客服人员操作增加积分（小票当天有效）；</p>
+                <p>3、在本页面，拍照上传消费小票，自助积分（可上传3日内小票）；</p>
+            </div>
+            <img class="img_wrap" src="" alt="" style="display:none;" id="uploadImgView">
+            <input type="file"  id="uploadImg" name="file" placeholder="商品图片" onchange="addImg(this.files)" style="display:none" accept="image/*">
+            <div class="uploading" id="div1">拍小票上传<img src="pic/icon_cinema.png" class="parkingImg" /></div>
+            <div class="uploading uploadingTrue" id="div2">
+                <p id="reCamera">重拍</p>
+                <p id="reUploading" state="1">确认上传</p>
+            </div>
+        </div>
+
+        <div class="takePicture">
+            <p class="takePictureH">拍照自助积分</p>
+            <div class="illustrate">
+                <p>1. 您可上传3日内的消费小票（包含消费当天），每张小票仅能参与1次积分。</p>
+                <p>2. 请将小票保持平整，至少要拍完整下图红框中内容，并保证照片清晰。</p>
+                <p>3. 上传成功后，我们将在7个工作日内帮您完成积分，在此期间请您保留小票以便核对。</p>
+            </div>
+            <div class="statement">
+
+                <div id="example">
+                    <p class="statementH">***************结账单***************</p>
+
+                    <p class="statementH"><span class="borR">商户名</span></p>
+                    <div class="statementC">
+                        <p><span class="borR">结账时间：2016-05-31 12:00:21</span></p>
+                        <p><span class="borR">交易号：121457812157821</span></p>
+                    </div>
+
+                    <div class="commodityBox">
+                        <div class="commoditylist">
+                            <div class="commoditylistPs">
+                                <p>商品</p>
+                                <p>数量</p>
+                                <p>金额</p>
+                            </div>
+                            <p>======================================================================</p>
+                        </div>
+                        <p class="subtotal">小计：99</p>
+                    </div>
+
+                    <div class="money"><span class="borR">应收：99</span></div>
+
+                </div>
+            </div>
+
+            <!-- <div class="uploading" id="div1">拍小票上传</div>
+            <div class="uploading uploadingTrue" id="div2">
+                <p id="reCamera">重拍</p>
+                <p id="reUploading" state="1">确认上传</p>
+            </div> -->
+        </div>
+
+
+        <div class="pointrecord">
+            <p class="pointrecordH">自助积分记录</p>
+            <div class="recordBox">
+                <p class="norecord">暂无数据</p>
+                <!-- <div class="recordList">
+                    <div>
+                        <p class="zpoint">自助积分（2017-08-07）</p>
+                        <p class="state stateR">审核中</p>
+                    </div>
+                    <div class="check">
+                        <p class="needpoint">本次积分：0</p>
+                        <p class="seedetails">查看详情 〉〉</p>
+                    </div>
+                </div>
+                <div class="recordList">
+                    <div>
+                        <p class="zpoint">自助积分（2017-08-07）</p>
+                        <p class="state stateG">审核中</p>
+                    </div>
+                    <div>
+                        <p class="needpoint">本次积分：0</p>
+                        <p class="seedetails">查看详情 〉〉</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="shezhi_tishi">
+        <p></p>
+    </div>
+    <!-- 菊花加载 -->
+    <div id="foo" style="position:fixed;left:49%;top:58%;display:none"></div>
+    <script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+    <script src="../common/officialJs/fontSize.js"></script>
+    <script src="../common/customJs/URL.js"></script>
+    <script src="../common/customJs/AJAX.js"></script>
+    <script src="../common/customJs/toastDialog.js"></script>
+    <script src="../common/customJs/time.js"></script>
+    <script src="../common/customJs/wxShare.js"></script>
+    <!-- 菊花加载 -->
+    <script src="../common/officialJs/spin.min.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script src="js/selfhelp.js"></script>
+</body>
+
+</html>

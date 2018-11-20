@@ -1,0 +1,39 @@
+    *{
+        margin: 0px;
+        padding:0px;
+    }
+    html{
+        font-size: 100px;
+    }
+    body{
+        font-size: 12px;
+    }
+    html,body{
+        width: 100%;
+        background: #FFF35E;
+    }
+    .headerImg{
+        width: 100%;
+    }
+    .title{
+        width:60%;
+        margin-left: 20%;
+    }
+    p{
+        color: #46351F;
+        font-size: .14rem;
+        line-height: .23rem;
+        padding-left: .3rem;
+        padding-right: .3rem;
+    }
+    .footer{
+        width: 100%;
+        position: fixed;
+        left: 0;
+        bottom: 0px;
+        font-size: .16rem;
+        color: #ffffff;
+        text-align: center;
+        line-height: .45rem;
+        background: #FF5287;
+    }

@@ -1,0 +1,234 @@
+  body, html {
+      height: 100%;
+  }
+
+  * {
+      padding: 0;
+      margin: 0;
+  }
+
+  html {
+      font-size: 100px;
+  }
+
+  body, .wrap {
+      font-size: 12px;
+  }
+
+  .wrap ul {
+      margin-top: 0.1rem !important;
+  }
+
+  .listBox {
+      background: #ffffff;
+      position: relative;
+      padding: .1rem;
+  }
+
+  .divbox {
+      width: 67px;
+      height: 100px;
+      background: red;
+  }
+
+  .tabBox {
+      width: 100%;
+      position: fixed;
+      left: 0;
+      top: 0;
+      background: #fff;
+      z-index: 100;
+  }
+
+  .tabbot {
+      position: relative;
+      display: flex;
+  }
+
+  .borbot {
+      position: absolute;
+      left: 0;
+      bottom: 0px;
+      width: 30%;
+      height: 2px;
+      background: rgb(255, 221, 0);
+  }
+
+  .listBoxUl li {
+      height: .5rem !important;
+      /*margin: 0 .1rem;*/
+      display: flex;
+      -webkit-justify-content: space-between;
+      -webkit-align-items: center;
+      /*border-bottom: 1px solid rgb(230, 230, 230);*/
+  }
+
+  .desc {
+      font-size: .14rem;
+      color: rgb(51, 51, 51);
+  }
+
+  .time {
+      font-size: .12rem;
+      color: rgb(128, 128, 128);
+  }
+
+  .point {
+      font-size: .14rem;
+  }
+
+  .stateR {
+      color: rgb(233, 5, 77);
+  }
+
+  .stateG {
+      color: rgb(0, 192, 163);
+  }
+  /*没有数据 显示 */
+
+  .nodata {
+      position: fixed;
+      top: 2rem;
+  }
+
+  .nodata img {
+      width: 50%;
+      margin-left: 25%;
+  }
+
+  .nodata p {
+      text-align: center;
+      font-size: .22rem;
+      color: rgb(51, 51, 51);
+      margin-top: .1rem;
+  }
+
+  .morebtn {
+      width: 100%;
+      line-height: .45rem;
+      text-align: center;
+      color: #9C9C9C;
+      /*background: rgb(255,221,0);*/
+  }
+
+  .ccc {
+      background: rgb(230, 230, 230);
+  }
+
+  .cartype {
+      position: absolute;
+      right: .2rem;
+      top: .2rem;
+  }
+
+  .cartype p {
+      font-size: .13rem;
+      color: rgb(158, 161, 175);
+  }
+
+  .cartype img {
+      height: .2rem;
+  }
+
+  .allpointBox {
+      color: #fff;
+      padding-left: .14rem;
+      display: flex;
+      align-items: center;
+      -webkit-align-items: center;
+  }
+
+  .allpointFont {
+      font-size: .17rem;
+      margin-right: .09rem;
+  }
+
+  .allpoint {
+      font-size: .32rem;
+  }
+
+  .flex_between {
+      display: flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+  }
+
+  .tabtitle {
+      width: 96%;
+      height: .97rem;
+      margin-left: 2%;
+      margin-top: .14rem;
+      border-radius: .04rem;
+      background: url(../pic/img_corecard.png) no-repeat;
+      background-size: 100% 100%;
+  }
+
+  .tabtitleTop {
+      padding: .14rem .14rem .07rem .14rem;
+      color: #fff;
+      font-size: .13rem;
+      margin-bottom: .07rem;
+  }
+
+  .tabbotNew {
+      margin-top: .14rem;
+      margin-bottom: .14rem;
+  }
+
+  .tabListBox {
+      display: none;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      background: #fff;
+  }
+
+  .tabbotList {
+      line-height: .4rem;
+      color: #000000;
+      font-size: .12rem;
+      align-items: center;
+      -webkit-align-items: center;
+      padding-right: 2%;
+      margin-left: 2%;
+      padding-left: .14rem;
+  }
+
+  .tabbotList img {
+      width: .11rem;
+  }
+
+  .tabAllpoint {
+      display: flex;
+      justify-content: flex-end;
+      -webkit-justify-content: flex-end;
+      margin-right: 2%;
+  }
+
+  .tabListShow {
+      display: flex;
+      align-items: center;
+      -webkit-align-items: center;
+  }
+
+  .tabListShow img {
+      width: .09rem;
+  }
+
+  .tabbotListOn {
+      background: #F8F8F8;
+  }
+
+  .ulTaost,.mengcengNew{
+      display: none;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      opacity: .7;
+      position: absolute;
+      left: 0;
+      top: 0;
+  }
+  .checkedImg{
+      display: none;
+  }

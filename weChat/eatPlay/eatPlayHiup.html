@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>吃喝玩乐</title>
+    <link rel="stylesheet" href="../shop/css/shop_zhuye.css">
+    <link rel="stylesheet" href="css/eatPlay.css">
+    <script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+    <script src="../common/officialJs/fontSize.js"></script>
+    <!-- <script src="/weixin/common/common.js"></script> -->
+    <script src="../common/customJs/URL.js"></script>
+    <script src="../common/customJs/AJAX.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <style>
+        .productboxList {
+            display: flex;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            margin-bottom: .14rem;
+        }
+
+        .productboxListImg {
+            flex: 1;
+            margin-right: .1rem;
+        }
+
+        .productboxListImg img {
+            width: 100%;
+        }
+
+        .productboxListDes {
+            flex: 3;
+            padding-bottom: .14rem;
+            border-bottom: 1px solid #E6E6E6
+        }
+
+        .productTitle {
+            color: #333333;
+            font-size: .16rem;
+            font-weight: bold;
+        }
+
+        .productAddress {
+            color: #333333;
+            font-size: .13rem;
+            margin: .1rem 0;
+        }
+
+        .productZlassify {
+            color: #808080;
+            font-size: .1rem;
+            margin-bottom: .1rem;
+        }
+
+        .productdiscount {
+            color: #E8375E;
+            font-size: .1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="selectBox">
+        <select class="select" name="" id="cityBox">
+            <option value="1" city="北京市">华熙LIVE·北京五棵松</option>
+            <option value="2" city="重庆市">华熙LIVE·重庆鱼洞</option>
+            <option value="3" city="成都市">华熙LIVE·成都528艺术村</option>
+        </select>
+        <img src="../memberCard/pic/icon_address.png" class="icon_address" />
+        <img src="pic/cityLogoNew.png" class="icon_arrow" />
+    </div>
+    <div class="wrap">
+        <header class="head_zhuye">
+            <div class="xianshi" id="survey">
+                <img src="pic/icon_gk_gray.png" class="headericon" />
+                <p class="headerfont">华熙概况</p>
+            </div>
+            <div class="quanbu" id="HIUP">
+                <img src="pic/icon_hiup.png" class="headericon" />
+                <p class="headerfont tabOn">HI-UP</p>
+            </div>
+            <div class="quanbu" id="coupon">
+                <img src="pic/icon_coupon_gray.png" class="headericon" />
+                <p class="headerfont">优惠券</p>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="tabs">
+                <div class="tabsbox">
+                    <div class="tab_list tab_list_on" typeid=0>全部</div>
+                </div>
+            </div>
+            <div class="productbox">
+                <div class="productboxList">
+                    <div class="productboxListImg"><img src="pic/icon_coupon_gray.png" /></div>
+                    <div class="productboxListDes">
+                        <p class="productTitle">宜家订货中心</p>
+                        <p class="productAddress">复兴路69号</p>
+                        <p class="productZlassify">生活家具</p>
+                        <p class="productdiscount">8月全场6折</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 向右边的渐变 -->
+            <div class="moretishi"><img src="../shop/pic/1.png" /></div>
+            <div class="nodata" id="nodataSection">
+                <img src="pic/pic_ontheway.png" style="width:30%" />
+                <p style="font-size:.14rem;color:#808080">精彩内容在路上，敬请期待</p>
+            </div>
+        </section>
+        <div class="nodata" id="nodataWrap">
+            <img src="pic/pic_ontheway.png" style="width:30%" />
+            <p style="font-size:.14rem;color:#808080">精彩内容在路上，敬请期待</p>
+        </div>
+    </div>
+
+    <script>
+        // goHomeBtn('body');
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+
+        $("#cityBox").on("change", function() {
+            var cityId = $(this).val();
+            if (cityId != 1) {
+                // 隐藏主体
+                $(".section").hide();
+                $(".head_zhuye").hide();
+                $(".wrap ").css({
+                    "background": "none"
+                })
+                $("#nodataWrap").show();
+            } else {
+                $(".section").show();
+                $(".head_zhuye").show();
+                $(".wrap ").css({
+                    "background": "url(pic/bg_1.png) no-repeat",
+                    "background-size": "100%"
+                })
+                $("#nodataWrap").hide();
+            }
+        })
+        $("#survey").on("click", function() {
+            window.location.href = "eatPlay.html";
+        })
+        $("#coupon").on("click", function() {
+                        // alert("敬请期待！");
+            window.location.href = "eatPlayCoupon.html";
+        })
+        // 获取二级分类
+        queryTypeList(1);
+        //渲染列表
+        getList(0);
+
+        $(".tab_list").on("click", function() {
+            $("#nodataSection").hide();
+            var typeid = $(this).attr("typeid");
+            $(this).css({
+                '-webkit-tap-highlight-color':   'rgba(0,0,0,0)',
+                '-webkit-tap-highlight-color':   'transparent'
+            })
+            $(".productbox").html('');
+            $(this).addClass('tab_list_on').siblings('').removeClass('tab_list_on');
+            getList(typeid);
+        })
+
+        // 渲染列表
+        function getList(typeId) {
+            var sendUrl = APP_URL + 'HXXCServiceAdmin/merchant/getMerchantListByTypeId.json';
+            var sendDate = {
+                "typeId": typeId
+            };
+            fnAjax(sendUrl, "get", false, sendDate, function(data) {
+                if (data.state == 0) {
+                    if (data.result == 0) {
+                        $(".productbox").hide();
+                        $("#nodataSection").show();
+                    } else {
+                        $(".productbox").show();
+                        $(".nodata").hide();
+                        var htmlList = '';
+                        var showZhe = '';
+                        $.each(data.result, function(i, k) {
+                            showZhe = k.show == 0 ? k.shopDesc : "";
+                            htmlList += '<div class="productboxList">' +
+                                '<div class="productboxListImg"><div class="shopLogoUrlBor"><img src="' + k.shopLogoUrl + '" /></div></div>' +
+                                '<div class="productboxListDes">' +
+                                '<p class="productTitle">' + k.shopName + '</p>' +
+                                '<p class="productAddress">' + k.address + '</p>' +
+                                '<p class="productZlassify">' + k.shopNatureName + '</p>' +
+                                '<p class="productdiscount">' + showZhe + '</p>' +
+                                '</div>' +
+                                '</div>';
+                        });
+                        $(".productbox").html(htmlList);
+                    }
+                }
+            }, function(data) {});
+        }
+        // 渲染分类
+        function queryTypeList(grade) {
+            var sendUrl = APP_URL + 'HXXCServiceAdmin/merchant/queryTypeList.json';
+            var sendDate = {
+                "grade":grade
+            };
+            fnAjax(sendUrl, "get", false, sendDate, function(data) {
+                if (data.state == 0) {
+                    var tabhtml = '';
+                    $.each(data.result, function(i, k) {
+                            var tab_list_on = "";
+                            tabhtml += '<div class="tab_list ' + tab_list_on + '" typeid=' + k.id + '>' + k.typeName + '</div>';
+
+                    });
+                    // var moreshow = '<div class="tab_list" style="width:.55rem;background:#fff"></div>';
+                    $(".tabsbox").append(tabhtml);
+                    // $(".tabsbox").append(moreshow);
+                }
+            }, function(data) {});
+        }
+
+
+    //     <?php echo $jsapi?>
+    // wx.ready(function() {
+    //     wx.checkJsApi({
+    //         jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'],
+    //         success: function(res) {
+    //             console.log(res);
+    //         }
+    //     });
+    //     wx.onMenuShareAppMessage({
+    //         title: '吃喝玩乐 华熙LIVE一卡通', // 分享标题
+    //         desc: '越多积分，越多实惠！', // 分享描述
+    //         link: WX_URL + 'user.php?eatPlayHiup=1', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    //         imgUrl: WX_URL + 'tmp/title.png', // 分享图标
+    //         type: '', // 分享类型,music、video或link，不填默认为link
+    //         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+    //         success: function() {
+    //             // 用户确认分享后执行的回调函数
+    //             console.log("分享成功");
+    //         },
+    //         cancel: function() {
+    //             // 用户取消分享后执行的回调函数
+    //             console.log("取消分享");
+    //         }
+    //     });
+    //       // 分享到朋友圈
+    //     wx.onMenuShareTimeline({
+    //         title: '吃喝玩乐 华熙LIVE一卡通',
+    //         desc: '越多积分，越多实惠！',
+    //         link:  WX_URL + 'user.php?eatPlayHiup=1',
+    //         imgUrl:  WX_URL + 'tmp/title.png',
+    //         trigger: function(res) {
+    //             // 用户确认分享后执行的回调函数
+    //         },
+    //         success: function(res) {
+    //             // 用户确认分享后执行的回调函数
+    //         },
+    //         cancel: function(res) {
+    //             console.log("取消分享：");
+    //             console.log(JSON.stringify(res));
+    //             // 用户取消分享后执行的回调函数
+    //         },
+    //         fail: function(res) {
+    //             console.log("分享失败：");
+    //             console.log(JSON.stringify(res));
+    //         }
+    //     });
+    // });
+    // wx.error(function(res) {
+    //     // console.log(res);
+    // });
+        $("#luckballlogo").on("click", function() {
+            window.location.href = WX_URL + "user.php?luckballact=1";
+        })
+    </script>
+
+</body>
+
+</html>

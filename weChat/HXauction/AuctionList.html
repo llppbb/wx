@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<title>竞拍</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+	    <meta name="format-detection" content="telephone=no" />
+	    <meta name="format-detection" content="email=no" />
+	    <!--禁止页面缩放-->
+	    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/AuctionList.css" />
+		<!--下拉刷新 s-->
+        <!-- <link rel="stylesheet" href="../common/weUI/lib/weui.css">
+		<link rel="stylesheet" href="../common/weUI/css/jquery-weui.css"> -->
+		<!--下拉刷新 e-->
+	</head>
+	<body>
+		<!--下拉刷新 s-->
+		<!-- <div class="weui-pull-to-refresh-layer">
+		<body ontouchstart>
+	      <div class='pull-to-refresh-arrow'></div>
+	      <div class='pull-to-refresh-preloader'></div>
+	      <div class="down">下拉刷新</div>
+	      <div class="up">释放刷新</div>
+	      <div class="refresh">正在刷新</div>
+	    </div> -->
+	    <!--下拉刷新 e-->
+
+		<div class="wrap">
+			<div class="auctionListMain">
+				<div class="headtop">
+					<div class="goodstap">
+						<img class="imgsmall" src='Images/tab_goods.png' alt="" />
+						<div class="taptitlel">商品</div>
+					</div>
+					<div class="actiontap">
+						<img class="imgsmall" src='Images/tab_auction_pre.png' alt="" />
+						<div class="taptitler">竞拍专区</div>
+						<div class="lineyellow"></div>
+					</div>
+				</div>
+				<div class="hotauction">
+					<div class="devtitle">正在热拍</div>
+					<div id="hotauctionBox"></div>
+				</div>
+				<div class="preauction">
+					<div class="devtitle">竞拍预告</div>
+					<div class="goodsrow"></div>
+				</div>
+				<div class="endauction">
+					<div class="devtitle">已结束</div>
+					<div class="goodsrow"></div>
+				</div>
+			</div>
+		</div>
+        <!--活动结束-->
+		<div class="auctionListNoMain" id="noData" style="display: none;">
+			<img class="nodataImg" src='Images/nodata.png' alt="" />
+			<div class="upTitle">你来晚了</div>
+			<div class="downTitle">本次活动已结束</div>
+			<img class="nodataImgTitle" src='Images/nodatatitle.png' alt="" />
+		</div>
+		<script src="../common/weUI/lib/jquery-2.1.4.js" type="text/javascript" ></script>
+		<script src="../common/weUI/js/jquery-weui.js"></script>
+		<script src="../common/officialJs/fontSize.js" type="text/javascript" ></script>
+		<script src="../common/officialJs/leftTime.min.js" type="text/javascript" ></script>
+		<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+		<script src="../common/customJs/URL.js" type="text/javascript"></script>
+		<script src="../common/customJs/AJAX.js" type="text/javascript"></script>
+		<script src="../common/customJs/time.js" type="text/javascript"></script>
+		<script src="../common/customJs/wxShare.js"></script>
+		<script src="js/AuctionList.js" type="text/javascript" ></script>
+	</body>
+</html>

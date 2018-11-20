@@ -1,0 +1,646 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html{
+	background:#f4f4f4 ;
+}
+/* 完整页面 */
+.detailMain{
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    overflow-x:hidden;
+    flex-direction: column;
+    /* min-height: 6.1rem; */
+    align-items: center;
+    /* background-color: #f4f4f4; */
+}
+
+.detailMainS{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: auto;
+    overflow-x:hidden;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+.tishititle{
+    font-size: 0.14rem;
+    color: #808080;
+    margin-top: -0.5rem;
+}
+
+
+.loadingImg{
+    margin-top: 1.3rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+
+.loadingImg2{
+    width: 3rem;
+    height: 3rem;
+}
+
+/* 商品图片 */
+.topimg{
+    width: 100%;
+    height: 3.4rem;
+}
+
+/* 商品状态模块未开始 */
+.statusbarPre{
+    width: 100%;
+    height: 0.45rem;
+    /* background-color: #ffb32c; */
+    background: url('../Images/label_enter.png');
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    display: flex;
+    margin-top: -0.45rem;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* 商品状态模块已结束 */
+.statusbarEnd{
+    width: 100%;
+    height: 0.45rem;
+    /* background-color: #ffb32c; */
+    background: url('../Images/label_end.png');
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    display: flex;
+    margin-top: -0.45rem;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* 正在竞拍倒计时条 */
+.statusbarOpen{
+    width: 100%;
+    height: 0.45rem;
+    margin-top: -0.45rem;
+    /* background-color: #ffb32c; */
+    background: url('../Images/label_auction.png');
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+/* 倒计时文字叙述 */
+.overtitleOpen{
+	width: 0.78rem;
+    height: 0.16rem;
+	font-Size: 0.13rem;
+	color: #ffffff;
+}
+/* 即将开始时间背景 */
+.baoguoTimePre{
+   display: flex;
+   flex-direction: column;
+   width: 1.4rem;
+   margin-left: 1.2rem;
+}
+
+.overtitlePre{
+	width: 0.78rem;
+    height: 0.16rem;
+	font-Size: 0.13rem;
+    color: #ed720b;
+    text-align: left;
+    margin-top: -0.03rem;
+}
+.overtitleDownPre{
+	width: 1.4rem;
+    height: 0.16rem;
+	font-Size: 0.16rem;
+    color: #ed720b;
+    text-align: left;
+}
+
+.overtitleEnd{
+	width: 0.78rem;
+    height: 0.16rem;
+	font-Size: 0.13rem;
+    color: #ffffff;
+    text-align: left;
+    margin-top: -0.03rem;
+}
+.overtitleDownEnd{
+	width: 1.4rem;
+    height: 0.16rem;
+	font-Size: 0.16rem;
+    color: #ffffff;
+    text-align: left;
+}
+
+
+/* 商品信息模块(未开始) */
+.titlebar{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    /* height: 2.45rem; */
+    padding-bottom: 0.1rem;
+    background-color:white;
+}
+/* 商品信息模块(已结束) */
+.titlebarEndLiu{
+     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    /* height: 2.12rem; */
+    padding-bottom: 0.1rem;
+    background-color:white;
+}
+
+.titlebarEnd{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    /* height: 3.87rem; */
+    padding-bottom: 0.1rem;
+    background-color:white;
+}
+
+/* 商品信息模块(开启竞拍) */
+.titlebarOpen{
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+     width: 100%;
+     /* height: 4.17rem; */
+     padding-bottom: 0.1rem;
+     background-color:white;
+}
+
+/* 商品名称 */
+.goodsname{
+    color: #333333;
+    font-size: 0.2rem;
+    font-weight: 500;
+    width: 3.33rem;
+    text-align: left;
+    margin-top: 0.15rem;
+    margin-left: 0.21rem;
+}
+/* 商品积分 */
+.goodspoint{
+    font-size: 0.12rem;
+    color: #333333;
+    text-align: left;
+    margin-top: 0.1rem;
+    margin-left: 0.21rem;
+}
+.goodspoint1{
+    font-size: 0.12rem;
+    width: 0.5rem;
+    color: #808080;
+    text-align: left;
+    margin-top: 0.14rem;
+    margin-left: 0.03rem;
+}
+.pointsline{
+    display: flex;
+    flex-direction: row;
+}
+
+/* 分割线 */
+.divisionline{
+   width: 3.33rem;
+   background-color:#e6e6e6;
+   height: 0.005rem;
+   margin-left: 0.21rem;
+   margin-top: 0.2rem;
+   
+}
+/* 出价记录背景 */
+.pricelist{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 3.47rem;
+    height: 1.33rem;
+    background-color:white;
+    margin-left: 0.14rem;
+    margin-top: 0.35rem;
+    border: 0.005rem solid rgb(230, 230, 230);
+    border-radius:  0.04rem;
+}
+
+
+/* 出价记录名城积分等 */
+.lineBlack{
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   height: 0.14rem;
+   font-size: 0.11rem;
+   align-items: center;
+   background-color: white;
+   color: #808080;
+   margin-top: 0.15rem;
+}
+.lineBlackBig{
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   height: 0.14rem;
+   align-items: center;
+   font-size: 0.13rem;
+   font-weight: 500;
+   background-color: white;
+   color: #333333;
+   margin-top: 0.1rem;
+}
+.nameLine{
+  margin-left: 0.1rem;
+  width: 0.68rem;
+  text-align: left;
+  overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+}
+.typesLine{  
+    width: 0.58rem;
+    text-align: left;
+}
+.dataLine{  
+    width: 0.67rem;
+    text-align: left;
+}
+.timeLine{ 
+    width: 0.75rem;
+    text-align:left;
+}
+.pointLine{
+    text-align: right;
+}
+
+/* 出价记录条数 */
+.listName{
+   font-size: 0.11rem;
+   color: #808080;
+   margin-top: 0.14rem;
+}
+
+/* 锤子小图标 */
+.chuizi{
+    width: 0.16rem;
+    height: 0.16rem;
+    margin-left: 0.2rem;
+}
+/* 正在进行 */
+.nowtitle{
+   font-size: 0.16rem;
+   color: #ffffff;
+   margin-left: 0.01rem;
+   width: 0.7rem;
+   text-align: left;
+}
+.baoguoTime{
+   display: flex;
+   flex-direction: column;
+   width: 1.1rem;
+   margin-left: 1.2rem;
+}
+
+.starTitle{
+    width: 2.2rem;
+    height: 0.28rem;
+    margin-top: -0.14rem;
+    color: #ffffff;
+    font-size: 0.16rem;
+    background: url('../Images/img_tittle.png');
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    text-align: center;
+}
+
+/* 单个热拍商品积分红色字  */
+.goodspointbigline{
+    font-size: 0.16rem;
+    color: #ed3771;
+    text-align: left;
+}
+
+/* 中间信息部分背景 */
+.pricetimebg{   
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+/* 起拍价 */
+.startpiont{
+    width: 1.55rem;
+    font-size: 0.13rem;
+    color: #808080;
+    margin-left: 0.21rem;
+    margin-top: 0.13rem;
+    text-align: left;
+}
+
+/* 加价幅度 */
+.pointstep{
+    width: 1.55rem;
+    font-size: 0.13rem;
+    color: #808080;
+    margin-left: 0.21rem;
+    margin-top: 0.13rem;
+    text-align: left;
+}
+
+/* 开始时间 */
+.starttime{
+    width: 1.6rem;
+    font-size: 0.13rem;
+    color: #808080;
+    margin-left: 0.21rem;
+    margin-top: 0.13rem;
+    text-align: left;
+    text-overflow:ellipsis;
+}
+/* 结束时间 */
+.endtime{
+    width: 1.6rem;
+    font-size: 0.13rem;
+    color: #808080;
+    margin-left: 0.16rem;
+    margin-top: 0.13rem;
+    text-align: left;
+    text-overflow:ellipsis;
+}
+
+/* 会员等级 */
+.vipgrade{
+    width: 1.55rem;
+    font-size: 0.13rem;
+    color: #808080;
+    margin-left: 0.21rem;
+    margin-top: 0.13rem;
+    text-align: left;
+}
+
+/* 参与奖励 */
+.participate{
+    width: 1.55rem;
+    font-size: 0.13rem;
+    color: #808080;
+    margin-left: 0.21rem;
+    margin-top: 0.13rem;
+    text-align: left;
+}
+
+/* 描述内容通用 */
+.content{
+    font-size: 0.13rem;
+    color: #333333;
+}
+
+.descbg{
+   display: flex;
+   flex-direction: column;
+   background-color: #fff;
+   width: 100%;
+   align-items: flex-start;
+   margin-top: 0.1rem;
+}
+
+.desctit{
+    color: #333333;
+    font-size: 0.17rem;
+    margin-left: 0.21rem;
+    font-weight: 500;
+    margin-top: 0.21rem;
+}
+/* 商品描述网页 */
+.descpage{
+    /* padding-top: 0.1rem; */
+    margin-top: 0.1rem;
+    width: 100%;
+    font-size: 0.14rem;
+    text-align: left;
+    width: 3.33rem;
+    margin-left: 0.21rem;
+    line-height: 0.25rem;
+    /*新增英文强制换行*/
+    word-wrap:break-word
+}
+.descpage img{
+    width: 100%;
+}
+
+/* 温馨提示 */
+.prompt{
+    width: 100%;
+    display: flex;
+    margin-top: 0.1rem;
+    flex-direction: column;
+    padding-bottom: 0.6rem;
+    align-items: flex-start;
+    background-color: white;
+}
+
+.promptOver{
+     width: 100%;
+    display: flex;
+    margin-top: 0.1rem;
+    flex-direction: column;
+    padding-bottom: 0.2rem;
+    align-items: flex-start;
+    background-color: white;
+}
+.warmprompt{
+    color: #333333;
+    font-size: 0.17rem;
+    margin-left: 0.21rem;
+    margin-top: 0.1rem;
+    font-weight: 500;
+}
+.promptcontent{
+    color: #808080;
+    width: 3.42rem;
+    margin-left: 0.21rem;
+    margin-top: 0.15rem;
+    font-size: 0.15rem;
+    text-align: left;
+    line-height: 0.25rem;
+   word-wrap: break-word;
+
+}
+
+/* 底部按钮 (免费报名)*/
+.bottombtn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0; 
+    right: 0; 
+    margin-bottom: 0;
+    width: 100%;
+    height: 0.5rem;
+    background-color: #ffdd00;    
+}
+/* 按钮的标题(免费报名) */
+.btntitle{
+    color: #333333;
+    font-size: 0.16rem;
+    margin-top: 0.04rem;
+    font-weight: 500
+}
+
+/* 按钮的描述(免费报名) */
+.titledesc{
+    color: #333333;
+    font-size: 0.13rem;
+    margin-top: 0.02rem;
+}
+
+/* 底部按钮(已报名) */
+.bottombtndone{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0; 
+    right: 0; 
+    margin-bottom: 0;
+    width: 100%;
+    height: 0.5rem;
+    background-color: #cccccc;    
+}
+/* 按钮的标题(已报名)*/
+.btntitledone{
+    color: #7d7d7d;
+    font-size: 0.16rem;
+    margin-top: 0.04rem;
+    font-weight: 500
+}
+
+/* 按钮的描述(已报名) */
+.titledescdone{
+    color: #7d7d7d;
+    font-size: 0.13rem;
+    margin-top: 0.02rem;
+
+}
+
+/* 底部按钮(去竞拍) */
+.bottombtnpai{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 0; 
+    right: 0; 
+    margin-bottom: 0;
+    width: 100%;
+    height: 0.5rem;
+    background-color: #e8365e;    
+}
+/* 按钮的标题(去竞拍) */
+.btntitlepai{
+    color: #ffffff;
+    font-size: 0.16rem;
+    font-weight: 500
+}
+
+
+/* 倒计时组件 */
+.countdowngb{
+    display: flex;
+    flex-direction: row;
+    font-size: 0.13rem;
+    height: 0.16rem;
+    width: 2rem;
+    margin-top: 0.02rem;
+}
+
+.datanum{
+    color: white;
+    font-size: 0.11rem;
+    width: 0.16rem;
+    background-color: #333333;
+    text-align: center;
+}
+.danwei{
+    font-size: 0.13rem;
+    color: #333333;
+    margin-left: 0.04rem;
+    margin-right: 0.04rem;
+}
+
+.error{
+    font-size: 0.18rem;
+    color:red;
+    margin-top: 0.5rem;
+}
+
+
+.spinner {
+  margin: 100px auto;
+  width: 50px;
+  height: 60px;
+  text-align: center;
+  font-size: 10px;
+}
+ 
+.spinner > div {
+  background-color:royalblue;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+   
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+ 
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+ 
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+ 
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+ 
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+ 
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) } 
+  20% { -webkit-transform: scaleY(1.0) }
+}
+ 
+@keyframes stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}

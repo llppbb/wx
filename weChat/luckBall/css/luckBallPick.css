@@ -1,0 +1,158 @@
+*{
+        margin: 0px;
+        padding:0px;
+    }
+    html{
+        font-size: 100px;
+    }
+    body{
+        font-size: 12px;
+    }
+    html,body{
+        width: 100%;
+    }
+    .bigbox{
+        margin: 0 .1rem 0 .1rem;
+        border: 1px solid #E6E6E6;
+        border-radius: .02rem;
+        padding: .2rem .29rem;
+    }
+    .backHomePage{
+      width:  .55rem;
+      height: .24rem;
+      line-height: .24rem;
+      border-radius: .12rem;
+      background:#FFE35E;
+      margin-top: .4rem;
+      margin-left: .1rem;
+      padding-left: .28rem;
+      padding-right: .1rem;
+      color: #BA9420;
+      font-size: .13rem;
+    }
+    .mes{
+        color: #706606;
+        font-size: .13rem;
+        margin-bottom: .1rem;
+    }
+   .radombtn{
+       margin-top: .2rem;
+       height: .3rem;
+       border-top: 1px solid #E6E6E6;
+       border-radius: .04rem;
+       padding-top: .2rem;
+   }
+    .radombtn p{
+        float: right;
+        height: .3rem;
+        line-height: .3rem;
+        border-radius: .02rem;
+        padding-left: .3rem;
+        padding-right: .1rem;
+        background: #FFC900;
+        color: #fff;
+    }
+    /*号码被占用*/
+    .errorshow{
+        display: none;
+        margin-top: .3rem;
+        text-align: center;
+    }
+    .icon_error{
+        width: .54rem;
+        margin: 0 auto;
+    }
+    /*没有订单的时候*/
+
+    .goupiaoNo {
+        width: 100%;
+        text-align: center;
+        padding-top: 0.825rem;
+    }
+
+    .goupiaoNo img {
+        height: 1.245rem;
+    }
+
+    .goupiaoNo h2 {
+        color: #9E9E9E;
+        font-size: 0.14rem;
+        font-weight: normal;
+        color: #808080;
+    }
+
+    .goupiaoNo div {
+        width: 50%;
+        height: 0.4rem;
+        line-height: 0.4rem;
+        margin-top: 0.14rem;
+        margin-left: 25%;
+        text-align: center;
+        background: #FFDD10;
+        font-size: 0.16rem;
+        border-radius: 0.2rem;
+    }
+    .jianhaonewLeft {
+        height: 0.14rem;
+        position: absolute;
+        left: 0.04rem;
+        top: 50%;
+        margin-top: -0.07rem;
+    }
+    .inputBall{
+        width: 150%;
+        height: .5rem;
+        position: absolute;
+        left:-50%;
+        top:0px;
+        opacity: 0;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-tap-highlight-color: transparent; /* For some Androids,个人感觉是低版本号的安卓，4.0下面 */
+        outline: none;
+    }
+    .footerccc{
+        background: #CCCCCC;
+        color: #FFFFFF;
+    }
+    .inputBallNum{
+         display: flex ;
+         position: relative;
+    }
+
+    .inputBalllist{
+        flex:  1;
+        height: .55rem;
+        border: 1px solid #ccc;
+        text-align: center;
+        /*vertical-align: middle;*/
+        line-height: .55rem;
+        font-size: .36rem;
+        color: #333;
+    }
+    .pointshowBox{
+                display: none;
+    }
+    .pointshow{
+        display: flex;
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+        color: #706606;
+        font-size: .13rem;
+        line-height: .4rem;
+        margin: .1rem;
+        border: 1px solid #E6E6E6;
+        border-radius: .02rem;
+        padding-left: .14rem;
+        padding-right: .14rem;
+    }
+    .pointshow span{
+        color: #FFC900;
+    }
+
+    .ballNum{
+        border: 1px solid #696327;
+        background: #FFFEEC;
+    }
+    .ballNumOn{
+        border: 1px solid #5699FF;
+    }

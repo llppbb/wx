@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="format-detection" content="email=no" />
+		<!--禁止页面缩放-->
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+		<title>自助积分详情</title>
+		<link rel="stylesheet" type="text/css" href="css/selfhelp.css" />
+		<link rel="stylesheet" type="text/css" href="css/selfhelpDetails.css" />
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="pointrecord">
+				<div class="recordList">
+					<div>
+						<p class="zpoint">上传时间</p>
+						<p class="zpoint" id="addtime"></p>
+					</div>
+					<div>
+						<p class="zpoint">状态</p>
+						<p class="state stateR" id="state"></p>
+					</div>
+					<div>
+						<p class="zpoint">小票金额</p>
+						<p class="zpoint" id="money"></p>
+					</div>
+					<div>
+						<p class="zpoint">本次积分</p>
+						<p class="state" id="point"></p>
+					</div>
+				</div>
+				<div class="errordescribe" style="display:none"></div>
+			</div>
+			<div class="imgBox"><img src="" /></div>
+		</div>
+		<script src="../common/officialJs/jquery-1.8.2.min.js"></script>
+		<script src="../common/officialJs/fontSize.js"></script>
+		<script src="../common/customJs/URL.js"></script>
+	    <script src="../common/customJs/AJAX.js"></script>
+	    <script src="../common/customJs/time.js"></script>
+		<script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+		<script src="js/selfhelpDetails.js"></script>
+	</body>
+
+</html>

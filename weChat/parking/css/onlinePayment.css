@@ -1,0 +1,396 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    font-size: 100px;
+}
+
+body {
+    font-size: 12px;
+}
+html,
+body,
+.wrap {
+  width: 100%;
+  min-height: 100%;
+  background: #fff;
+}
+.carnumber {
+    /*border-bottom: 1px dashed rgb(230, 230, 230);*/
+    /*overflow: hidden;*/
+    background: #FCFCFC;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,.08) inset;
+}
+
+.carnumber,
+.timeboxF {
+    height: .42rem;
+    /*padding-left: 2%;*/
+    clear: both;
+    display: block;
+}
+
+.carnumber div {
+    width: 22%;
+    float: left;
+    margin-left: 4%;
+    text-align: center;
+    height: .24rem;
+    line-height: .24rem;
+    margin-top: .17rem;
+    font-size: .14rem;
+    color: rgb(204, 204, 204);
+    margin-right: 4%;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    /*border: 1px solid rgb(204, 204, 204);
+    border-radius: .04rem;*/
+}
+
+.timeboxF {
+    height:.9rem;
+    clear: both;
+    position: relative;
+}
+
+.timebox div {
+    width: 28%;
+    float: left;
+    text-align: center;
+    margin-left: 3%;
+    height: .24rem;
+    line-height: .24rem;
+    margin-top: .2rem;
+    font-size: .14rem;
+
+}
+
+.timeboxC {
+    width: 34% !important;
+}
+
+.address {
+    clear: both;
+    padding: .1rem .15rem;
+    padding-left: .3rem;
+    font-size: .14rem;
+    color: rgb(185, 185, 185);
+    border-top: 1px dashed rgb(230, 230, 230);
+    position: relative;
+}
+
+.carnumberOn {
+    color: rgb(51, 51, 51) !important;
+    font-weight: bold;
+    /*background: rgb(255, 221, 16);*/
+    border-bottom: 2px solid rgb(255, 221, 16) !important;
+}
+
+.botiput {
+    width: 66%;
+    margin: 0rem 17% .1rem 17%;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+.botiput img{
+    width: 100%;
+}
+.trackMatte {
+    width: 100%;
+    height: 100%;
+    opacity: .7;
+    background: #000000;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    display: none;
+    font-size: .16rem;
+}
+
+.introduce {
+    background: #fff;
+    color: rgb(185, 185, 185);
+    font-size: .14rem;
+    line-height: .22rem;
+    margin: 2%;
+    padding: .2rem .14rem;
+    border-radius: .04rem;
+}
+
+.center {
+    margin-bottom: .1rem;
+    margin-top: .1rem;
+}
+
+.nocar img {
+    width: 50%;
+    margin-top: .15rem;
+    margin-left: 25%;
+}
+
+.nocar p {
+    font-size: .14rem;
+    color: rgb(51, 51, 51);
+    margin-bottom: .085rem;
+    margin-top: .12rem;
+    text-align: center;
+}
+
+/*倒计时显示部分*/
+
+.cdtitle {
+    text-align: center;
+    margin-top: .13rem;
+    margin-bottom: .07rem;
+    font-size: .14rem;
+    color: rgb(128, 128, 128);
+}
+
+.cdtime {
+    text-align: center;
+    margin-bottom: .05rem;
+    font-size: .24rem;
+    font-weight: bold;
+}
+
+.cdtimeb {
+    color: rgb(51, 51, 51);
+}
+
+.cdtimer {
+    /*color: rgb(237, 49, 109);*/
+}
+
+.cdmes {
+    text-align: center;
+    margin: 0 .2rem .21rem .2rem;
+    padding-top: .2rem;
+    padding-bottom: .15rem;
+    font-size: .14rem;
+    color: #FFFFFF;
+    background: url(/weixin/parkingNew/picnew/tip_yellow.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.bgh {
+    position: absolute;
+    left: 0px;
+    top: -.0rem;
+    width: 100%;
+    height: .05rem;
+    background: url(/weixin/parkingNew/pic/img_line.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.addressicon {
+    height: .13rem;
+    position: absolute;
+    left: .14rem;
+    top: 50%;
+    margin-top: -.07rem;
+}
+
+.timebox div p:nth-of-type(1) {
+    color: #999999;
+    font-size: .14rem;
+}
+
+.timebox div p:nth-of-type(2) {
+    font-size: .2rem;
+    margin-top: .1rem;
+    font-weight: bold;
+}
+
+.redmes {
+    width: 88%;
+    text-align: center;
+    line-height: .34rem;
+    background: rgb(230, 230, 230);
+    padding-left: .13rem;
+    font-size: .12rem;
+    position: absolute;
+    left: 5%;
+    bottom: .07rem;
+}
+
+.redmes span {
+    color: rgb(210, 10, 35);
+    position: relative;
+}
+
+.redmes img {
+    width: .1rem;
+    position: absolute;
+    left: -.13rem;
+    top: .01rem;
+}
+/*轮播*/
+.img_gallery {
+    height: 1.5rem;
+}
+.main_img ul {
+  width: 100%;
+}
+.img_gallery img {
+    width: 100%;
+    height: 100%;
+}
+.swiper-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    height: 1.7rem;
+}
+.swiper-container-horizontal>.swiper-pagination {
+    bottom: 0rem !important;
+    left: 0;
+    width: 100%;
+}
+/* 车牌号管理 停车记录 会员须知 */
+.tabBox{
+    width: 96%;
+    margin-left: 2%;
+    margin-top: .3rem;
+    margin-bottom: .3rem;
+    display: flex ;
+    height: .8rem;
+    background: #fff;
+    border-radius: .4rem;
+    align-items:center;
+    -webkit-align-items:center;
+    box-shadow: 0px 1px 7px 0px rgba(0,0,0,.08);
+    background: #fff;
+}
+.haveBannerTab{
+    position: absolute;
+    left: 2%;
+    width: 96%;
+    top: 1.08rem;
+    display: flex ;
+    height: .8rem;
+    background: #fff;
+    border-radius: .4rem;
+    align-items:center;
+    -webkit-align-items:center;
+    box-shadow: 0px 1px 7px 0px rgba(0,0,0,.08);
+    background: #fff;
+}
+.tabBox div,.haveBannerTab div{
+    vertical-align: middle;
+    flex: 1;
+    text-align: center;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+.tabBox img,.haveBannerTab img{
+    width: .3rem;
+}
+/* 停车场列表 */
+.parkingArea{
+    width: 96%;
+    margin-left: 2%;
+    margin-top: .1rem;
+    margin-bottom: .1rem;
+}
+.parkingTitle{
+    text-align: center;
+    padding: .1rem 0;
+    font-size: .17rem;
+    color: #333333;
+    font-weight: bold;
+}
+.parkingAreaList{
+   padding: .15rem .1rem;
+   -webkit-box-shadow: 0px 1px 7px 0px rgba(0,0,0,.08);
+   -moz-box-shadow: 0px 1px 7px 0px rgba(0,0,0,.08);
+   box-shadow: 0px 1px 7px 0px rgba(0,0,0,.08);
+   margin-top: .1rem;
+}
+.parkingName{
+  font-size: .14rem;
+  color: #333333;
+  font-weight: bold;
+}
+.parkingMes{
+    font-size: .14rem;
+    color: #808080;
+    margin-top: .06rem;
+}
+/* 灰色背景盒子 */
+.bgdiv{
+    background: #F3F4F6;
+    height: .1rem;
+    width: 100%;
+}
+/*没有绑定车牌号 显示 按键*/
+.nocarnum {
+  margin-top: .6rem;
+  margin-bottom: .4rem;
+}
+.nocarnumMes{
+    text-align: center;
+    font-size: .14rem;
+    color:#808080;
+    margin-bottom: .14rem;
+}
+.nocarnumBtn{
+    width: 50%;
+    margin-left: 25%;
+    background: #FDD361;
+    border-radius: .15rem;
+    height: .3rem;
+    color: #fff;
+    text-align: center;
+    line-height: .3rem;
+    font-size: .14rem;
+}
+.citybox{
+    width: 92%;
+    display: flex ;
+    margin: .21rem 4% 0 4%;
+    justify-content:space-between;
+    -webkit-justify-content:space-between;
+}
+.cityName img{
+    width: .38rem;
+    position: absolute;
+    left: -.1rem;
+    top: -.03rem;
+}
+.cityName{
+    position: relative;
+    background: #E9E9E9;
+    padding: .05rem .1rem;
+    border-radius: .15rem;
+    padding-left: .3rem;
+}
+.redfont img{
+    width: .15rem;
+    position: absolute;
+    left: -.2rem;
+    top: 0.03rem;
+}
+.redfont{
+    font-size: .14rem;
+    color: #808080;
+    position: relative;
+}
+.parkingTitle_{
+    position: absolute;
+    top: .1rem;
+    width: .1rem;
+    height: .02rem;
+    background: #D2D2D2;
+}
+.parkingTitle_L{
+    left: -.2rem;
+}
+.parkingTitle_R{
+    right: -.2rem
+}
+.haveBannerCenter{
+    margin-top: .7rem !important;
+}
+div.point {
+    bottom: .5rem !important;
+}
