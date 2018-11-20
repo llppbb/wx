@@ -1,0 +1,358 @@
+
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <title>订单</title>
+    <link rel="stylesheet" href="weixin/ticketfolder/css/liebiaonew.css">
+    <link rel="stylesheet" type="text/css" href="weixin/cbaorder/css/common.css" />
+</head>
+<style>
+    html,
+    body,
+    .wrap {
+        min-height: 100%;
+        /*height: 100%;*/
+        background: #f4f4f4;
+    }
+
+    .headerTab {
+        padding-top: 0.2rem;
+        background: #FFFFFF;
+        height: 0.5rem;
+        /*margin-bottom: 0.05rem;*/
+    }
+
+    .weikaishi {
+        text-align: center;
+        padding-right: 5%;
+        padding-left: 15%;
+    }
+
+    .weikaishi,
+    .yijieshu {
+        width: 50%;
+        float: left;
+    }
+
+    .font_14_color_179 {
+        padding-bottom: 0.08rem !important;
+        padding-top: 0rem !important;
+    }
+
+    .font_14_color_179 {
+        font-size: 0.14rem !important;
+        color: rgb(179, 179, 179) !important;
+    }
+
+    .yijieshu {
+        padding-left: 5%;
+        text-align: center;
+        padding-right: 15%;
+    }
+
+    .weikaishi p {
+        border-bottom: none !important;
+        text-align: center;
+        padding-bottom: 0.08rem;
+        /*display: none;*/
+    }
+
+    .font_14_color_51 {
+        font-size: 0.14rem !important;
+        color: rgb(51, 51, 51);
+    }
+
+    .goupiaoNo {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        padding-top: 0.825rem;
+    }
+
+    .goupiaoNo img {
+        height: 1.245rem;
+    }
+
+    .goupiaoNo h2 {
+        color: #9E9E9E;
+        font-family: "微软雅黑";
+        font-size: 0.22rem;
+        color: #333333;
+        margin-top: 0.69rem;
+    }
+
+    .goupiaoNo div {
+        width: 35%;
+        height: 0.4rem;
+        line-height: 0.4rem;
+        margin-top: 0.405rem;
+        margin-left: 32.5%;
+        text-align: center;
+        font-family: "微软雅黑";
+        background: #FFDD10;
+        font-size: 0.16rem;
+        border-radius: 0.2rem;
+    }
+
+    .cnName{
+        padding-bottom: .14rem;
+        position: relative;
+        border-bottom: 1px dashed #ccc;
+    }
+
+
+    .jianhao {
+        position: absolute;
+        right: 0rem;
+        top: 50%;
+        margin-top: -0.15rem;
+        width: 0.12rem;
+        height: 0.12rem;
+        display: block;
+    }
+    .jianhao img {
+         width: auto;
+        height: 100%;
+    }
+    .botbtn {
+        padding: 0rem;
+        padding-top: .1rem;
+        background: #FFFFFF;
+        height: 0.45rem;
+    }
+    .quxiaodingdanBtn, .zhifuBtn {
+        width: 1.2rem;
+        height: 0.24rem;
+        border-radius: 0.04rem;
+        border: 1px solid #ffdd10;
+        float: left;
+        font-size: .12rem;
+        text-align: center;
+        line-height: 0.24rem;
+    }
+    .quxiaodingdanBtn {
+        margin-left: 0.14rem;
+        color: #FFDD10;
+    }
+
+    .centen_list_centen {
+        padding-bottom: 0px;
+    }
+    .yijieshu p {
+        border-bottom: 2px solid #ffdd10;
+        text-align: center;
+        padding-bottom: 0.08rem;
+    }
+    /* 加载更多*/
+    .morebtn{
+       width: 100%;
+       line-height: .45rem;
+       text-align: center;
+       color: #9C9C9C;
+       float: left;
+      display: none;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <div class="headerTab">
+            <div class="weikaishi" style="-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color: transparent;">
+                <a href="./user.php?ticketFolder=1" class="font_14_color_179">未开始</a>
+            </div>
+            <div class="yijieshu" style="-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color: transparent;">
+                <p class="font_14_color_51 tabOn">已结束</p>
+            </div>
+        </div>
+        <!--无订单-->
+        <div id="jifenNo" class="goupiaoNo" style="display:none">
+            <img src="weixin/cbaorder/pic/img_emptylist.png" />
+            <h2>暂无订单</h2>
+            <div id="gopiao">
+                去购买
+            </div>
+        </div>
+        <!-- <div class="centen"></div> -->
+        <div class="centen" id="endHtml"></div>
+        <div class="morebtn" id="morebtn" style="display:none">点击加载更多↓↓</div>
+    </div>
+    <div class="mengceng" style="display: none;"></div>
+    <!--取消-->
+    <div class="weidenglu_tishi quxiaoTiShi" style="display: none;">
+        <div class="weidenglu_tishi_title">
+            <p class="weidenglu_tishi_title_p2 quxiaodingan_wenzi font_16_color_51">取消订单？</p>
+        </div>
+        <div class="weidenglu_tishi_bottom">
+            <div class="quexiaoBtn">取消</div>
+            <div class="quedingBtn">确定</div>
+        </div>
+    </div>
+    <script src="weixin/common/zepto.min.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <!-- <script src="weixin/ticketfolder/js/common.js"></script> -->
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        var uid = "<?php echo $uid?>";
+        var pagesize=10;
+        // var uid = "2017541475479";
+        var currentpagenew='';
+        getTicketOrderList(uid,1,pagesize,"init");
+        $(".centen_list").each(function(index, el) {
+            var that = $(this);
+            if ($(this).attr('orderStatus') == '0') {
+            var id = $(this).attr('oid');
+            var timezone = $('#timer_' + id);
+            var surplus = $(this).attr('surplus');
+            function removeSelf() {
+                that.remove();
+            }
+            timer(surplus, timezone, removeSelf);
+            }
+        });
+
+        var orderBox = '';
+        $(".quxiaodingdanBtn").click(function(event) { //取消订单提示
+            orderBox = $(this).parents('.centen_list');
+            $(".mengceng").show();
+            $(".mengceng").css('opacity', '0.7');
+            $(".quxiaoTiShi").show();
+        });
+        $(".quedingBtn").click(function(event) { //确认取消订单
+            var orderNo = orderBox.attr('orderNo');
+            var data = {
+                'orderNo': orderNo,
+                'uid': uid,
+                'identity': 'cancelTicketOrder'
+            };
+            $.post(WX_URL + 'requestAjax.php', data, function(res) {
+                if (res.state == 0) {
+                    $(".mengceng").hide();
+                    $(".quxiaoTiShi").hide();
+                    orderBox.remove();
+                } else {
+                    // alert(JSON.stringify(res));
+                    return false;
+                }
+            }, 'json');
+        });
+        $(".quexiaoBtn").click(function(event) {
+            $(".mengceng").hide();
+            $(".quxiaoTiShi").hide();
+        });
+        $("#gopiao").click(function(event) {
+            location.href = WX_URL + "user.php?ticketList=1";
+        });
+        $(".centen_list").click(function(event) {
+            if ($(this).attr('orderStatus') == '0') {
+                return;
+            } else {
+                var orderNo = $(this).attr('orderNo');
+                location.href = WX_URL + "user.php?ticketParticulars=1&orderNo=" + orderNo;
+                return;
+            }
+        });
+        $(".zhifuBtn").click(function(event) {
+            var orderNo = $(this).attr('orderNo');
+            var usePoint = 'false';
+            location.href = WX_URL + "user.php?orderNoPay=1&orderNo=" + orderNo + "&usePoint=" + usePoint + "&continuePay=true";
+            return;
+        });
+
+        function getTicketOrderList(uid,page,pageSize,type){
+            $.ajax({
+                    url: WX_URL + "requestAjax.php",
+                    type: 'POST',
+                    dataType: 'json',
+                    async:false,
+                    data: {
+                        "uid":uid,
+                        "ticketFolderType":1,  //1已结束
+                        "pageSize":pageSize,
+                        "page":page,
+                        "identity": 'getTicketOrderList'
+                    },
+                    success:function(data){
+                        console.log(data);
+                        if(type=="init"){
+                            if(data.result.length==0){
+                                $("#jifenNo").show();
+                                return false;
+                            }
+                        }
+                            var html='';
+                            var continuePay='';
+                            var pages=data.pages;
+                            currentpagenew=data.page;
+                            // pages 总页数   page 当前页
+                          //  判断是否显示 加载更多
+                            clickMore(currentpagenew,pages)
+                           $.each(data.result,function(i, k) {
+                               var surplus=k.payExpTime-<?php echo time()?>;
+                            //    var surplus=600;
+                            //    if(k.orderStatus==0){
+                            //        continuePay='<div class="botbtn">'+
+                            //            '<div class="quxiaodingdanBtn">'+
+                            //                '<p >取消订单</p>'+
+                            //            '</div>'+
+                            //            '<div class="zhifuBtn" id="zhifuBtn_'+i+'" orderNo="'+k.orderNo+'">'+
+                            //                '<p>支付 <span id="timer_'+i+'">--:--</span></p>'+
+                            //            '</div>'+
+                            //        '</div>';
+                            //    }
+                                html+='<div class="centen_list" id="centen_list_'+i+'" oid="'+i+'" orderStatus='+k.orderStatus+' orderNo="'+k.orderNo+'" surplus="'+surplus+'">'+
+                                   '<div class="centen_list_centen">'+
+                                       '<div class="font_16_color_51 cnName">'+k.cnName+'<div class="jianhao"><img src="weixin/ticketfolder/pic/gengduo.png"/></div></div>'+
+                                       '<p class="font_14_color_179  font_14_color_179_p1" style="margin-top:.14rem">'+k.startTime+'</p>'+
+                                       '<p class="font_14_color_179">'+k.stadiumName+'</p>'+
+                                       '<p class="font_14_color_128" style="padding-bottom: .14rem;"><span class="font_18_color_233">'+k.ticketNumber+'</span> 张 <span class="font_18_color_233 font_18_color_233_l">'+k.totalAmount+'</span> 元</p>'+
+                                   '</div>'+continuePay+
+                               '</div>';
+                           });
+                           $(".centen").append(html);
+                    }
+                })
+        }
+
+        $(".morebtn").on("click",function(){
+            console.log("加载更多");
+            var nextpage=parseInt(currentpagenew)+1;
+            getTicketOrderList(uid,nextpage,pagesize,"more");
+        })
+        function clickMore(currentpagenew,pages){
+            if(parseInt(currentpagenew) < parseInt(pages)){
+                 console.log("显示加载更多");
+                 $(".morebtn").show();
+            }else{
+                console.log("隐藏示加载更多");
+                $(".morebtn").hide();
+            }
+        }
+
+        // 禁用微信分享
+              function onBridgeReady() {
+                     WeixinJSBridge.call('hideOptionMenu');
+                }
+
+               if (typeof WeixinJSBridge == "undefined") {
+                   if (document.addEventListener) {
+                       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                   } else if (document.attachEvent) {
+                       document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                   }
+               } else {
+                   onBridgeReady();
+               }
+    </script>
+</body>
+
+</html>

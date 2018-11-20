@@ -1,0 +1,234 @@
+.container{
+			width: 100%;
+			background: #f4f4f4;
+			height: 100%;
+			display: inline-block;
+		}
+		.headers{
+			width: 100%;
+			height:0.49rem;
+			background: #ffffff;
+			text-align: center;
+			line-height: 0.49rem;
+			color: #fff;
+		}  
+		.reservation{
+			display: inline-block;
+			float: right;
+			margin-right: 0.14rem;
+		}
+		.lister{
+			margin-top: 0.1rem;
+			width: 3.55rem;
+			height:0.98rem;
+			background: #ffffff;
+			position: relative;
+			border-radius: 0.04rem;
+
+		}
+		.pTitle{
+			display: inline-block;
+			margin-top: 0.13rem;
+			margin-left: 0.1rem;
+			font-size: 0.16rem;
+
+			height:0.16rem;
+			color:rgb(51,51,51);
+		}
+		.jiantou{
+			display: inline-block;
+			float: right;
+			margin-top: 0.27rem;
+			margin-right: 0.16rem;
+			color: rgb(151,151,151);
+			font-size: 0.14rem;
+		}
+		.hrs{
+			width: 3.35rem;
+			height: 0.01rem;
+			background: rgb(230,230,230);
+			margin-top: 0.1rem;
+		}
+		.address{
+			font-size: 0.14rem;
+			color: rgb(179,179,179);
+			display: inline-block;
+			margin-left: 0.1rem;
+			margin-top:0.1rem;
+		}
+		.Remainingcarnumber{
+			margin-left: 0.1rem;
+			margin-top:0.1rem;
+			font-size: 0.12rem;
+			color: rgb(102,102,102);
+			display: inline-block;
+		}
+		.number{
+			margin-left: 0.07rem;
+			font-size: 0.12rem;
+			color: rgb(203,13,45);
+			display: inline-block;
+		}
+		.Tollstandard{
+			margin-left: 0.1rem;
+			margin-top:0.1rem;
+			font-size: 0.12rem;
+			color: rgb(102,102,102);
+			display: inline-block;
+		}
+		.hour{
+			margin-left: 0.07rem;
+			font-size: 0.12rem;
+			color: rgb(203,13,45);
+			display: inline-block;
+		}
+		.reservationCar{
+			width: 0.64rem;
+			height:0.24rem;
+			background: rgb(255,221,16);
+			position: absolute;
+			float: right;
+			top: 0.81rem;
+			right: 0.1rem;
+			line-height: 0.24rem;
+			text-align: center;
+			border-radius: 0.03rem;
+			font-size: 0.12rem;
+			color: rgb(51,51,51);
+		}
+		.footer{
+			margin-top: 0.1rem;
+			width: 3.55rem;
+			height: 3.42rem;
+			background: #fff;
+			border-radius: 0.04rem;
+
+		}
+		.pDateTitle{
+			display: inline-block;
+			margin-top: 0.14rem;
+			margin-left: 0.32rem;
+			color: rgb(51,51,51);
+			font-size: 0.16rem;
+
+		}
+		.tishi{
+			display: inline-block;
+			margin-top: 0.07rem;
+			margin-left: 0.33rem;
+			font-size: 0.12rem;
+			color: rgb(179,179,179);
+		}
+		.pImg{
+			width: 3.35rem;
+			height: 2.15rem;
+			margin-top: 0.14rem;
+			margin-left: 0.32rem;
+
+		}
+		.charge{
+			display: inline-block;
+			margin-left: 0.10rem;
+			margin-top: 0.10rem;
+			font-size: 0.14rem;
+			color: rgb(179,179,179);
+		}
+		.Reservationster{
+			display: inline-block;
+			margin-left: 0.10rem;
+			margin-top: 0.10rem;
+			font-size: 0.14rem;
+			color: rgb(179,179,179);
+		}
+		.hours{
+			color: rgb(215,37,59);
+		}
+		.cars{
+			color: rgb(203,13,45);
+
+		}
+		.jiantoua{
+			display: inline-block;
+			float: right;
+			margin-top: 0.27rem;
+			margin-right: 0.16rem;
+			color: rgb(151,151,151);
+			font-size: 0.14rem;
+		}
+		.hrster{
+			width: 3.35rem;
+			height: 0.02rem;
+			background: rgb(230,230,230);
+			margin-top: 0.14rem;
+		}
+		.often{
+			display: inline-block;
+			margin-top: 0.14rem;
+			margin-left: 0.32rem;
+			color: rgb(219,219,219);
+			font-size: 0.16rem;
+		}
+		.jiantoub{
+			display: inline-block;
+			float: right;
+			margin-top: 0.35rem;
+			margin-right: 0.16rem;
+			color: rgb(151,151,151);
+			font-size: 0.14rem;
+		}
+		.bloc{
+			display: inline-block;
+			width: 0.98rem;
+			height:0.24rem;
+			text-align: center;
+			line-height: 0.24rem;
+			border-radius: 0.04rem;
+			font-size: 0.14rem;
+			color: rgb(51,51,51);
+			border: 1px solid rgb(128,128,128);
+			margin-top: 0.14rem;
+
+		}
+		.JN1{
+			margin-left:0.32rem;
+		}
+		.JN2{
+			margin-left:0.03rem;
+		}
+		.JN3{
+			margin-left:0.03rem;
+		}
+		.Tipcart{
+			display: inline-block;
+			margin-top: 0.10rem;
+			margin-left: 0.33rem;
+			font-size: 0.12rem;
+			color: rgb(179,179,179);
+		}
+		.times{
+			margin-top: 0.1rem;
+			width: 100%;
+			height: 1.52rem;
+			background: #fff;
+		}
+		.spantishi{
+			margin-top: 0.14rem;
+			margin-left:0.14rem;
+			font-size: 0.14rem;
+			color: rgb(185,185,185);
+			display: inline-block;
+		}
+		.btn{
+			width: 100%;
+			height: 0.45rem;
+			background: rgb(204,204,204);
+			line-height: 0.45rem;
+			text-align: center;
+			position: fixed;
+			bottom: 0;
+			font-size: 0.16rem;
+			color: rgb(125,125,125);
+		}
+		.infos{
+			background: rgb(255,221,16);
+		}

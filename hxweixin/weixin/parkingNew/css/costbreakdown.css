@@ -1,0 +1,118 @@
+ * {
+ 	margin: 0px;
+ 	padding: 0px;
+ }
+
+ html {
+ 	width: 100%;
+ 	height: 100%;
+ 	font-size: 100px;
+ }
+
+ body {
+ 	width: 100%;
+ 	height: 100%;
+ 	font-size: 12px;
+ }
+
+ .wrap {
+ 	width: 100%;
+ 	height: 100%;
+ 	display: flex;
+ 	-webkit-flex-direction:column;
+ }
+ /*中间列表*/
+ .centen{
+    margin: 0 .21rem;
+    position: relative;
+    margin-top: .55rem;
+    padding-top: .3rem;
+    background: #fff;
+    box-shadow: 0px 1px 7px 0px rgba(0,0,0,.08);
+ }
+ .clist {
+ 	display: flex;
+ 	-webkit-flex-direction: row;
+ 	-webkit-justify-content: space-between;
+ 	padding: .1rem .14rem;
+ 	font-size: .14rem;
+ }
+
+ .clist:last-child {
+ 	border-bottom: none;
+ }
+
+ .clist p:nth-of-type(1) {
+ 	color: #808080;
+ }
+
+ .clist p:nth-of-type(2) {
+
+ 	color: #000000;
+    font-weight: bold;
+
+ }
+
+ .total{
+ 	color: rgb(233,6,78) !important;
+    font-size: .18rem;
+ }
+ /*车牌号*/
+
+ .carnum {
+ 	font-size: .14rem;
+ 	color: rgb(51, 51, 51);
+ 	text-align: center;
+
+ }
+
+ .wxshow {
+ 	font-size: .14rem;
+ 	color: rgb(185, 185, 185);
+ 	line-height: .22rem;
+ 	padding: .14rem;
+    background: url(/weixin/parkingNew/picnew/tip_gray.png) no-repeat;
+    background-size: 100% 100%;
+    margin: .2rem;
+    margin-bottom: .1rem;
+    z-index: 11;
+ }
+
+ .wxshow span {
+ 	color: rgb(226, 0, 62);
+ }
+
+ .footer {
+ 	width: 100%;
+    border-top: 1px solid #DFDFDF;
+    padding: .25rem 0;
+    margin-top: -.25rem;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+.footer img{
+    width: 66%;
+    margin-left: 17%;
+}
+.onoff{
+	margin-top: -.05rem;
+}
+
+/*按钮 的样式*/
+.lcs_switch.lcs_on {
+    background: rgb(255,221,16);
+    box-shadow: 0 0 2px rgb(255,221,16) inset;
+}
+.lcs_switch{
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+}
+.trackMatte{
+    width: 100%;
+    height: 100%;
+    opacity: .7;
+    background: #000000;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    display: none;
+}

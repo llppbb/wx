@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>自助积分详情</title>
+    <link rel="stylesheet" type="text/css" href="weixin/membercardNew/css/selfhelp.css" />
+</head>
+<style>
+    html,
+    .wrap {
+        background: #fff;
+    }
+
+    .recordList {
+        border: none;
+    }
+
+    .recordList div {
+        border-bottom: 1px solid rgb(230, 230, 230);
+        line-height: .31rem;
+    }
+
+    .recordList div p {
+        line-height: .31rem;
+    }
+
+    .stateR,
+    .stateG {
+        font-size: .14rem !important;
+    }
+
+    .imgBox {
+        height: 4rem;
+        margin: 0px .2rem .2rem .2rem;
+        background: rgb(230, 230, 230);
+        padding: .24rem;
+    }
+
+    .errordescribe {
+        font-size: .15rem;
+        color: rgb(102, 102, 102);
+        line-height: .2rem;
+        padding: 0px .1rem .1rem .1rem;
+    }
+
+    .imgBox img {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+
+        <div class="pointrecord">
+
+            <div class="recordList">
+                <div>
+                    <p class="zpoint">上传时间</p>
+                    <p class="zpoint" id="addtime"></p>
+                </div>
+                <div>
+                    <p class="zpoint">状态</p>
+                    <p class="state stateR" id="state"></p>
+                </div>
+                <div>
+                    <p class="zpoint">小票金额</p>
+                    <p class="zpoint" id="money"></p>
+                </div>
+                <div>
+                    <p class="zpoint">本次积分</p>
+                    <p class="state" id="point"></p>
+                </div>
+            </div>
+            <div class="errordescribe" style="display:none"></div>
+        </div>
+        <div class="imgBox"><img src="" /></div>
+    </div>
+
+    <script src="weixin/membercardNew/js/jquery-1.8.2.min.js"></script>
+    <script src="weixin/membercardNew/js/fontSize.js"></script>
+    <script src="weixin/common/md5.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        var id_ = "<?php echo $id?>";
+        var uid = "<?php echo $uid?>";
+        //getRecordDetail   uid  id
+        var tmp = {
+            "uid": uid,
+            "id": id_
+        };
+        var sendData = createSign(tmp);
+        $.ajax({
+            url: COUPON_URL + "Home/Requestajax/getRecordDetail",
+            type: 'POST',
+            dataType: 'json',
+            async: false,
+            data: sendData,
+            success: function(data) {
+                console.log(data);
+                var font = '';
+                var className = '';
+                var dot = ''
+                if (data.result.status == 0) {
+                    font = "审核中";
+                    className = "stateR";
+                } else if (data.result.status == 1) {
+                    font = "已完成";
+                    className = "stateG";
+                } else {
+                    className = "stateR";
+                    font = "审核失败";
+                    var des = "失败原因：" + data.result.description;
+                    $(".errordescribe").show();
+                    $(".errordescribe").html(des);
+                }
+                $("#addtime").html(data.result.addtime);
+                $("#state").html(font);
+                $("#state").addClass(className);
+                $("#point").html(data.result.point);
+                $("#money").html(data.result.amount);
+                $(".imgBox img").attr("src", data.result.img_url);
+            }
+        })
+        goHomeBtn("body");
+    </script>
+</body>
+
+</html>

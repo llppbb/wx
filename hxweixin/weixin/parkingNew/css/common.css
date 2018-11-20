@@ -1,0 +1,152 @@
+/*蒙层*/
+
+.trackMatte {
+	width: 100%;
+	height: 100%;
+	opacity: .7;
+	background: #000000;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	display: none;
+}
+
+
+/*将输入框内的 提示文字  盒子成灰色*/
+
+input::-webkit-input-placeholder {
+	color: rgb(128, 128, 128);
+}
+
+
+/*绑定 手机   开始    大盒子  */
+
+.bindmobile {
+	width: 86%;
+	margin-top: 1rem;
+	margin-left: 7%;
+	position: fixed;
+	z-index: 555;
+	border-radius: 0.14rem;
+	overflow: hidden;
+	text-align: center;
+	left: 0px;
+	top: 0px;
+	background: rgb(255, 255, 255);
+	padding-bottom: 0.2rem;
+}
+
+
+/*上边的标题*/
+
+.bmtitle {
+	font-size: 0.18rem;
+	color: rgb(51, 51, 51);
+	padding-top: 0.155rem;
+}
+
+
+/*包含 手机号 验证码 盒子 */
+
+.bmboxT {
+	position: relative;
+}
+
+
+/*输入手机号*/
+
+.bmmobilenum {
+	width: 87%;
+	height: 0.57rem;
+	border: 1px solid rgb(227, 227, 227);
+	margin-top: 0.19rem;
+	text-indent: 10px;
+	position: relative;
+	display: inline-block;
+}
+
+
+/*获取验证码*/
+
+.bmgetCode {
+	display: inline-block;
+	width: 1.015rem;
+	height: 0.25rem;
+	font-size: 0.14rem;
+	text-align: center;
+	line-height: 0.25rem;
+	color: rgb(51, 51, 51);
+	border: 1px solid rgb(255, 211, 16);
+	position: absolute;
+	border-radius: 0.50rem;
+	z-index: 10;
+	top: 0.35rem;
+	left: 1.80rem;
+	background: #ffffff;
+}
+
+
+/*验证码 车牌号*/
+
+.bmauthcCode,.bmcar{
+	width: 87%;
+	height: 0.57rem;
+	border: 1px solid rgb(227, 227, 227);
+	text-indent: 10px;
+	border-top: none;
+}
+
+/*提示文字*/
+.bmpromptText{
+	width: 87%;
+	color: rgb(185,185,185);
+	font-size: .12rem;
+	margin:0 auto ;
+	margin-top: .05rem;
+	margin-bottom:.2rem;
+	text-align: left;
+}
+
+/*两个 按钮的盒子*/
+
+.bmboxB {
+	width: 100%;
+	margin-top: .2rem;
+	border-top: 1px solid rgb(230, 230, 230);
+}
+
+
+/*取消 按钮*/
+
+.bmabolish {
+	display: inline-block;
+	width: 1.20rem;
+	height: 0.40rem;
+	text-align: center;
+	line-height: 0.40rem;
+	border-radius: 0.50rem;
+	border: 1px solid rgb(255, 221, 16);
+	font-size: 0.16rem;
+	color: rgb(51, 51, 51);
+	margin-top: 0.20rem;
+}
+
+
+/*确定 按钮*/
+
+.bmconfirm {
+	display: inline-block;
+	width: 1.20rem;
+	height: 0.40rem;
+	text-align: center;
+	line-height: 0.40rem;
+	border-radius: 0.50rem;
+	background:rgb(255, 221, 16);
+	font-size: 0.16rem;
+	color: rgb(51, 51, 51);
+	margin-top: 0.20rem;
+	margin-left: 0.22rem;
+}
+
+
+/*绑定手机 结束*/

@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>金币充值</title>
+    <link rel="stylesheet" href="weixin/jinbichongzhi/css/style.css">
+    <style>
+        .tiaochongzhijilu {
+            width: 100%;
+            height: 0.35rem;
+            line-height: 0.35rem;
+            background: #FFFFFF;
+            text-align: center;
+            font-family: "微软雅黑";
+            font-size: 0.17rem;
+        }
+
+        .tiaochongzhijilu a {
+            color: #8F8F8F;
+        }
+
+        .jinbiGengduo {
+            margin-right: 0.1rem;
+        }
+
+        .jinbiGengduo span {
+            margin-right: 0rem;
+        }
+
+        .jinbiwenzi {
+            top: 0.07rem;
+            word-break: normal;
+            width: 0.3rem;
+        }
+
+        .jingbiQian {
+            width: 0.4rem;
+            text-align: right;
+        }
+
+        .jinbiGengduo {
+            margin-right: 0.3rem;
+        }
+
+        .jinbiwenzi {
+            right: -0.33rem;
+        }
+
+        .divSpan {
+            margin-right: 0rem;
+        }
+
+        .divSpan {
+            width: 100%;
+            text-align: right !important;
+            color: #E9054D;
+            font-family: "微软雅黑";
+            font-size: 0.24rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .jingbiQian {
+            width: 100%;
+            text-align: right;
+        }
+
+        .jinbiGengduo {
+            width: 80%;
+            text-align: right !important;
+        }
+
+        .jinbiTOp {
+            margin-top: 0.1rem;
+            background: #FFFFFF;
+            height: 0.91rem !important;
+        }
+
+        /*修改*/
+
+        .wenziTopImg img {
+            width: 0.4rem;
+            margin-top: 0.08rem;
+        }
+
+        .wenzi {
+            margin-left: 0.145rem !important;
+            font-family: "微软雅黑";
+            padding-top: 0.16rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="tiaochongzhijilu">
+            <a href="./user.php?chargeLog=1">充 值 记 录</a >
+    </div>
+        <div class="neirongTop jinbiTOp">
+            <div class="topimg topimgTop">
+                <img src="weixin/jinbichongzhi/pic/img_tx.png" id="headimgurl"/>
+            </div>
+            <div class="wenzi wenziTop">
+                <p class="dianhuahao hansansui"></p>
+            </div>
+            <div class="gengduo jinbiGengduo">
+                <div class="divSpan"><div id="JB" class="jingbiQian" id="userGold">0</div><div class="jinbiwenzi">金币</div></div>
+            </div>
+        </div>
+    <div class="tab">
+        <div class="leftJifen"><img src="weixin/jinbichongzhi/pic/tittle_jb.png"/></div>
+    </div>
+    <div class="neirong">
+        <div class="neirongTop">
+            <div class="topimg">
+                <img src="weixin/jinbichongzhi/pic/icon_jb.png"/>
+            </div>
+            <div class="wenzi">
+                <h3>10000金币+送2000</h3>
+                <p>1元=120金币</p>
+            </div>
+            <!-- <div class="gengduo goldRecharge" id="y100"> -->
+            <div class="gengduo goldRecharge" dataType="100">
+                100元
+            </div>
+            <div class="hot"><img src="weixin/jinbichongzhi/pic/icon_hot.png"/></div>
+        </div>
+        <div class="neirongTop">
+            <div class="topimg">
+                <img src="weixin/jinbichongzhi/pic/icon_jb.png"/>
+            </div>
+            <div class="wenzi">
+                <h3>5000金币+送500</h3>
+                <p>1元=110金币</p>
+            </div>
+            <!-- <div class="gengduo goldRecharge" id="y50"> -->
+            <div class="gengduo goldRecharge" dataType="50">
+                50元
+            </div>
+        </div>
+        <div class="neirongTop">
+            <div class="topimg">
+                <img src="weixin/jinbichongzhi/pic/icon_jb.png"/>
+            </div>
+            <div class="wenzi">
+                <h3>3000金币</h3>
+                <p>1元=100金币</p>
+            </div>
+            <!-- <div class="gengduo goldRecharge" id="y30"> -->
+            <div class="gengduo goldRecharge" dataType="30">
+                30元
+            </div>
+        </div>
+        <div class="neirongTop">
+            <div class="topimg">
+                <img src="weixin/jinbichongzhi/pic/icon_jb.png"/>
+            </div>
+            <div class="wenzi">
+                <h3>1000金币</h3>
+                <p>1元=100金币</p>
+            </div>
+            <!-- <div class="gengduo goldRecharge" id="y10"> -->
+            <div class="gengduo goldRecharge" dataType="10">
+                10元
+            </div>
+        </div>
+
+        <div class="neirongTop">
+            <div class="topimg">
+                <img src="weixin/jinbichongzhi/pic/icon_jb.png"/>
+            </div>
+            <div class="wenzi">
+                <h3 class="wenzijifen">积分兑换</h3>
+            </div>
+            <div class="gengduo" id="duihuanBtn">
+                兑换
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script src="weixin/common/zepto.min.js"></script> -->
+<script src="weixin/common/jquery.js"></script>
+<script src="weixin/common/fontSize.js"></script>
+<script src="weixin/common/md5.js"></script>
+<script src="weixin/common/common.js"></script>
+<script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441" ></script>
+<script>
+    $(document).ready(function($) {
+        var uid = "<?php echo $uid?>";
+        var openid = "<?php echo $openid?>";
+
+        // 获取用户金币
+        var userGold = $("#userGold");
+        getUserCoin(uid, userGold);
+
+        // 获取用户微贝头像，昵称等信息
+        var headimgurl = $("#headimgurl");
+        var hansansui = $(".hansansui");
+        getWeiBeiUserInfo(openid, headimgurl, hansansui);
+    })
+
+    $(".goldRecharge").on("click", function() {
+        var dataType = $(this).attr('dataType');
+        var timestamp = "<?php echo time()?>";
+        var sign = hex_md5(timestamp + "<?php echo SIGNCODE?>" + dataType);
+        location.href = WX_URL+"user.php?goldRecharge=1&sign="+sign+"&timestamp="+timestamp;
+    })
+
+    $("#duihuanBtn").on("click", function() {
+        location.href = WX_URL + "user.php?exchange=1";
+    })
+</script>
+
+</body>
+</html>

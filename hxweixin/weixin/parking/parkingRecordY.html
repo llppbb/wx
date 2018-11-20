@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+		<title>停车记录</title>
+	</head>
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		html {
+			width: 100%;
+			height: 100%;
+			font-size: 100px;
+			background:rgb(230,230,230) ;
+		}
+		
+		body,.wrap{
+			width: 100%;
+			height: 100%;
+			font-size: 12px;
+		}
+
+		.centen {
+			padding: 0 .2rem;
+		}
+		
+		.carportList {
+			margin-top: .1rem;
+			font-size: .14rem;
+			background: #fff;
+			padding: .1rem 0;
+			border-radius: .04rem;
+		}
+		
+		.carportListtop {
+			padding: 0 .1rem ;
+			height: .3rem;
+			line-height: .3rem;
+			display: flex;
+			-webkit-flex-direction: row;
+			-webkit-justify-content: space-between;
+			border-bottom: 1px solid rgb(230,230,230);
+			margin-bottom: .1rem;
+		}
+		.carportListCenten{
+			padding: 0 .1rem ;
+			display: flex;
+			-webkit-flex-direction: row;
+		}
+		.carportListCentenicon{
+		   width:.36rem;
+		   height: .36rem;
+		   background: red;
+		}
+		.centenR{
+			flex: 1;
+			padding-left: .1rem;
+		}
+		.centenR div{
+			display: flex;
+			-webkit-flex-direction: row;
+			color: rgb(179,179,179);
+		}
+		.centenR div p{
+			flex: 1;
+		}
+		.money{
+			margin-top: .1rem;
+			color: rgb(179,179,179);
+			padding-left: .56rem;
+			padding-top: .1rem;
+			border-top: 1px solid rgb(230,230,230);
+		}
+		.parkingLot{
+			font-size: .16rem !important;
+			color: rgb(51,51,51) !important;
+		}
+		
+		
+		.headerTab {
+			width: 100%;
+		  padding-top: 0.3rem;
+		  background: #FFFFFF;
+		  height: 0.2rem;
+		  font-size: .14rem;
+		}
+		.weikaishi,
+		.yijieshu {
+			width: 50%;
+		    float: left;
+		}
+		.weikaishi {
+		  text-align: center;
+		}
+		.weikaishi p {
+			width: 50%;
+			margin-left: 25%;
+		  border-bottom: 2px solid #ffdd10;
+		  text-align: center;
+		}
+		.yijieshu {
+		  text-align: center;
+		}
+		.yijieshu p {
+		  text-align: center;
+		  width: 50%;
+		  margin-left: 25%;
+		}
+		.font_14_color_51{
+			font-size: 0.14rem;
+             color: rgb(51,51,51);
+		}
+		.font_14_color_179{
+			  font-size: 0.14rem ;
+              color: rgb(179,179,179);
+		}
+	</style>
+
+	<body>
+		<div class="wrap">			
+			
+			<div class="headerTab">
+               <div class="weikaishi"><p  class="font_14_color_51">预约车位</p></div>
+               <div class="yijieshu"><p class="font_14_color_179">普通车位</p></div>
+           </div>
+           
+			<div class="centen">
+				<div class="carportList">
+
+					<div class="carportListtop">
+						<p>
+							<span class="licenseplatenumber">京N12345</span>
+						</p>
+						<p>
+							<span class="carportState">预约车位</span>
+						</p>
+					</div>
+
+					<div class="carportListCenten">
+						<div class="carportListCentenicon">
+
+						</div>
+
+						<div class="centenR">
+							<div class="parkingLot">华熙专用停车场1（2017-06-19）</div>
+
+							<div>
+								<p>
+									<span class="appointmentTime">预约时间</span>
+								</p>
+								<p>
+									<span class="approachTime">入场时间</span>
+								</p>
+							</div>
+
+							<div>
+								<p>
+									<span class="approachDuration">预约时长</span>
+								</p>
+								<p>
+									<span class="parkingDuration">停车时长</span>
+								</p>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="money">手机支付：15元</div>
+
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/fontSize.js"></script>
+	<script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+
+</html>

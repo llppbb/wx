@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <title>订单</title>
+    <link rel="stylesheet" href="weixin/cbaorder/css/liebiao.css">
+    <link rel="stylesheet" type="text/css" href="weixin/cbaorder/css/common.css" />
+</head>
+<style>
+    html,
+    body,
+    .wrap {
+        min-height: 100%;
+        /*height: 100%;*/
+        background: #f4f4f4;
+    }
+
+    .headerTab {
+        padding-top: 0.2rem;
+        background: #FFFFFF;
+        height: 0.5rem;
+        /*margin-bottom: 0.05rem;*/
+    }
+
+    .weikaishi {
+        text-align: center;
+        padding-right: 5%;
+        padding-left: 15%;
+    }
+
+    .weikaishi,
+    .yijieshu {
+        width: 50%;
+        float: left;
+    }
+
+    .font_14_color_179 {
+        padding-bottom: 0.08rem !important;
+        padding-top: 0rem !important;
+    }
+
+    .font_14_color_179 {
+        font-size: 0.14rem !important;
+        color: rgb(179, 179, 179) !important;
+    }
+
+    .yijieshu {
+        padding-left: 5%;
+        text-align: center;
+        padding-right: 15%;
+    }
+
+    .weikaishi p {
+        border-bottom: 2px solid #ffdd10 !important;
+        text-align: center;
+        padding-bottom: 0.08rem;
+        /*display: none;*/
+    }
+
+    .font_14_color_51 {
+        font-size: 0.14rem !important;
+        color: rgb(51, 51, 51);
+    }
+
+    .goupiaoNo {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        padding-top: 0.825rem;
+    }
+
+    .goupiaoNo img {
+        height: 1.245rem;
+    }
+
+    .goupiaoNo h2 {
+        color: #9E9E9E;
+        font-family: "微软雅黑";
+        font-size: 0.22rem;
+        color: #333333;
+        margin-top: 0.69rem;
+    }
+
+    .goupiaoNo div {
+        width: 35%;
+        height: 0.4rem;
+        line-height: 0.4rem;
+        margin-top: 0.405rem;
+        margin-left: 32.5%;
+        text-align: center;
+        font-family: "微软雅黑";
+        background: #FFDD10;
+        font-size: 0.16rem;
+        border-radius: 0.2rem;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <div class="headerTab">
+            <div class="weikaishi">
+                <p class="font_14_color_51">购票订单</p>
+            </div>
+            <div class="yijieshu">
+                <a href="./user.php?orderList=1" class="font_14_color_179">商城订单</a>
+            </div>
+        </div>
+        <?php if(empty($orderlist['result'])) {?>
+        <!--无订单-->
+        <div id="jifenNo" class="goupiaoNo">
+            <img src="weixin/cbaorder/pic/img_emptylist.png" />
+            <h2>暂无订单</h2>
+            <div id="gopiao">
+                去购买
+            </div>
+        </div>
+        <?php } else {?>
+        <div class="centen">
+            <?php foreach ($orderlist['result'] as $v) {?>
+            <div class="centen_list" id="centen_list_<?php echo $v['id']?>" oid="<?php echo $v['id']?>" orderStatus="<?php echo $v['orderStatus']?>" orderNo="<?php echo $v['orderNo']?>" surplus="<?php echo ($v['payExpTime']-time())?>">
+                <!--未支付订单-->
+                <div class="centen_list_centen bor_bottom">
+                    <p class="font_16_color_51">
+                        <?php echo $v['scheduleName']?>
+                    </p>
+                    <p class="font_14_color_179  font_14_color_179_p1">
+                        <?php echo $v['showPlayTime']?>
+                    </p>
+                    <p class="font_14_color_179">
+                        <?php echo $v['stadiumName']?>
+                    </p>
+                    <p class="font_14_color_128"><span class="font_18_color_233"><?php echo $v['ticketNumber']?></span>张 <span class="font_18_color_233 font_18_color_233_l"><?php echo $v['payAmount']?></span>元</p>
+                </div>
+                <?php if($v['orderStatus'] == 0) {?>
+                <div class="botbtn">
+                    <div class="quxiaodingdanBtn">
+                        <p class="font_16_color_51">取消订单</p>
+                    </div>
+                    <div class="zhifuBtn" id="zhifuBtn_<?php echo $v['id']?>" orderNo="<?php echo $v['orderNo']?>">
+                        <p class="font_16_color_51">支付 <span id="timer_<?php echo $v['id']?>">--:--</span></p>
+                    </div>
+                </div>
+                <?php }?>
+            </div>
+            <?php }?>
+        </div>
+        <?php }?>
+    </div>
+    <div class="mengceng" style="display: none;"></div>
+    <!--取消-->
+    <div class="weidenglu_tishi quxiaoTiShi" style="display: none;">
+        <div class="weidenglu_tishi_title">
+            <p class="weidenglu_tishi_title_p2 quxiaodingan_wenzi font_16_color_51">取消订单？</p>
+        </div>
+        <div class="weidenglu_tishi_bottom">
+            <div class="quexiaoBtn">取消</div>
+            <div class="quedingBtn">确定</div>
+        </div>
+    </div>
+    <!--继续支付-->
+    <div class="weidenglu_tishi zhiFu" style="display: none;">
+        <div class="choose_zhifufangshi bor_bottom">
+            <p class="font_16_color_51">选择支付方式</p>
+            <img src="weixin/cbaorder/pic/bt_close.png" class="closeBtn" />
+        </div>
+        <div class="fangshi_weixin_dianziqianbao">
+            <div class="fangshi_weixin">
+                <dl>
+                    <dt><img src="weixin/cbaorder/pic/icon_selected_wx.png"/></dt>
+                    <dd>微信</dd>
+                </dl>
+            </div>
+            <div class="fangshi_dianziqianbao">
+                <dl>
+                    <dt><img src="weixin/cbaorder/pic/icon_selected_qb.png"/></dt>
+                    <dd>电子钱包</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <script src="weixin/common/zepto.min.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        var uid = "<?php echo $uid?>";
+
+        $(function() {
+            $(".centen_list").each(function(index, el) {
+                var that = $(this);
+                if ($(this).attr('orderStatus') == '0') {
+                    var id = $(this).attr('oid');
+                    var timezone = $('#timer_' + id);
+                    var surplus = $(this).attr('surplus');
+
+                    function removeSelf() {
+                        that.remove();
+                    }
+                    timer(surplus, timezone, removeSelf);
+                }
+            });
+        });
+
+        var orderBox = '';
+        $(".quxiaodingdanBtn").click(function(event) { //取消订单提示
+            orderBox = $(this).parents('.centen_list');
+            $(".mengceng").show();
+            $(".mengceng").css('opacity', '0.7');
+            $(".quxiaoTiShi").show();
+        });
+        $(".quedingBtn").click(function(event) { //确认取消订单
+            var orderNo = orderBox.attr('orderNo');
+            var data = {
+                'orderNo': orderNo,
+                'uid': uid,
+                'identity': 'cancelTicketOrder'
+            };
+            $.post(WX_URL + 'requestAjax.php', data, function(res) {
+                if (res.state == 0) {
+                    $(".mengceng").hide();
+                    $(".quxiaoTiShi").hide();
+                    orderBox.remove();
+                } else {
+                    alert(JSON.stringify(res));
+                    return false;
+                }
+            }, 'json');
+        });
+        $(".quexiaoBtn").click(function(event) {
+            $(".mengceng").hide();
+            $(".quxiaoTiShi").hide();
+        });
+        $("#gopiao").click(function(event) {
+            location.href = WX_URL + "user.php?ticketList=1";
+        });
+        $(".centen_list").click(function(event) {
+            if ($(this).attr('orderStatus') == '0') {
+                return;
+            } else {
+                var orderNo = $(this).attr('orderNo');
+                location.href = WX_URL + "user.php?CBAOrderDetail=1&orderNo=" + orderNo;
+                return;
+            }
+        });
+        $(".zhifuBtn").click(function(event) {
+            var orderNo = $(this).attr('orderNo');
+            var usePoint = 'false';
+            location.href = WX_URL + "user.php?orderNoPay=" + orderNo + "&usePoint=" + usePoint + "&continuePay=true";
+            return;
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width,initial-scale=1.0" name="viewport">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title></title>
+    <link href="weixin/shop/css/reset.css" rel="stylesheet">
+    <link href="weixin/shop/css/userlista.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="headers">
+        <!--没有 核销人-->
+        <div class="add_databaobiao" style="display:none">
+            <a href="#">
+                <div class="imgs">
+                    <img src="weixin/shop/pic/btn_add.png" />
+                </div>
+                <span class="spantext">暂无核销人员，点此添加</span>
+            </a>
+        </div>
+        <!--有核销人-->
+        <div class="addpeople_btn">
+            <p>添加核销员</p>
+        </div>
+        <div class="hrs"></div>
+        <div class="box">
+
+            <!-- <div class="databaobiao">
+                    <span class="names">张三</span>
+                    <span class="times">2017-02-21 19:00</span>
+                    <p class="ptext">手机：<span class="iphone">13426364477</span></p>
+                    <p class="quanxian">权限：<span class="hexiao">核销</span></p>
+                    <p class="beizhu">权限：<span class="container">无</span></p>
+                    <div class="hr"></div>
+                </div>
+               <div class="databaobiao">
+                    <span class="names">张三</span>
+                    <span class="times">2017-02-21 19:00</span>
+                    <p class="ptext">手机：<span class="iphone">13426364477</span></p>
+                    <p class="quanxian">权限：<span class="hexiao">核销</span></p>
+                    <p class="beizhu">权限：<span class="container">无</span></p>
+                    <div class="hr"></div>
+                </div> -->
+        </div>
+    </div>
+
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script src="weixin/common/md5.js"></script>
+    <script>
+        var tmp = Date.parse(new Date()).toString();
+        tmp = tmp.substr(0, 10);
+        var sign_tmp = "SDE45FHW6KL" + tmp;
+        var md5_sign_tmp = hex_md5(sign_tmp);
+        var mobile = "<?php echo $mobile?>";
+        $(".addpeople_btn").hide();
+        $.ajax({
+            type: "get",
+            url: COUPON_URL + "Home/Requestajax/getVerifyUserList",
+            async: false,
+            dataType: "json",
+            data: {
+                "sign": md5_sign_tmp,
+                "timestamp": tmp,
+                "mobile": mobile
+            },
+            success: function(data) {
+                console.log(data);
+                var html = "";
+                var html_new = "";
+                if (data.state == 0) {
+                    $(".addpeople_btn").show();
+                    if (data.result.length == 0) {
+                        $(".add_databaobiao").show();
+                        $(".addpeople_btn").hide();
+                        $(".hrs").hide();
+                        $("body").css("background", "#f3f3f3")
+                    }
+                    $.each(data.result, function(i, k) {
+                        html_new += add_html(html, k);
+                    });
+                }
+                console.log(html_new);
+                $(".box").append(html_new);
+            },
+            error: function() {
+                console.log("请求失败");
+            }
+        })
+        // 添加结构
+        function add_html(html, k) {
+            //alert("权限"+k.authority); alert("状态"+k.status); 0核销 1查看订单 2核销+查看订单
+            var quanxian = "";
+            if (k.authority == 0) {
+                quanxian = "核销"
+            } else if (k.authority == 1) {
+                quanxian = "查看订单"
+            } else if (k.authority == 2) {
+                quanxian = "数据报表"
+            } else if (k.authority == 3) {
+                quanxian = "核销  查看订单 数据报表"
+            }
+            html += ' <div class="databaobiao" attr_verifyuid=' + k.verifyuid + '><span class="names">' + k.username + '</span><span class="times">' + k.exptime + '</span><p class="ptext">手机：<span class="iphone">' + k.usermobile +
+                '</span></p><p class="quanxian">权限：<span class="hexiao">' + quanxian + '</span></p><p class="beizhu">备注：<span class="container">' + k.userdesc + '</span></p><div class="hr"></div></div>'
+            return html;
+        }
+        // 添加核销人员
+        $(".addpeople_btn").on("click", function() {
+            location.href = WX_URL + "user.php?add_peopel=1";
+        })
+        $(".add_databaobiao").on("click", function() {
+
+            //alert(verifyuid);
+            location.href = WX_URL + "user.php?add_peopel=1";
+        })
+
+        // 核销人员  详情页面
+        $(".databaobiao").on("click", function() {
+            var verifyuid = $(this).attr("attr_verifyuid");
+            //alert(verifyuid);
+            location.href = WX_URL + "user.php?userxiangqing=1&verifyuid=" + verifyuid;
+        })
+        // 返回  商城 主页
+        goHomeBtn('body');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+/*虚拟*/
+  .shangpinxinxi_number{
+            padding-top: 0.14rem;
+        }
+        .wenxitishi{
+            font-size: 0.12rem;
+            color: rgb(128,128,128);         
+        }
+        .mar_bot{
+           margin-bottom: 0.14rem; 
+        }
+/*实物*/
+ .shangpinxinxi_number {
+            padding-top: 0.14rem;
+        }        
+        .wenxitishi {
+            font-size: 0.12rem;
+            color: rgb(128, 128, 128);
+        }
+        .peisong{
+            margin-top: 0.1rem;
+            background: #FFFFFF;
+        }
+        .peisong_xinxi_wenzi{
+            padding: 0.14rem;
+        }
+        .peisong_xinxi_lianxiern{
+            margin-bottom: 0.13rem;
+            padding-left: 0.14rem;
+            padding-right: 0.14rem;
+            height: 0.15rem;
+            line-height: 0.15rem;            
+        }
+        .peisong_xinxi_lianxiern_name{
+            float: left;
+        }
+        .peisong_xinxi_lianxiern_mobile{
+            float: right;
+        }
+        .peisong_xinxi_adress{
+            padding-left: 0.14rem;
+            padding-bottom: 0.18rem;
+        }
+        .peixong_state{
+            padding-left: 0.14rem;
+            padding-top: 0.18rem;
+            padding-bottom: 0.14rem;
+        }
+        .peixong_state div{
+            margin-bottom: 0.14rem;
+        }
+        .peixong_state div span{
+            color:rgb(233,5,77)
+        }
+        .color_233{
+            color: rgb(233,5,77);
+        }

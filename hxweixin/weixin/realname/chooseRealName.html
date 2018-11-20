@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>选择实名制信息</title>
+    <link rel="stylesheet" href="weixin/realname/css/shimingzhixinxi.css">
+</head>
+<style>
+    .tishi {
+        font-size: 0.12rem;
+        color: rgb(233, 5, 77);
+        opacity: 0.8;
+        padding: 0.14rem;
+        padding-bottom: 0;
+    }
+
+    .moren_img {
+        position: absolute;
+        left: 0.14rem;
+        top: 45%;
+        width: 0.15rem;
+        height: 0.15rem;
+    }
+
+    .img_img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .tianjiadizhi1 {
+        height: 0.4rem;
+        width: 70%;
+        margin-left: 15%;
+        background: #FFDD10;
+        color: #333333;
+        font-size: 0.16rem;
+        border-radius: 0.2rem;
+        text-align: center;
+        line-height: 0.4rem;
+        margin-top: 0.245rem;
+        font-family: "微软雅黑";
+        vertical-align: middle;
+    }
+
+    .tianjiadizhi1 span img {
+        width: 0.19rem;
+        height: 0.19rem;
+        margin-right: 0.085rem;
+        vertical-align: middle;
+        margin-top: -0.05rem;
+    }
+
+    .tishi_piaoshu {
+        background: #FFFFFF;
+        padding: 0.15rem 0 0.2rem .14rem;
+        color: rgb(51, 51, 51);
+        font-size: 0.14rem;
+        position: relative;
+    }
+
+    .tishi_piaoshu_quedingBtn {
+        position: absolute;
+        right: 0.14rem;
+        top: 50%;
+        margin-top: -0.127rem;
+        width: 0.63rem;
+        text-align: center;
+        height: 0.254rem;
+        line-height: 0.254rem;
+        background: rgb(255, 221, 16);
+        font-size: 0.15rem;
+        color: rgb(51, 51, 51);
+        border-radius: 0.127rem;
+    }
+
+    .checkbox input {
+        border: none;
+    }
+
+    .shezhi_tishi {
+        border-radius: 0.04rem;
+        background: #000000;
+        opacity: 0.7;
+        position: fixed;
+        padding: 0.07rem 0.14rem;
+        left: 0px;
+        top: 30%;
+        color: #FFFFFF;
+        text-align: center;
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <?php if (empty($realnamelist)) {?>
+        <div class="tianjiadizhi1 tianjiarealname">
+            <span>
+                <img src="weixin/realname/pic/img_add.png" />
+            </span>添加实名制信息</div>
+        <?php } else {?>
+        <div class="tishi_piaoshu">
+            <p class="titlemes"></p>
+            <div class="tishi_piaoshu_quedingBtn tianjiarealname">添加</div>
+        </div>
+        <div class="tishi">
+            <p>实名制信息绑定之后不可修改，请谨慎选择</p>
+        </div>
+        <?php foreach ($realnamelist as $v) {?>
+        <div class="system_information" status="false" rid="<?php echo $v['id']?>">
+            <div class="system_information_list">
+                <p>
+                    <?php echo $v['name']?>
+                </p>
+                <p>
+                    <?php switch ($v['cardType']) {
+                         case 1:
+                             echo "身份证";
+                             break;
+                         case 2:
+                             echo "护照";
+                             break;
+                         case 3:
+                             echo "军官证";
+                             break;
+                         case 4:
+                             echo "士兵证";
+                             break;
+                         case 5:
+                             echo "台胞证";
+                             break;
+                         case 6:
+                             echo "回乡证";
+                             break;
+                         case 99:
+                             echo "其它证件";
+                             break;
+                     }?> ：
+                    <?php echo $v['idCard']?>
+                </p>
+                <div class="moren_img">
+                    <img src="weixin/realname/pic/icon_mr_gray.png" class="img_img" />
+                </div>
+            </div>
+        </div>
+        <?php }?>
+        <div class="tianjiadizhi quedingBtn">
+            <!--<span><img src="weixin/realname/pic/img_add.png"/></span>添加实名制信息-->
+            确定
+        </div>
+        <?php }?>
+    </div>
+    <div class="shezhi_tishi">
+        <P>设置成功</P>
+    </div>
+
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script>
+        var aid = "<?php echo $aid?>";
+        var switch_ = "<?php echo $switch_?>";
+        var orderNo = "<?php echo $orderNo?>";
+        var programId = "<?php echo $programId?>";
+        var ticketNum = "<?php echo $lockInfo['ticketCount']?>";
+        var realNameType = "<?php echo $lockInfo['realNameType']?>"; //  2一单一证  1一票一证
+        if(realNameType==1){
+            $(".titlemes").html("你购买了"+ticketNum +"张票，需要"+ticketNum +"实名制信息");
+        }else if(realNameType==2){
+            $(".titlemes").html("本单只需要一个实名制信息！");
+        }
+        $(".system_information").click(function(event) {
+            if ($(this).attr('status') == 'false') {
+                $(this).attr('status', 'true');
+                $(this).find(".img_img").attr("src", "weixin/realname/pic/Group.png");
+            } else {
+                $(this).attr('status', 'false');
+                $(this).find(".img_img").attr("src", "weixin/realname/pic/icon_mr_gray.png");
+            }
+        });
+
+
+
+        $(".quedingBtn").click(function(event) {
+            if(realNameType==1){
+                if ($(".system_information[status='true']").length > ticketNum) {
+                    tishi("您购买了" + ticketNum + '张票' + ',只需要' + ticketNum + '个实名信息！');
+                    return;
+                } else if ($(".system_information[status='true']").length < ticketNum) {
+                    tishi("您购买了" + ticketNum + '张票' + ',需要' + ticketNum + '个实名信息！');
+                    return;
+                }
+            }else if(realNameType==2){
+                if ($(".system_information[status='true']").length != 1) {
+                    tishi('本单只需要一个实名制信息！');
+                    return;
+                }
+            }
+            var contacts = [];
+            $(".system_information").each(function(index, el) {
+                if ($(this).attr('status') == 'true') {
+                    var id = $(this).attr('rid');
+                    contacts.push(id);
+                }
+            });
+            location.href = WX_URL + "user.php?placeOrder=1&orderNo=" + orderNo + "&aid=" + aid + "&contacts=" + contacts+ "&switch_=" + switch_+ "&programId=" + programId;
+        });
+        $(".tianjiarealname").click(function(event) {
+            location.href = WX_URL + "user.php?realNameList=1&addRealName=yes";
+        });
+        // 禁用微信分享
+              function onBridgeReady() {
+                     WeixinJSBridge.call('hideOptionMenu');
+                }
+
+               if (typeof WeixinJSBridge == "undefined") {
+                   if (document.addEventListener) {
+                       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                   } else if (document.attachEvent) {
+                       document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                   }
+               } else {
+                   onBridgeReady();
+               }
+    </script>
+</body>
+
+</html>

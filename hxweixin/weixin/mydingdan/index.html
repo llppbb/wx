@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>个人中心--我的订单</title>
+    <link rel="stylesheet" href="weixin/mydingdan/css/style.css">
+    <link rel="stylesheet" href="weixin/common/common.css">
+    <style>
+        .headerTab {
+            padding-top: 0.2rem;
+            background: #FFFFFF;
+            height: 0.5rem;
+            /*margin-bottom: 0.05rem;*/
+        }
+
+        .weikaishi {
+            text-align: center;
+            padding-right: 5%;
+            padding-left: 15%;
+        }
+
+        .weikaishi,
+        .yijieshu {
+            width: 50%;
+            float: left;
+        }
+
+        .font_14_color_179 {
+            padding-bottom: 0.08rem !important;
+            padding-top: 0rem !important;
+        }
+
+        .font_14_color_179 {
+            font-size: 0.14rem !important;
+            color: rgb(179, 179, 179) !important;
+        }
+
+        .yijieshu {
+            padding-left: 5%;
+            text-align: center;
+            padding-right: 15%;
+        }
+
+        .yijieshu p {
+            border-bottom: 2px solid #ffdd10 !important;
+            text-align: center;
+            padding-bottom: 0.08rem;
+            /*display: none;*/
+        }
+
+        .font_14_color_51 {
+            font-size: 0.14rem !important;
+            color: rgb(51, 51, 51);
+        }
+
+        #jifenshangchengdingdan {
+            margin-top: 0.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="headerTab">
+            <div class="weikaishi">
+                <a href="./user.php?cbaOrderList=1" class="font_14_color_179">购票订单</a>
+            </div>
+            <div class="yijieshu">
+                <p class="font_14_color_51">商城订单</p>
+            </div>
+        </div>
+        <?php if(!empty($orderList)) {?>
+        <!--积分商城订单-->
+        <div id="jifenshangchengdingdan">
+            <!--未支付的订单-->
+            <?php foreach($orderList as $k) {?>
+            <?php $ids = substr($k['beiTaiOrderNo'], -8)?>
+            <div class="neirong" beiTaiOrderNo="<?php echo $k['beiTaiOrderNo']?>">
+                <div class="neirongTop yizhifuneirongT">
+                    <div class="topimg">
+                        <h4><span><?php echo $k['goodName']?></span></h4>
+                        <p><span><?php echo $k['quantity']?></span><span><?php echo $k['score']?><?php echo empty($k['giftType'])?'积分':'金币'?></span></p>
+                    </div>
+                    <div class="gengduo gengduo1">
+                        <img src="weixin/mydingdan/pic/gengduo.png" />
+                    </div>
+                </div>
+            </div>
+            <?php }?>
+            <?php } else {?>
+            <!--没有积分商城订单-->
+            <div id="jifenNo" class="goupiaoNo">
+                <img src="weixin/mydingdan/pic/img_emptylist.png" />
+                <h2>暂无订单</h2>
+                <div id="gopiao">
+                    去购买
+                </div>
+            </div>
+            <?php }?>
+            <!--蒙层-->
+            <div class="mengceng"></div>
+            <!--取消订单-->
+            <div class="quxiaodingyaoBox">
+                <p>取消此订单？</p>
+                <div class="anniu anniuQx">
+                    <div class="quxiaodingdan quxiaodingdanQx" id="fou">否</div>
+                    <div class="zhifu" id="shi">是</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shezhi_tishi">
+        <P>设置成功</P>
+    </div>
+    <script src="weixin/common/zepto.min.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        var uid = "<?php echo $uid?>";
+        // 跳转贝泰商城
+        $("#gopiao").on("click", function() {
+            var data = {
+                'uid': uid,
+                'channel': 'wechat',
+                'identity': 'goShopping',
+            }
+            $.post(WX_URL + 'requestAjax.php', data, function(res) {
+                if (res.state == 0) {
+                    location.href = res.result.mall_url;
+                } else {
+                    tishi(res.message);
+                }
+            }, 'json');
+        })
+        // 订单详情
+        $(".neirong").click(function(event) {
+            var beiTaiOrderNo = $(this).attr("beiTaiOrderNo");
+            location.href = WX_URL + "user.php?beiTaiOrderNo=" + beiTaiOrderNo;
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>商城</title>
+    <link rel="stylesheet" href="weixin/shop/css/shop_zhuye.css">
+</head>
+<style>
+    .head_zhuye {
+        width: auto;
+        white-space: nowrap;
+        height: 0.49rem;
+    }
+
+    .head_zhuye div {
+        width: auto;
+    }
+
+    .head_zhuye div p {
+        position: relative;
+        width: auto;
+        margin: 0 .1rem;
+        padding-left: 0px;
+        color: rgb(128, 128, 128);
+    }
+
+    .canyin_list_state,
+    .fuzhuang_list_state {
+        padding-bottom: 0.14rem;
+    }
+
+    .tabOn p {
+        color: #333333 !important;
+    }
+
+    /*没有商品是展示*/
+
+    .nodata {
+        display: none;
+        margin-top: .95rem;
+        text-align: center;
+        font-size: .15rem;
+        color: rgb(51, 51, 51);
+    }
+
+    .nodata img {
+        width: 40%;
+    }
+
+    .nodata p {
+        margin-top: .25rem;
+    }
+
+    .header_scroll {
+        height: .5rem;
+        overflow-x: scroll;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <div class="header_scroll">
+            <header class="head_zhuye" id="head_box">
+                <div class="quanbu" id="backall_btn">
+                    <p>全部商品</p>
+                </div>
+            </header>
+        </div>
+        <section class="section">
+            <div class="bg_tiao"></div>
+        </section>
+        <div class="nodata">
+            <img src="weixin/shop/pic/img_empty.png" />
+            <p>商城商品正加紧更新中...</p>
+        </div>
+    </div>
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script src="weixin/common/md5.js"></script>
+    <script src="weixin/shop/js/common.js"></script>
+    <script src="weixin/shop/js/common_ajax.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        ajax_common();
+        var defaulta = "<?php echo $producttype?>";
+        $(".canyin").hide();
+        $("#" + defaulta).show();
+        $("#" + defaulta).find(".more_Btn").hide();
+        $("." + defaulta).addClass('tabOn');
+        $(".tab_canyin").on("click", function() {
+            var index = $(this).index();
+            var type = $(this).attr("attr_type");
+            $(".canyin").hide();
+            $("#" + type).show();
+            $("#" + type).find(".more_Btn").hide();
+            $(this).addClass('tabOn').siblings().removeClass('tabOn');
+        })
+        infoSlyder();
+    </script>
+</body>
+
+</html>

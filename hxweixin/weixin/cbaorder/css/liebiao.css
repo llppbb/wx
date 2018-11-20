@@ -1,0 +1,153 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+html,
+body,
+.wrap {
+  width: 100%;
+}
+input,
+select,
+button,
+textarea {
+  -webkit-appearance: none;
+}
+li {
+  list-style: none;
+}
+.full {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+html {
+  font-size: 100px;
+}
+body,
+.wrap {
+  font-size: 12px;
+}
+/*------wrap-----------------*/
+.wrap {
+  width: 100%;
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  background: #F4F4F4;
+}
+.headerTab {
+  padding-top: 0.28rem;
+  background: #FFFFFF;
+  height: 0.5rem;
+}
+.weikaishi,
+.yijieshu {
+  width: 50%;
+  float: left;
+}
+.weikaishi {
+  text-align: center;
+  padding-right: 5%;
+  padding-left: 15%;
+}
+.weikaishi p {
+  border-bottom: 2px solid #ffdd10;
+  text-align: center;
+  padding-bottom: 0.05rem;
+}
+.yijieshu {
+  padding-left: 5%;
+  text-align: center;
+  padding-right: 15%;
+}
+.yijieshu p {
+  border-bottom: 2px solid #ffdd10;
+  text-align: center;
+  padding-bottom: 0.05rem;
+}
+.centen_list {
+  overflow: hidden;
+  margin-top: 0.105rem;
+  margin-right: 0.08rem;
+  margin-left: 0.08rem;
+  border-radius: 0.03rem;
+}
+.centen_list_title {
+  padding: 0.085rem 0.14rem;
+  background: #ffdd10;
+}
+.centen_list_centen {
+  padding: 0.14rem;
+  background: #FFFFFF;
+  position: relative;
+}
+.font_14_color_179 {
+  padding-bottom: 0.14rem;
+  padding-top: 0.14rem;
+}
+.botbtn {
+  padding: 0.2rem;
+  background: #FFFFFF;
+  height: 0.8rem;
+}
+.quxiaodingdanBtn,
+.zhifuBtn {
+  width: 1.2rem;
+  height: 0.4rem;
+  border-radius: 0.2rem;
+  border: 1px solid #ffdd10;
+  float: left;
+  text-align: center;
+  line-height: 0.4rem;
+}
+.quxiaodingdanBtn {
+  margin-left: 0.265rem;
+}
+.zhifuBtn {
+  margin-left: 0.22rem;
+  background: #ffdd10;
+}
+.choose_zhifufangshi {
+  padding: 0.175rem 0;
+  text-align: center;
+  position: relative;
+}
+.closeBtn {
+  position: absolute;
+  right: 0.181rem;
+  top: 0.14rem;
+  width: 0.144rem;
+  height: 0.144rem;
+}
+.fangshi_weixin_dianziqianbao {
+  padding-top: 0.35rem;
+  height: 1.45rem;
+}
+.fangshi_weixin {
+  width: 50%;
+  float: left;
+  padding-left: 0.7rem;
+}
+.fangshi_weixin dl {
+  text-align: center;
+}
+.fangshi_dianziqianbao {
+  width: 50%;
+  float: right;
+  text-align: left;
+  padding-right: 0.7rem;
+}
+.fangshi_dianziqianbao dl {
+  text-align: center;
+}

@@ -1,0 +1,87 @@
+ * {
+ 	margin: 0px;
+ 	padding: 0px;
+ }
+ html,body{
+ 	width: 100%;
+ 	height: 100%;
+ 	background: rgb(8,23,40);
+ }
+ html {
+ 	font-size: 100px;
+ }
+ 
+ body {
+ 	font-size: 12px;
+ }
+ .wrap{
+ 	width: 100%;
+ 	height: 100%;
+ }
+ .carBox{
+ 	height: .86rem;
+ 	padding: 0 .21rem;
+ }
+ .carBox p{
+ 	font-size: .14rem;
+ 	margin-top: .33rem;
+ 	width: 30%;
+ 	float: left;
+ 	line-height: .24rem;
+ 	text-align: center;
+ 	border: 1px solid rgb(128,128,128);
+ 	border-radius: .04rem;
+ }
+ .carBox p{
+ 	color: rgb(128,128,128);
+ }
+.carBox p:nth-of-type(2){
+  margin-left:4%;
+  margin-right: 4%;
+}
+  /*车牌上的  黄色背景*/
+ .carOn {
+ 	background: rgb(255,221,16);
+ 	color: rgb(51,51,51) !important;
+ }
+ /*显示时间*/
+.timebox{
+	margin-top: .5rem 0 .46rem 0;
+	width: 80%;
+	height: 3rem;	
+	margin-left: 10%;
+	text-align: center;
+	border: 2px dashed ;
+	border-radius: 100%;
+}
+
+.tbtitle{
+	text-align: center;
+	margin: .6rem 0 .2rem 0;
+	font-size: .14rem;
+	color: rgb(255,221,16);
+}
+.timeremaining{
+	font-size: .9rem;		
+}
+.timeremaining span{
+	color: rgb(255,221,16);
+}
+.reminderfont{
+	width: 80%;
+	text-align: center;
+	font-size: .16rem;
+	margin-left: 10%;
+	margin-top: .46rem;
+}
+
+.blue{
+	color: rgb(4,164,204);	
+}
+.blue .timeremaining{
+	color: #fff;	
+}
+
+.red,.red .timeremaining{
+	color: rgb(224,0,62);	
+}

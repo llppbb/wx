@@ -1,0 +1,290 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html, body, .wrap {
+    width: 100%;
+    height: 100%;
+
+}
+
+input, select, button, textarea {
+    -webkit-appearance: none;
+}
+
+li {
+    list-style: none;
+}
+.infos{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.header{
+                                width: 100%;
+                                padding-bottom: 0.15rem;
+                                text-align: center;
+                                background:#FFFFFF;
+                                padding-top: 0.15rem;
+                        }
+                        .header a{
+                            display: inline-block;
+                            font-size: 0.23rem;
+                            text-decoration: none;
+                            line-height: 0.5rem;
+                            color: rgb(51,51,51);
+                        }
+
+
+                        .jiandou {
+                            float: left;
+                            margin-top: 0.15rem;
+                            margin-left: 0.1rem;
+                            margin-right: 0.1rem;
+                        }
+                        .jiandou img{
+                                width: 0.2rem;
+                                 height: 0.2rem;
+                                 float: left;
+                        }
+                        .jiandou span{
+                               line-height: 0.2rem;
+                               font-size: 0.18rem;
+                               margin-left: 0.05rem;
+                        }
+                       .refresh{
+                            float: right;
+                             margin-right: 0.19rem;
+                             font-size: 0.18rem !important;
+
+                       }
+                       #pList{
+                        font-size: 18px;
+                        color: rgb(51,51,51);
+                        font-weight: bold;
+
+                       }
+                       #pList1{
+                        font-size: 18px;
+                        color: rgb(51,51,51);
+                        font-weight: bold;
+
+                       }
+                       #pList2{
+                        font-size: 18px;
+                        color: rgb(249,57,54);
+                        font-weight: bold;
+
+                       }
+                       .division{
+                        width: 100%;
+                        height: 0.12rem;
+                        background: #f4f4f4;
+                       }
+                       .describe{
+                        width: 100%;
+                        height: 0.70rem;
+                        font-size: 0.16rem;
+                        position: relative;
+                       }
+                       .shuaxin{
+                           position:absolute;
+                           right: 0.1rem;
+                           top:50%;
+                           height: 0.2rem;
+                           margin-top: -0.17rem;
+                       }
+                       .shuaxin img{
+                           height: 100%;
+                       }
+                       .ptext{
+
+                        margin-top: 0.14rem;
+                        margin-left: 0.14rem;
+                        padding-right:0.3rem;
+                       }
+                       .times{
+                        background: url(../pic/icon_time.png);
+                        background-repeat: no-repeat;
+                        width: 100%;
+                        height: 0.50rem;
+                        line-height: 0.50rem;
+                        background-size: 0.12rem;
+                        background-position: 0.14rem 0.19rem;
+                        padding-left: 0.29rem;
+                        color: rgb(179,179,179);
+                        font-size: 0.14rem;
+                    
+                         }
+                       .numbers{
+                        width: 100%;
+
+                       }
+                       .numbers .pred{
+                        color: rgb(249,57,64);
+                       }
+                       .numbers p{
+                        float: left;
+                        height: 50px;
+                        margin-top: 0.28rem;
+                        font-size: 0.17rem;
+                        width: 33.33%;
+                        text-align: center;
+                       }
+                       .numbers p span{
+                        margin-top: 0.07rem;
+                        display: inline-block;
+                        font-size: 0.1rem;
+                        font-weight: initial;
+
+                       }
+                       #infos{
+                        margin-top: 0.35rem
+                       }
+                       .footer{
+                        width: 100%;
+                        text-align: center;
+
+                       }
+                       .footer .pnumber .sleft{
+                        margin-left: 0.13rem;
+                       }
+                       .footer p{
+                        margin-left: -1.2rem;
+                        color: rgb(128,128,128);
+                        margin-top: 0.23rem;
+                       }
+                       .footer .divbck{
+                            width: 8%;
+                            height: 0.30rem;
+                            background: red;
+                            display: inline-block;
+                            text-align: center;
+                            margin-left: -0.045rem;
+                       }
+                       .footer .co1{
+                        background: rgb(53,210,0);
+
+                       }
+                       .footer .co2{
+                        background: rgb(127,229,4);
+                       }
+                       .footer .co3{
+                        background: rgb(250,237,43);
+                       }
+                       .footer .co4{
+                        background: rgb(255,174,68);
+                       }
+                       .footer .co5{
+                        background: rgb(247,57,64);
+                       }
+
+                       .footer .co6{
+                        background: rgb(246,221,92);
+                       }
+                       .footer .co7{
+                        background-color: rgb(255,174,68);
+                       }
+                       .footer .co8{
+                        background: rgb(255,143,72);
+                       }
+                       .footer .co9{
+                        background-color: rgb(255,105,69);
+                       }
+                       .footer .co0{
+                        background: rgb(249,57,64);
+                       }
+                       .footer .numsCo{
+                        width: 8%;
+                        display: inline-block;
+                        margin-left: -0.04rem;
+                        text-align: center;
+                        margin-bottom: 0.335rem;
+                        color: rgb(128,128,128);
+                       }
+                       .pnumber span{
+                            margin-left: 0.1rem;
+                            color: rgb(128,128,128);
+                            margin-top: 0.33rem;
+                            display: inline-block;
+                       }
+                       .divisions{
+
+                         width: 100%;
+                        height: 0.12rem;
+                        background: #f4f4f4;
+                       }
+                       table{
+                        width: 100%;
+
+                       }
+                        table .groups1{
+                        width: 25%;
+                        height: 0.28rem;
+                        background: rgb(167,167,167);
+                        line-height: 0.28rem;
+                        text-align: center;
+                        color: rgb(255,255,255);
+                        position: relative;
+                       }
+                       table .groups1:before {
+                        content: "";
+                        display: inline-block;
+                        width: 0.01rem;
+                        height: 0.15rem;
+                        background: #c1c1c1;
+                        position: absolute;
+                        top: 0.06rem;
+                        left: 0.93rem;
+                        }
+                        table .groups td{
+                        width: 25%;
+                        height: 0.50rem;
+                        line-height: 0.50rem;
+                        text-align: center;
+                        color: rgb(102,102,102);
+                        }
+                        table .groups .admission{
+                            color: red;
+                        }
+                        table tr:nth-child(odd) td{
+                            background: rgb(244,244,244);
+                        }
+                        .pimgs img{
+                            width: 2.7rem;
+                        }
+                        #ruChange{
+                            line-height: 0.5rem !important;
+                            font-size: 0.18rem;
+                            text-align: left;
+                            width: 90% !important;
+                            margin-left: 5%;
+                            height: 0.38rem;
+                            border: 1px solid rgb(169,145,0);
+                            border-radius: 0.04rem;
+                        }
+                        #ruChange div{
+                           height:0.38rem;
+                           line-height: 0.38rem;
+                           width: 50%;
+                           float: left;
+                           text-align: center;
+
+                        }
+                        #ruChange div p{
+                            height: 0.36rem;
+                            line-height: 0.36rem;
+                            text-align: center;
+                        }
+                        @media only screen and (max-width:320px ) {
+                        	#ruChange div p{
+                            height: 0.34rem;
+
+                            }
+                        }
+                        .btn_on{
+                                background: rgb(169,145,0);
+                                border:#FFFFFF 1px solid;
+                                border-radius: 0.04rem;
+                       }
