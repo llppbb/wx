@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>核销页</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        background: #f4f4f4;
+        overflow: hidden;
+        position: relative;
+    }
+
+    html {
+        font-size: 100px;
+    }
+
+    body,
+    .wrap {
+        font-size: 14px;
+    }
+
+    .wrap {
+        width: 100%;
+        height: 100%;
+    }
+
+    .title {
+        width: 100%;
+        text-align: center;
+        line-height: .44rem;
+        font-size: .18rem;
+        color: rgb(51, 51, 51);
+    }
+
+    .infos {
+        color: rgb(51, 51, 51);
+        line-height: 0.22rem;
+        padding: 0.1rem 0rem;
+        margin-left: .1rem;
+        margin-right: .1rem;
+        font-size: .18rem;
+        border-bottom: 1px solid rgb(227, 227, 227);
+    }
+
+    .infos span {
+        font-size: .14rem !important;
+    }
+
+    .btn2 {
+        width: 100%;
+        height: 0.45rem;
+        text-align: center;
+        line-height: 0.45rem;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        border: none;
+        font-size: 0.16rem;
+        color: #fff;
+    }
+
+    .statistics {
+        width: 100%;
+        position: absolute;
+        left: 0px;
+        bottom: .5rem;
+        font-size: 0.15rem;
+        color: rgb(51, 51, 51);
+        padding: 0 .1rem;
+    }
+
+    .statistics div {
+        margin-bottom: .1rem;
+    }
+
+    .examineState {
+        background: rgb(44, 49, 50);
+        color: #fff;
+        font-size: .3rem;
+        text-align: center;
+        padding: .3rem 0;
+    }
+
+    /*未核销 核销成功*/
+
+    .turexiao {
+        color: rgb(198, 209, 94);
+    }
+
+    /*按钮 核销 继续核销*/
+
+    .turexiaoBtn {
+        background: rgb(198, 209, 94);
+    }
+
+    .false {
+        color: rgb(246, 99, 99);
+    }
+
+    /*核销成功 核出成功*/
+
+    .trueout {
+        color: rgb(151, 171, 228);
+    }
+
+    /*核销成功 核出成功*/
+
+    .trueoutBtn {
+        background: rgb(151, 171, 228);
+    }
+</style>
+
+<body>
+
+    <div class="wrap">
+        <div class="title">FIBA 3X3 总决赛</div>
+        <div class="examineState">未核销</div>
+        <div class="centen">
+            <p class="infos">场次: <span id="schedule"> </span></p>
+            <p class="infos">区域: <span id="productname"></span></p>
+            <p class="infos">票价: <span id="price"></span></p>
+            <p class="infos">验票时间: <span id="endDate"><?php echo date("Y-m-d H:i:s")?></span></p>
+            <p class="infos">验票人: <span id="userName"></span></p>
+            <p class="infos">入场人数: <span id="getInto"></span></p>
+            <div class="statistics">
+                <div>累计总核销数 <span id="verifyTotal">0</span> 累计总核出数 <span id="getAuto">0</span></div>
+                <div> 现有库存 <span id="inventory">0</span></div>
+            </div>
+            <div class="btn2" id="hexiao_btn">核 销</div>
+            <button class="btn2 turexiaoBtn" id="btn_continue" style="display:none">继续扫描</button>
+        </div>
+
+    </div>
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script src="weixin/common/md5.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        // 扫一扫 参数 s
+        var appId = '<?php echo APPID?>';
+        var timestamp = '<?php echo $signPackage["timestamp"];?>';
+        var nonceStr = '<?php echo $signPackage["nonceStr"];?>';
+        var signature = '<?php echo $signPackage["signature"];?>';
+        // 扫一扫 参数 e
+
+        // fiba 核销参数  s
+        var verifyCode = "<?php echo $verifyCode?>"
+        var useStatus = "<?php echo $useStatus?>"; // 使用状态  0 未使用  1 已入场  2 已出场
+        var openid = "<?php echo $openid?>";
+        // fiba 核销参数  取数据
+        var schedule = "<?php echo $schedule?:'无' ?>"; // 场次
+        var productName = "<?php echo $productName?:'无' ?>"; // 截后4位用做区域
+        var price = "<?php echo $price?$price.'元':'无' ?>"; // 票价
+        var userName = "<?php echo $userName?:'无' ?>"; // 验票人
+        var ticketStatus = "<?php echo $ticketStatus ?>"; // 票状态
+        var inventory = "<?php echo $inventory?:0 ?>"; // 库存数
+        var getInto = "<?php echo $getInto?:0 ?>"; // 库存数
+        var verifyTotal = "<?php echo $verifyTotal?:0 ?>"; // 库存数
+        var getAuto = "<?php echo $getAuto?:0 ?>"; // 库存数
+        // 渲染页面
+        $("#schedule").text(schedule);
+        $("#productname").text(productName.slice(-4));
+        $("#getInto").text(getInto);
+        $("#price").text(price);
+        $("#userName").text(userName);
+        $("#verifyTotal").text(verifyTotal);
+        $("#inventory").text(inventory);
+        $("#getAuto").text(getAuto);
+
+        // 1.判断优惠券是否已核销(使用) useStatus 0未使用  1已使用
+        if (useStatus == -1) { // 该场查无此票
+            $(".examineState").html("该场查无此票");
+            $(".examineState").addClass('false');
+            $("#hexiao_btn").hide();
+        } else if (useStatus == 2) { // 该票已核出
+            $(".examineState").html("该票已核出");
+            $(".examineState").addClass('false');
+            $("#hexiao_btn").hide();
+        } else if (useStatus == 1) { // 未核销
+            if (useStatus != ticketStatus) { //该票已被核销
+                $(".examineState").html("该票已被核销");
+                $(".examineState").addClass('false');
+                $("#hexiao_btn").hide();
+            } else { //核销成功
+                $(".examineState").html("核销成功");
+                $(".examineState").addClass('trueout');
+                $("#hexiao_btn").html("核 出");
+                $("#hexiao_btn").addClass('trueoutBtn').removeClass('turexiaoBtn');
+            }
+        } else if (useStatus == 0) {
+            $(".examineState").html("未核销");
+            $(".examineState").addClass('turexiao');
+            $("#hexiao_btn").html("核 销");
+            $("#hexiao_btn").addClass('turexiaoBtn').removeClass('trueoutBtn');
+        }
+
+        $("#hexiao_btn").on("click", function() {
+            if (ticketStatus != useStatus) {
+                if (useStatus == 0) {
+                    $(".examineState").html("未核销");
+                    $(".examineState").addClass('turexiao');
+                    $("#hexiao_btn").html("核 销");
+                    $("#hexiao_btn").addClass('turexiaoBtn').removeClass('trueoutBtn');
+                } else if (useStatus == 1) {
+                    $(".examineState").html("该票已被核销");
+                    $(".examineState").addClass('false');
+                    $("#hexiao_btn").hide();
+                } else if (useStatus == 2) {
+                    $(".examineState").html("该票已核出");
+                    $(".examineState").addClass('false');
+                    $("#hexiao_btn").hide();
+                }
+                return false;
+            }
+            $.ajax({
+                url: WX_URL + 'requestAjax.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    "verifyCode": verifyCode,
+                    "openid": openid,
+                    "ticketStatus": ticketStatus,
+                    "identity": 'verifyTicket'
+                },
+                success: function(res) {
+                    if (res.state == 0) {
+                        // alert("核销成功");
+                        $(".examineState").html(res.result);
+                        $("#hexiao_btn").hide();
+                        $("#btn_continue").show();
+                        if (res.result == "核销成功") {
+                            $(".examineState").addClass('turexiao');
+                            $("#getInto").html(parseInt(getInto) + 1);
+                            $("#verifyTotal").text(parseInt(verifyTotal) + 1);
+                            $("#btn_continue").addClass('turexiaoBtn').removeClass('trueoutBtn');
+                        } else {
+                            $(".examineState").addClass('trueout');
+                            $("#getInto").text(parseInt(getInto) - 1);
+                            $("#getAuto").html(parseInt(getAuto) + 1);
+                            $("#inventory").text(parseInt(inventory) + 1);
+                            $("#btn_continue").addClass('trueoutBtn').removeClass('turexiaoBtn');
+                        }
+
+                    } else if (res.state == 1) {
+                        $(".examineState").html(res.result);
+                        $(".examineState").addClass('false');
+                        $("#hexiao_btn").hide();
+                        $("#btn_continue").show();
+                        if (res.result == "该票已被核销" || res.result == "核销失败") {
+                            $("#btn_continue").addClass('turexiaoBtn').removeClass('trueoutBtn');
+                        } else if (res.result == "该票已被核出") {
+                            $("#btn_continue").addClass('trueoutBtn').removeClass('turexiaoBtn');
+                        }
+                    }
+                },
+                error: function() {
+                    alert("失败")
+                }
+            })
+        })
+
+        $("#btn_continue").on("click", function() {
+            scanQRCode(appId, timestamp, nonceStr, signature);
+        })
+
+        /* 微信拉起扫一扫
+         * @param appId, timestamp, nonceStr, signature, domId
+         * @return
+         */
+        function scanQRCode(appId, timestamp, nonceStr, signature) {
+            wx.config({
+                debug: false,
+                appId: appId,
+                timestamp: timestamp,
+                nonceStr: nonceStr,
+                signature: signature,
+                jsApiList: ['checkJsApi', 'scanQRCode']
+            });
+            wx.error(function(res) {
+                // alert("出错了：" + res.errMsg);
+            });
+            wx.ready(function() {
+                wx.checkJsApi({
+                    jsApiList: ['scanQRCode'],
+                    success: function(res) {}
+                });
+                //扫描二维码
+                wx.scanQRCode({
+                    needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
+                    scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                    success: function(res) {}
+                });
+            })
+        }
+    </script>
+</body>
+
+</html>

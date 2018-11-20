@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>支付</title>
+    <link rel="stylesheet" href="weixin/schedule/FontAwesome/css/simple.switch.three.css" type="text/css">
+    <link rel="stylesheet" href="weixin/schedule/FontAwesome/css/css.css" type="text/css">
+    <link rel="stylesheet" href="weixin/schedule/FontAwesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="weixin/schedule/css/zhifu.css">
+    <link rel="stylesheet" href="weixin/schedule/css/common.css">
+    <style>
+        .wrapbg{
+            width: 100%;
+            height: 1.13rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: url(/weixin/schedule/pic/img_bg1.png) no-repeat;
+            background-size: 100%;
+        }
+        .shezhi_tishinew {
+            border-radius: 0.04rem;
+            background: #000000;
+            opacity: 0.7;
+            position: fixed;
+            padding: 0.07rem 0.14rem;
+            left: 0px;
+            top: 30%;
+            color: #FFFFFF;
+            text-align: center;
+            display: none;
+        }
+        .deletebtn img {
+            width: .11rem;
+        }
+        .addRealNameCFont{
+             position: relative;
+        }
+        .addImg{
+            position: absolute;
+            left: -.2rem;
+            top: 0.02rem;
+            width: .16rem;
+        }
+        .shengyuTime {
+            width: 2.2rem;
+            margin-top: .1rem;
+        }
+        .wrap {
+            padding-top: 0.48rem;
+        }
+        .line{
+            width: 100%;
+            height: 0.05rem;
+            background: url(/weixin/ticketfolder/pic/img_line.png) no-repeat;
+            background-size: 100%;
+            position: absolute;
+            left: 0;
+            top:0rem;
+        }
+        .titcketmes {
+           position: relative;
+        }
+        .iconfont{
+            position: relative;
+            padding-left: .2rem;
+        }
+        .iconimg{
+            width: .13rem;
+            position: absolute;
+            left: 0rem;
+            top: .03rem;
+        }
+        .seatslist{
+            position: relative;
+            padding-right: .1rem;
+        }
+        .seatslist img{
+             position: absolute;
+             right: 0px;
+             top: .03rem;
+             width: 1px;
+        }
+        .rntitle {
+            padding-right: 0rem ;
+        }
+        .allprice {
+            color:#808080;
+        }
+        .zhifuBtn {
+            font-size: .16rem;
+        }
+        .hasaddress{
+            font-size: .13rem;
+        }
+        .rnmesfontNOname{
+            font-size: .14rem;
+            color: #E6E6E6;
+            text-align: center;
+            margin: .3rem 0;
+        }
+        .rnmesfont{
+            display: none;
+            font-size: .12rem;
+            color: #808080;
+        }
+    </style>
+</head>
+<body>
+    <!-- 菊花加载 -->
+    <div id="foo" style="position:absolute;left:49%;top:40%;display:none"></div>
+    <div class="wrap">
+        <div class="wrapbg">
+            <div class="shengyuTime">
+                <p>支付剩余时间：<span id="timezone">00:00</span></p>
+            </div>
+        </div>
+        <?php if(!$lockInfo['ticketType'] && !$lockInfo['deliverType']) {?>
+            <div class="addressmes" style="position:relative;">
+                <div class="line"></div>
+                <?php if(empty($defaultAddress)) {?>
+                <div class="noaddress editaddress">＋添加收货地址</div>
+                <?php } else {?>
+                <div class="hasaddress editaddress" aid="<?php echo $defaultAddress['id']?>">
+                    <div class="addressNmae iconfont">收货人：<span><?php echo $defaultAddress['name']?></span><img src="weixin/schedule/pic/icon_person.png" class="iconimg"/></div>
+                    <div class="addressMobile iconfont">收货人手机号：<span><?php echo $defaultAddress['mobile']?></span><img src="weixin/schedule/pic/icon_telephone.png" class="iconimg"/></div>
+                    <div class="addressDetailed iconfont">收货人地址：<span><?php echo $defaultAddress['address']?></span><img src="weixin/schedule/pic/icon_addressIcon.png" class="iconimg"/></div>
+                    <div class="rightbtn"><img src="weixin/schedule/pic/icon_arrow.png" alt=""></div>
+                </div>
+                <?php }?>
+            </div>
+        <?php }?>
+        <div class="titcketmes borrad">
+            <div class="tmproduct bordas">
+                <div class="productName">
+                    <?php echo $lockInfo['programName']?>
+                </div>
+                <div class="productTime"><span><?php echo $lockInfo['playTime']?></span></div>
+                <?php if(count($lockInfo['seatIds'])>0 && $lockInfo['canChooseSeat']) {?>
+                    <div class="seats iconfont">
+                        <img src="weixin/schedule/pic/icon_seat.png" class="iconimg" style="top:0.02rem"/>
+                        <?php foreach($lockInfo['seatIds'] as $v) {?>
+                        <div class="seatslist">
+                            <?php echo $v['scheduleAreaName']," ",$v['lineName']."排",$v['rankName']."座"?>
+                            <img src="weixin/schedule/pic/Line.png" />
+                        </div>
+                        <?php }?>
+                    </div>
+                <?php }?>
+            </div>
+            <div class="tmNumMoney spaceBetween bordas">
+                <div class="fontL"><span style="color:#E8375E;font-size:.2rem"><?php echo $lockInfo['ticketCount']?></span>张</div>
+                <div class="tmMoney"><span style="color:#E8375E;font-size:.2rem"><?php echo $lockInfo['totalAmount']?></span>元</div>
+            </div>
+            <div class="tmsendtype spaceBetween bordas">
+                <div class="fontL">配送方式</div>
+                <div>
+                    <!-- <?php print_r($lockInfo);?> -->
+                    <span style="font-size:.14rem;color:#333333;margin-right:.1rem"><?php echo $lockInfo['ticketType']?'电子票':($lockInfo['deliverType']?'自取':'快递  '.($lockInfo['freeShipping']==null?"":'满'.$lockInfo['freeShipping'] .'元包邮').'</span><span style="font-size:.2rem;color:#E8375E">'. $lockInfo['realFreight'].'</span><span style="font-size:.14rem;color:#808080">元</span>')?></div>
+            </div>
+          <?php if($lockInfo['ruleFlag']) {?>
+            <div class="tmpointpay spaceBetween">
+                <p class="fontL" style="font-size:.14rem">可用<span style="font-size:.14rem;color:#E8375E"><?php echo $lockInfo['canUsePoint'] ?></span><span id="pointForMoney">积分抵扣<span style="font-size:.14rem;color:#E8375E"><?php echo $lockInfo['pointForMoney'] ?></span></span>元</p>
+                <div class="div switchBtn"><input type="checkbox" class="c6 <?php echo $lockInfo['canUseFlag']?'':'pointNe'?>" name="o" id="usePoint" <?php echo $lockInfo['canUseFlag']?"":"disabled"?> /></div>
+            </div>
+         <?php }?>
+        </div>
+        <div class="personmobile spaceBetween borrad">
+            <div style="font-size: .14rem;color: #808080;">购票人手机号</div>
+            <div style="font-size: .14rem;color: #333333;"><?php echo $mobile?></div>
+        </div>
+        <?php if ($lockInfo['realNameStatus'] != 0) {?>
+        <div class="relname borrad">
+            <div class="rntitle spaceBetween bordas">
+                <div>实名制信息</div>
+                <div id="addrealNameBtn"><span class="addRealNameCFont">添加实名制信息<img src="weixin/realname/pic/icon_add.png" class="addImg" /></span></div>
+            </div>
+            <div class="rnmes">
+                <div>本项目为实名购票，请填写实名制信息</div>
+                <div class="rnmesfont">一张票需要一个实名制信息，提交后不可修改，请谨慎输入</div>
+                <div class="rnmesfontNOname">还没有添加实名制信息，快去添加吧~</div>
+            </div>
+            <?php if (!empty($peiSongRealNameList)) {?>
+            <?php foreach ($peiSongRealNameList as $v) {?>
+            <div class="relnameList bordas" cid="<?php echo $v['id']?>">
+                <div class="relnameListName">
+                    <?php echo $v['name']?>
+                </div>
+                <div class="spaceBetween">
+                    <div class="relnameshow"><span class="cardName"><?php echo $v['cardName']?></span>：<span class="idCard"><?php echo $v['idCard']?></span></div>
+                    <p style="display:none;"><span class="cardType"><?php echo $v['cardType']?></span></p>
+                    <div class="deletebtn" cid="<?php echo $v['id']?>"><img src="weixin/schedule/pic/icon_delete.png" /></div>
+                </div>
+            </div>
+            <?php }?>
+            <?php }?>
+        </div>
+        <?php }?>
+        <div class="footerHeji">
+            <div class="allprice">实付 <span id="totalAmout"><?php echo $lockInfo['totalAmount']+$lockInfo['realFreight']?></span>元</div>
+            <div class="zhifuBtn">确认支付</div>
+        </div>
+    </div>
+
+    <div class="mengceng"></div>
+    <div class="weidenglu_tishi">
+        <div class="weidenglu_tishi_title">
+            <p class="weidenglu_tishi_title_p2">支付失败！订单会为您保留10分钟，请您尽快支付</p>
+        </div>
+        <div class="weidenglu_tishi_bottom">
+            <div class="i_know">我知道了</div>
+        </div>
+    </div>
+
+    <div class="shezhi_tishinew" style="display:none">
+        <P>设置成功</P>
+    </div>
+
+    <script src="weixin/schedule/js/jq-1.8.3.min.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <!-- 菊花加载 -->
+    <script src="weixin/common/spin.min.js"></script>
+    
+    <script type="text/javascript" src="weixin/schedule/js/simple.switch.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <!--修改-->
+    <script>
+
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+
+        var qeuhuo = '<span class="quehuodengji">缺货登记</span>';
+        var uid = "<?php echo $uid?>";
+        var openId = "<?php echo $openid?>";
+        var programId = "<?php echo $programId?>";
+        var switch_ = "<?php echo $switch_?>";
+        var orderNo = "<?php echo $orderNo?>";
+        var ticketType = "<?php echo$lockInfo['ticketType']?>";
+        var realNameStatus = "<?php echo $lockInfo['realNameStatus']?>";
+        var deliverType = "<?php echo $lockInfo['deliverType']?>";  //快递方式 0快递 1自取
+        var realNameType = "<?php echo $lockInfo['realNameType']?>"; //  一单一证  一票一证
+        var surplus = "<?php echo $lockInfo['secend']?>"; // 订单剩余支付时间（秒）
+        var timezone = $("#timezone");
+        var useRule = 1; // 是否使用积分抵扣 1不使用 0使用;
+        if($(".relnameList").length!=0){
+            $(".rnmesfont").show();
+            $(".rnmesfontNOname").hide();
+            if(realNameType==2){
+                $(".rnmesfont").html("一个订单需要一个实名制信息，提交后不可修改，请谨慎输入");
+            }else{
+                $(".rnmesfont").html("一张票需要一个实名制信息，提交后不可修改，请谨慎输入");
+            }
+        }
+
+        /*按钮插件*/
+        $(".c6").simpleSwitch({
+            "theme": "Green"
+        });
+        console.log(switch_);
+        if(switch_=="on"){
+            $("#usePoint").prop('checked',true);
+            $("#Switch0").addClass('On');
+            $("#totalAmout").text("<?php echo ($lockInfo['totalAmount']+$lockInfo['realFreight']-$lockInfo['pointForMoney'])?>");
+        }
+        //积分抵扣金额
+        $(".pointNe").on("click",function(){
+            tishinew("您的积分不足！");
+        })
+        $("#usePoint").change(function(event) {
+            if ($(this).prop('checked') == false) {
+                $("#totalAmout").text("<?php echo $lockInfo['totalAmount']+$lockInfo['realFreight']?>");
+            } else {
+                $("#totalAmout").text("<?php echo ($lockInfo['totalAmount']+$lockInfo['realFreight']-$lockInfo['pointForMoney'])?>");
+            }
+        });
+
+        $(function() {
+            var intDiff = parseInt(surplus); //倒计时总秒数量
+            // var intDiff = 60; //倒计时总秒数量
+            function changeType() {
+                $('.zhifuBtn').text('订单已取消');
+                $('.zhifuBtn').attr('click',"false");
+                $('.zhifuBtn').css('background', 'gray');
+                // location.href = WX_URL + "user.php?ticketList=1";
+                return;
+            }
+            if (intDiff <= 1) {
+                return false;
+            } else {
+                timer(intDiff, timezone, changeType);
+            }
+            $(".seatslist").last().find('img').hide();
+        });
+
+        $(".zhifuBtn").click(function(event) {
+             if($(this).attr("click")=="false"){
+                 return false;
+             }
+            if ($("#Switch0").hasClass('On')) {
+                useRule = 0;
+            }
+            var usePoint = $("#usePoint").prop('checked');
+            var buyerNumber = "<?php echo $mobile?>";
+            var receiverName, receiverMobile, receiverAddress;
+            if (ticketType == 0) {
+                receiverName = "<?php echo $defaultAddress['name']?>";
+                receiverMobile = "<?php echo $defaultAddress['mobile']?>";
+                receiverAddress = "<?php echo $defaultAddress['address']?>";
+            }
+            var ticketNum = <?php echo $lockInfo['ticketCount']?>;
+            var viewers = new Array();
+            if (realNameStatus != 0) {
+                var shenfenzhenghao = $(".idCard");
+                var name_name = $(".relnameListName");
+                var cardNames = $(".cardName");
+                var cardTypes = $(".cardType");
+                for (var i in shenfenzhenghao) {
+                    var id = shenfenzhenghao[i].innerHTML;
+                    var name = name_name[i].innerHTML;
+                    var cardName = cardNames[i].innerHTML;
+                    var cardType = cardTypes[i].innerHTML;
+                    if (name == undefined && id == undefined) {
+                        break;
+                    }
+                    viewers.push(new ObjStory(name, id, cardName, cardType));
+                }
+                if (viewers.length == 0) {
+                    tishinew("请添加实名制信息！");
+                    return;
+                }
+                if (realNameType == 1) { //一票一证
+                    if (viewers.length != ticketNum) {
+                        tishinew("您购买了" + ticketNum + '张票' + ',需要' + ticketNum + '个实名信息！');
+                        return;
+                    }
+                } else if (realNameType == 2) { //一单一证
+                    if (viewers.length != 1) {
+                        tishinew("本单只需要一个实名制信息！");
+                        return;
+                    }
+                }
+            }
+            // 判断是否有地址信息
+            if($(".editaddress").hasClass('noaddress')){
+                tishinew("请填写收货信息！");
+                return false;
+            }
+            $(this).css('background', 'gray');
+            $(this).attr("click","false");
+            $("#foo").show();
+            //  下单
+            placeOrder(uid, orderNo, buyerNumber, ticketType, receiverMobile, receiverAddress, receiverName, viewers, useRule, deliverType);
+        });
+
+        $(".editaddress").on("click", function() { //添加收货地址
+            if($('.zhifuBtn').attr('click')=="false"){
+                window.location.href=WX_URL+'user.php?ticketDetail='+programId;
+                return fasle;
+            }
+            var cids = [];
+            $(".relnameList").each(function(index, el) {
+                cids.push($(el).attr('cid'));
+            });
+            var switch_='';
+            if($("#Switch0").hasClass('On')){
+                switch_='on';
+            }else{
+               switch_='no';
+            }
+            location.href = WX_URL + "user.php?addressList=1&chooseAddress=yes&orderNo=" + orderNo + "&cids=" + cids+ "&switch_=" + switch_+ "&programId=" + programId;
+        })
+
+        $("#addrealNameBtn").click(function(event) { //添加实名制信息
+            if($('.zhifuBtn').attr('click')=="false"){
+                window.location.href=WX_URL+'user.php?ticketDetail='+programId;
+                return fasle;
+            }
+            if ($(".hasaddress").attr('aid') == undefined) {
+                var aid = '';
+            } else {
+                var aid = $(".hasaddress").attr('aid');
+            }
+            var switch_='';
+            if($("#Switch0").hasClass('On')){
+                switch_='on';
+            }else{
+               switch_='no';
+            }
+            location.href = WX_URL + "user.php?realNameList=1&chooseRealName=yes&orderNo=" + orderNo + "&aid=" + aid + "&switch_=" + switch_+ "&programId=" + programId;
+        });
+        // 下单
+        function placeOrder(uid, orderNo, buyerNumber, ticketType, receiverMobile, receiverAddress, receiverName, viewers, useRule, deliverType) {
+            var data = {
+                'uid': uid,
+                'orderNo': orderNo,
+                'buyerNumber': buyerNumber,
+                'ticketType': ticketType,
+                'receiverMobile': receiverMobile,
+                'receiverAddress': receiverAddress,
+                'receiverName': receiverName,
+                'viewers': viewers,
+                'useRule': useRule,
+                'deliverType': deliverType,
+                'identity': 'placeOrder'
+            };
+            $.ajax({
+                url: WX_URL + 'requestAjax.php',
+                type: 'POST',
+                dataType: 'json',
+                data: data,
+                async: false,
+                success: function(data) {
+                    console.log("+++++++++++++++data++++++++++++++++++");
+                    console.log(data);
+                    if (data.state == 1) {
+                        $("#foo").hide();
+                        tishinew(data.message.trim());
+                        $(".zhifuBtn").attr("click","true");
+                        $(".zhifuBtn ").css('background', '#FFDD10');
+                        return false;
+                    } else {
+                        setTimeout(function(){WXPayApi(uid,orderNo,openId)},1000)
+                        // return false;
+                    }
+                }
+            })
+        }
+
+        $(".deletebtn").on("click", function(event) {
+            $(this).parents(".relnameList").remove();
+        });
+// 菊花加载
+        $(function(){
+            var opts = {
+                lines: 9, // The number of lines to draw
+                length: 0, // The length of each line
+                width: 10, // The line thickness
+                radius: 15, // The radius of the inner circle
+                corners: 1, // Corner roundness (0..1)
+                rotate: 0, // The rotation offset
+                color: '#000', // #rgb or #rrggbb
+                speed: 1, // Rounds per second
+                trail: 60, // Afterglow percentage
+                shadow: false, // Whether to render a shadow
+                hwaccel: false, // Whether to use hardware acceleration
+                className: 'spinner', // The CSS class to assign to the spinner
+                zIndex: 2e9, // The z-index (defaults to 2000000000)
+                top: 'auto', // Top position relative to parent in px
+                left: 'auto' // Left position relative to parent in px
+            };
+            var target = document.getElementById('foo');
+            var spinner = new Spinner(opts).spin(target);
+        })
+// 获取支付签名
+        function WXPayApi(uid,orderNo,openId){
+            $.ajax({
+                url: WX_URL + 'requestAjax.php',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    'uid': uid,
+                    'orderNo': orderNo,
+                    'openId': openId,
+                    'identity': 'WXPayApi'
+                },
+                async: false,
+                success: function(data) {
+                    if (data.state == 0) {
+                        // 支付
+                        if (typeof WeixinJSBridge == "undefined") {
+                            if (document.addEventListener) {
+                                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                            } else if (document.attachEvent) {
+                                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                            }
+                        } else {
+                            WeixinJSBridge.invoke(
+                                'getBrandWCPayRequest', data.result,
+                                function(res) {
+                                    WeixinJSBridge.log(res.err_msg);
+                                    // 支付成功
+                                    if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                        window.location.href = WX_URL + "user.php?paySuccess=1&orderNo=" + orderNo;
+                                    }
+                                    // 支付过程中用户取消 (支付失败 get_brand_wcpay_request:fail) 注:get_brand_wcpay_request:cancel或者get_brand_wcpay_request:fail可以统一处理为用户遇到错误或者主动放弃，不必细化区分
+                                    if (res.err_msg == "get_brand_wcpay_request:cancel") {
+                                        window.location.href = WX_URL + "weixin/schedule/payFail.html";
+                                    }
+                                }
+                            );
+                        }
+                    }else{
+                        tishinew(data.message);
+                        $(".zhifuBtn").attr("click","true");
+                        $(".zhifuBtn ").css('background', '#FFDD10');
+                        $("#foo").hide();
+                    }
+                },
+                error: function(res) {
+                    $("#foo").hide();
+                    console.log(res)
+                }
+            })
+        }
+        // 禁用微信分享
+              function onBridgeReady() {
+                     WeixinJSBridge.call('hideOptionMenu');
+                }
+
+               if (typeof WeixinJSBridge == "undefined") {
+                   if (document.addEventListener) {
+                       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                   } else if (document.attachEvent) {
+                       document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                   }
+               } else {
+                   onBridgeReady();
+               }
+    </script>
+</body>
+
+</html>

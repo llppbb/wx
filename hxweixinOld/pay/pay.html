@@ -1,0 +1,109 @@
+
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>微信支付-支付</title>
+    <style>
+        /*--------提示框----------------*/
+        .content{
+            width: 80%;
+            position: absolute;
+            background-color: #CCCCCC;
+            top: 33%;
+            left: 10%;
+            border-radius: 5%;
+            display: none;
+        }
+        .ptitle{
+            font-size: 0.2rem;
+            text-align: center;
+            margin-top: 4%;
+        }
+        .ptext{
+            font-size: 0.2rem;
+            text-align: center;
+            margin-top: 3%;
+        }
+        .picon{
+            font-size: 0.2rem;
+            text-align: center;
+            border-bottom: 1px solid block;
+        }
+        .hrs{
+            margin-top: 4%;
+        }
+        .content a{
+            font-size: 0.2rem;
+            text-align: center;
+            display: block;
+            margin-bottom: 0%;
+            border-top: 1px solid;
+            margin-top: 5%;
+            padding: 3%;
+        }
+
+
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/weixin/common/common.js"></script>
+    <script type="text/javascript">
+        //调用微信JS api 支付
+        function jsApiCall()
+        {
+            WeixinJSBridge.invoke(
+                    'getBrandWCPayRequest',
+                <?php echo $jsApiParameters; ?>,
+                function(res){
+                    if(res.err_msg == "get_brand_wcpay_request:ok"){
+                        // alertk("正在给您充值中O(∩_∩)O");
+                        WeixinJSBridge.log(res.err_msg);
+                        location.href=WX_URL+"user.php?recharge=1";
+                    }
+                    if(res.err_msg == "get_brand_wcpay_request:cancel"){
+                        WeixinJSBridge.log(res.err_msg);
+                        window.location.href=WX_URL+"user.php?userGold=1";
+                    }
+                }
+
+            );
+        }
+
+    </script>
+    <script type="text/javascript">
+        window.onload = function(){
+            if (typeof WeixinJSBridge == "undefined"){
+                if ( document.addEventListener ) {
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            } else {
+                jsApiCall();
+            }
+        };
+    function alertk(content) {
+        $("#point").html(content);
+        $(".content").show();
+    }
+    $(".cancel").on("click",function(){
+        $(".content").css("display","none");
+    });
+    </script>
+</head>
+<body>
+<div class="content">
+    <p class="ptitle">
+        提示
+    </p>
+    <p class="ptext" id="point">
+    ]
+    </p>
+    <p class="picon">
+    (*^__^*)
+    </p>
+    <hr>
+    <a class="cancel" href="#" >确定</a>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <title></title>
+    <link rel="stylesheet" href="weixin/chargelog/css/style.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div>
+            <p class="pGold">我的金币: <span class="number" id="userGold">0</span></p>
+        </div>
+        <div class="hrs"></div>
+
+        <?php if (empty($chargeList)) {?>
+        <div>
+            <p class="ptext">
+                <span class="RMB"> 暂无记录</span>
+            </p>
+            <hr class="hr" />
+        </div>
+        <?php } else { ?>
+        <?php foreach ($chargeList as $v) {?>
+        <div>
+            <p class="ptext">
+                <span class="month">+<?php echo $v['score']?></span>
+                <span class="RMB"><?php echo $v['productDesc']?></span>
+                <span class="data"><?php echo $v['orderTime']?></span>
+            </p>
+            <hr class="hr" />
+        </div>
+        <?php }?>
+        <?php }?>
+    </div>
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        $(document).ready(function($) {
+            var uid = "<?php echo $uid?>";
+            var openid = "<?php echo $openid?>";
+
+            // 获取用户金币
+            var userGold = $("#userGold");
+            getUserCoin(uid, userGold);
+        })
+    </script>
+</body>
+
+</html>

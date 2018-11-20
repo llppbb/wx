@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <link rel="stylesheet" href="weixin/parkingNew/css/parkingRecord.css">
+    <title>停车记录</title>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="centen">
+            <!-- <div class="carportList">
+                 <div class="botBor">
+                     <p>
+                         <span class="licenseplatenumber">京N12345</span>
+                     </p>
+                     <p>
+                         <span class="carportState">预约车位</span>
+                     </p>
+                 </div>
+                 <div class="parkingLot">华熙专用停车场1（2017-06-19）</div>
+                 <div>
+                     <p>
+                         <span class="appointmentTime">预约时间</span>
+                     </p>
+                 </div>
+                 <div class="botBor">
+                     <p>
+                         <span class="parkingDuration">停车时长</span>
+                     </p>
+                 </div>
+                 <div class="money">
+                    <p>
+                           <span class="approachDuration">在线支付：<span class="colorR">15</span></span>
+                       </p>
+                       <p>
+                           <span class="parkingDuration">在线支付：<span class="colorR">12</span></span>
+                       </p>
+                </div>
+               <h3 class="bgs"></h3>
+             </div> -->
+        </div>
+        <div class="nodata" style="display:none">
+            <img src="weixin/parkingNew/picnew/icon_norecord.png" />
+            <p>暂无记录</p>
+        </div>
+
+    </div>
+</body>
+<script src="weixin/common/jquery.js"></script>
+<script src="weixin/common/fontSize.js"></script>
+<script src="weixin/common/common.js"></script>
+<script src="weixin/common/md5.js"></script>
+<script src="weixin/parkingNew/js/common.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+<script type="text/javascript">
+    var uid = "<?php echo $uid?>";
+    // var uid="2015828284104";
+    //totalAmount 停车费用
+    //outDt 出场时间
+    var sendUrl=WX_URL + 'requestAjax.php';
+    var sendDate={
+            uid: uid,
+            identity: "getParkingRecord"
+    };
+    fnAjaxParking ('post',sendUrl,false,sendDate, function(data){
+          if(data.state==0){
+              var html = "";
+              if (data.result.length == 0) {
+                  $(".centen").hide();
+                  $(".nodata").show();
+                  return false;
+              }
+              $.each(data.result, function(i, k) {
+                  var state_ = '';
+                  if (k.orderState == 2) {
+                      state_ = "已完成"
+                  }
+                  var ParkTime = k.parkTime;
+                  var ParkTimeNew = ParkTime.replace(/:/g, "时") + "分";
+                  html +='<div class="carportList" id=' + k.id + '>' +
+                  '<div class="bgH"><img src="weixin/parkingNew/picnew/img_cordon.png"/></div>'+
+                  '<div class="botBor"><p><span class="licenseplatenumber">' + k.carNum + '</span></p>' +
+                  '<p><span class="carportState">' + state_ + '</span></p></div>' +
+                  '<div class="parkingLot">' + k.parkName + '</div>' +
+                  '<div><p><span class="appointmentTime">入场时间:' + k.inDt + '</span></p></div>' +
+                  '<div class="botBor"><p><span class="outTime">出场时间:' + k.outDt + '</span></p></div>' +
+                  '<div><p><span class="parkingDuration">时长:' + ParkTimeNew + '</span></p><p style="color:#E9064E;font-weight:bold;">实付:<span>￥' + k.totalAmount + '</span></p></div>' +
+                  // '<h3 class="bgs"><img src="weixin/parkingNew/pic/img_line2.png"/></h3>' +
+                  '</div>';
+              });
+              $(".centen").html(html);
+          }
+      }, function(){
+          $(".centen").hide();
+          $(".nodata").show();
+          return false;
+      });
+
+    // 进入 停车详情
+    $(".carportList").on("click", function() {
+        var id_ = $(this).attr("id");
+        window.location.href = WX_URL + "user.php?parkingRecordDetails=1&id=" + id_;
+    })
+
+    var appId = '<?php echo APPID?>';
+    var nonceStr = '<?php echo $nonceStr;?>';
+    var timestamp = '<?php echo $timestamp;?>';
+    var signature = '<?php echo $signature;?>';
+    // 微信分享
+    wx.config({
+        debug: false,
+        appId: appId,
+        timestamp: timestamp,
+        nonceStr: nonceStr,
+        signature: signature,
+        jsApiList: ['checkJsApi', 'onMenuShareAppMessage']
+    });
+    wx.ready(function() {
+        wx.checkJsApi({
+            jsApiList: ['onMenuShareAppMessage'],
+            success: function(res) {
+                console.log(res);
+            }
+        });
+        wx.onMenuShareAppMessage({
+            title: '吃喝玩乐 华熙LIVE一卡通', // 分享标题
+            desc: '会员停车，不花钱！', // 分享描述
+            link: WX_URL + 'user.php?parkingnew', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: WX_URL + 'tmp/title.png', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function() {
+                // 用户确认分享后执行的回调函数
+                console.log("分享成功");
+            },
+            cancel: function() {
+                // 用户取消分享后执行的回调函数
+                console.log("取消分享");
+            }
+        });
+    });
+    wx.error(function(res) {
+        // console.log(res);
+    });
+</script>
+
+</html>

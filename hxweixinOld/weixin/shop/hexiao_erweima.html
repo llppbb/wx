@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>扫描结果</title>
+
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        background: #f4f4f4;
+        overflow: hidden;
+        position: relative;
+    }
+
+    html {
+        font-size: 100px;
+    }
+
+    body,
+    .wrap {
+        font-size: 14px;
+    }
+
+    .wrap {
+        width: 96%;
+        height: 96%;
+        margin-left: 2%;
+        margin-top: 2%;
+        background: #ffffff;
+    }
+
+    .infos {
+        font-size: 0.16rem !important;
+        color: rgb(128, 128, 128);
+        line-height: 0.22rem;
+        padding: 0.05rem 0.14rem;
+    }
+
+    .btn1,
+    .btn_continue {
+        width: 40%;
+        height: 45px;
+        text-align: center;
+        line-height: 45px;
+        border: 1px solid rgb(255, 221, 16);
+        font-size: 14px;
+        text-align: center;
+        margin-top: 20px;
+        border-radius: 0.225rem;
+        background: #ffffff !important;
+        margin-left: 30%;
+    }
+
+    .btn_continue {
+        margin-top: 0.65rem;
+        background: rgb(255, 221, 16) !important;
+    }
+
+    .tishi_wenzi,
+    .hexiao_success_tishi_title,
+    .hexiao_faile_tishi {
+        text-align: center;
+        padding: 0.4rem 0.32rem 0.2rem 0.32rem;
+        color: rgb(237, 85, 10);
+        font-size: 0.22rem;
+    }
+
+    .hexiao_state {
+        color: rgb(76, 223, 227);
+        font-size: 0.32rem !important;
+        text-align: center !important;
+        margin-top: 0.34rem;
+    }
+
+    .btn2 {
+        display: none;
+        width: 100%;
+        height: 0.45rem;
+        text-align: center;
+        line-height: 0.45rem;
+        background: rgb(255, 221, 16) !important;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        border: none;
+        font-size: 0.16rem;
+        color: rgb(51, 51, 51);
+    }
+</style>
+
+<body>
+
+    <input type="hidden" id="queryOrder" value="">
+    <input type="hidden" id="authority" value="">
+    <input type="hidden" id="useState" value="">
+    <input type="hidden" id="orderNo" value="">
+    <input type="hidden" id="uid" value="">
+
+    <div class="wrap">
+        <div class="centen">
+            <div class="tishi_wenzi"></div>
+            <p class="number">
+                <p class="infos">订单号: <span id="orderno"> </span></p>
+                <p class="infos">兑换商品: <span id="productname"></span></p>
+                <p class="infos">有效期-开始时间: <span id="exDate"></span></p>
+                <p class="infos">有效期-结束时间: <span id="endDate"></span></p>
+                <p class="infos">除外日期(星期): <span id="usedate"></span></p>
+                <p class="infos">核销人员: <span id="verifyuser"></span></p>
+                <p class="infos">核销时间: <span id="keyouTime"></span></p>
+                <p class="infos hexiao_state">核销状态: <span id="useStatus"></span></p>
+                <!-- <p class="infos" style="color:red;">优惠券状态: <span id="ExpTimeStatus"></span></p> -->
+                <button class="btn1" id="back_btn">返回</button>
+                <div class="btn2" id="hexiao_btn">确定核销</div>
+                <!-- <button class="btn1 btn2" id="query_order_btn">查看订单</button> -->
+            </p>
+        </div>
+
+        <div class="hexiao_success_tishi" id="hexiao_success" style="display:none">
+            <div class="hexiao_success_tishi_title">核销成功</div>
+            <button class="btn_continue" id="">继续核销</button>
+        </div>
+
+        <div class="hexiao_success_tishi" id="hexiao_failed" style="display:none">
+            <div class="hexiao_success_tishi_title">核销失败，请重新扫描并核销</div>
+            <button class="btn_continue" id="">确定</button>
+        </div>
+
+    </div>
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script src="weixin/common/md5.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        var appId = '<?php echo APPID?>';
+        var timestamp = '<?php echo $signPackage["timestamp"];?>';
+        var nonceStr = '<?php echo $signPackage["nonceStr"];?>';
+        var signature = '<?php echo $signPackage["signature"];?>';
+        // 商讯核销
+        var verifyCode = "<?php echo $verifyCode?>"
+        var authority = "<?php echo $authority?>"; // 0核销 1查看订单 2数据报表 3全部
+        var ExpTimeStatus = "<?php echo $ExpTimeStatus?>"; // -1未开始  0正常  1过期
+        var useStatus = "<?php echo $useStatus?>"; // 使用状态  0 未使用  1 已使用
+        var useDateStatus = "<?php echo $useDateStatus?>"; // 除外日期  0不在除外日期  1在除外日期
+        var tmp = Date.parse(new Date()).toString();
+        tmp = tmp.substr(0, 10);
+        var sign_tmp = "SDE45FHW6KL" + tmp;
+        var md5_sign_tmp = hex_md5(sign_tmp);
+        var openid = "<?php echo $openid?>";
+        var oneaniu_css = ''
+
+        //是否有核销权限
+        $.ajax({
+            type: "post",
+            url: COUPON_URL + "Home/Requestajax/getVerifyInfoDetail",
+            async: false,
+            dataType: "json",
+            data: {
+                "sign": md5_sign_tmp,
+                "timestamp": tmp,
+                "verifyCode": verifyCode
+            },
+            success: function(data) {
+                if (data.state == 0) {
+                    $("#productname").text(data.result.productname);
+                    $("#exDate").text(data.result.startdate);
+                    $("#endDate").text(data.result.enddate);
+                    $("#keyouTime").text(data.result.verifydate);
+                    $("#verifyuser").text(data.result.verifyuser);
+
+                    $("#usedate").text(data.result.usedate);
+                    $("#orderno").text(data.result.orderno);
+                    $("#orderNo").val(data.result.orderno);
+
+                    if (data.result.usestatus == 1) {
+                        var usestatus = "已核销";
+                    } else if (data.result.usestatus == 0) {
+                        var usestatus = "未核销";
+                    }
+                    $("#useStatus").text(usestatus);
+                    $("#useState").val(data.result.usestatus);
+                }
+            }
+        });
+        // 1.判断优惠券是否已核销(使用) useStatus 0未使用  1已使用
+        if (useStatus == 1) { // 已核销
+            $("#back_btn").show();
+            $("#hexiao_btn").hide();
+            $(".tishi_wenzi").html("很抱歉，该优惠券已核销，无法核销");
+        } else if (useStatus == 0) { // 未核销
+            // 2.优惠券是否在有效期 ExpTimeStatus -1未开始  0正常  1过期
+            if (ExpTimeStatus == -1) {
+                $("#back_btn").show();
+                $("#hexiao_btn").hide();
+                $(".tishi_wenzi").html("很抱歉，该优惠券还未开始使用，无法核销");
+            } else if (ExpTimeStatus == 1) {
+                $("#back_btn").show();
+                $("#hexiao_btn").hide();
+                $(".tishi_wenzi").html("很抱歉，该优惠券已过期，无法核销");
+            } else if (ExpTimeStatus == 0) {
+                // 3.判断拥有权限 authority 0核销 1查看订单 2数据报表 3全部
+                if (authority == 0 || authority == 3) {
+                    // 4.判断除外日期 useDateStatus 0不在除外日期  1在除外日期
+                    if (useDateStatus == 0) {
+                        $("#back_btn").hide();
+                        $("#hexiao_btn").show();
+                        $(".tishi_wenzi").html("确认核销？");
+                    } else if (useDateStatus == 1) {
+                        $("#hexiao_btn").prop('disabled', true);
+                        $("#hexiao_btn").css('background', '#EBEBE4');
+                        $(".tishi_wenzi").html("很抱歉，该优惠券处于除外日期中，不可核销");
+                    }
+                    /*$("#query_order_btn").prop('disabled', true);
+                    $("#query_order_btn").css('background', '#EBEBE4');*/
+                } else if (authority == 1 || authority == 2) {
+                    $("#hexiao_btn").prop('disabled', true);
+                    $("#hexiao_btn").css('background', '#EBEBE4');
+                }
+            }
+        }
+
+        $("#hexiao_btn").on("click", function() {
+            var useState = $("#useState").val();
+            if (useState == 1) {
+                alert("不能重复核销!");
+                return;
+            }
+            $.ajax({
+                url: WX_URL + 'requestAjax.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    "verifyCode": verifyCode,
+                    "openid": openid,
+                    "identity": 'verifyProduct'
+                },
+                success: function(res) {
+                    if (res.state == 0) {
+                        alert("核销成功");
+                        $(".centen").hide();
+                        $("#hexiao_success").show();
+                    } else if (res.state == 1) {
+                        alert("核销失败!");
+                        $(".centen").hide();
+                        $("#hexiao_failed").show();
+                    }
+                },
+                error: function() {
+                    alert("失败")
+                }
+            })
+        })
+
+        $("#back_btn").on("click", function() {
+            scanQRCode(appId, timestamp, nonceStr, signature);
+        })
+        $(".btn_continue").on("click", function() {
+            scanQRCode(appId, timestamp, nonceStr, signature);
+        })
+        /**
+         * 微信拉起扫一扫
+         * @param appId, timestamp, nonceStr, signature, domId
+         * @return
+         */
+        function scanQRCode(appId, timestamp, nonceStr, signature) {
+            wx.config({
+                debug: false,
+                appId: appId,
+                timestamp: timestamp,
+                nonceStr: nonceStr,
+                signature: signature,
+                jsApiList: ['checkJsApi', 'scanQRCode']
+            });
+            wx.error(function(res) {
+                // alert("出错了：" + res.errMsg);
+            });
+            wx.ready(function() {
+                wx.checkJsApi({
+                    jsApiList: ['scanQRCode'],
+                    success: function(res) {}
+                });
+                //扫描二维码
+                wx.scanQRCode({
+                    needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
+                    scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                    success: function(res) {}
+                });
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+	.container{
+			width: 100%;
+			background: #f4f4f4;
+			height: 100%;
+			display: inline-block;
+		}
+		.headers{
+			width: 100%;
+			height:0.49rem;
+			background: #ffffff;
+			text-align: center;
+			line-height: 0.49rem;
+			/*修改*/
+		}  
+		.reservation{
+			display: inline-block;
+			float: right;
+			margin-right: 0.14rem;
+			/*修改*/
+			font-size: .14rem;
+			color: rgb(51,51,51);
+			
+		}
+		
+		
+		.lister{
+			margin-top: 0.1rem;
+			width: 3.55rem;
+			height:1.15rem;
+			background: #ffffff;
+			position: relative;
+			border-radius: 0.04rem;
+
+		}
+		.pTitle{
+			display: inline-block;
+			margin-top: 0.1rem;
+			margin-left: 0.1rem;
+			font-size: 0.16rem;
+			width: 1.17rem;
+			height:0.16rem;
+			color:rgb(51,51,51);
+		}
+		.jiantou{
+			display: inline-block;
+			float: right;
+			margin-top: 0.1rem;
+			margin-right: 0.16rem;
+			color: rgb(151,151,151);
+			font-size: 0.14rem;
+			/*修改*/
+			width: .05rem;
+			
+		}
+		/*修改*/
+		.jiantou img { 
+			width: 100%;
+			}
+			
+		.hrs{
+			width: 100%;
+			/*修改*/
+			height: 0.01rem;
+			background: rgb(230,230,230);
+			margin-top: 0.1rem;
+		}
+		.address{
+			font-size: 0.12rem;
+			color: rgb(102,102,102);
+			display: inline-block;
+			margin-left: 0.1rem;
+			margin-top:0.12rem;
+		}
+		.Remainingcarnumber{
+			margin-left: 0.1rem;
+			margin-top:0.1rem;
+			font-size: 0.12rem;
+			color: rgb(102,102,102);
+			display: inline-block;
+		}
+		.number{
+			margin-left: 0.07rem;
+			font-size: 0.12rem;
+			color: rgb(203,13,45);
+			display: inline-block;
+		}
+		.Tollstandard{
+			margin-left: 0.1rem;
+			margin-top:0.1rem;
+			font-size: 0.12rem;
+			color: rgb(102,102,102);
+			display: inline-block;
+		}
+		.hour{
+			margin-left: 0.07rem;
+			font-size: 0.12rem;
+			color: rgb(203,13,45);
+			display: inline-block;
+		}
+		.reservationCar{
+			width: 0.64rem;
+			height:0.24rem;
+			background: rgb(255,221,16);
+			position: absolute;
+			float: right;
+			top: 0.81rem;
+			right: 0.1rem;
+			line-height: 0.24rem;
+			text-align: center;
+			border-radius: 0.03rem;
+			font-size: 0.12rem;
+			color: rgb(51,51,51);
+		}
+		.footer{
+			margin-top: 0.1rem;
+			width: 3.55rem;
+			height: 2.69rem;
+			background: #fff;
+			border-radius: 0.04rem;
+
+		}
+		.pImgTitle{
+			display: inline-block;
+			margin-top: 0.14rem;
+			margin-left: 0.10rem;
+			color: rgb(164,164,164);
+			font-size: 0.14rem;
+
+		}
+		.pImg{
+			width: 3.35rem;
+			height: 2.15rem;
+			margin-top: 0.14rem;
+			margin-left: 0.10rem;
+
+		}

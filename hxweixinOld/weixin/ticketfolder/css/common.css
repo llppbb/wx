@@ -1,0 +1,255 @@
+/*身份中列表   */
+.system_information_list{
+    padding-left: 0.14rem;
+    position: relative;
+   
+    padding: 0.14rem;
+    background: #FFFFFF;
+     border-bottom: 1px solid rgb(230,230,230);
+    }
+.system_information_list p:nth-of-type(1) {
+    color: #333333;
+    font-size: 0.15rem;
+    margin-bottom: 0.14rem;
+}
+.system_information_list p:nth-of-type(2) {
+    color: #808080;
+    font-size: 0.14rem;
+}
+.removeBtn {
+    width: 0.13rem;
+    height: 0.13rem;
+    position: absolute;
+    right: 0.14rem;
+    top: 50%;
+    margin-top: -0.065rem;
+}
+.removeBtn img {
+    width: 100%;
+}
+
+/*//蒙层提示*/
+.mengceng{
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 0.5;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+}
+ .weidenglu_tishi{
+        position: fixed;
+        left: 5%;
+        top: 7%;
+        width: 90%;
+        background: #FFFFFF;
+        border-radius: 0.14rem;        
+    }
+    .weidenglu_tishi_title{
+        text-align: center;
+        padding: .15rem 0.14rem .19rem 0.14rem;
+     
+    }
+    .yangzhengChange{
+        margin: 0 0.14rem;
+        border: 1px solid rgb(230,230,230);
+    }
+    .shoujihao,.yanzhengma{
+        height: 0.57rem;
+        border-bottom: 1px solid rgb(230,230,230);
+    }
+    .numberShoujihao,.yazhengmaIput{
+        margin-top: 0.2rem;
+        padding-left: 0.14rem;
+        border: none;
+        outline: none;
+        font-size: 0.15rem;
+        width: 0.9rem;
+    }
+    .getyzm{
+    width: 1.015rem;
+    height: 0.25rem;
+    float: right;
+    text-align: center;
+    border: 1px solid #FFDD10;
+    border-radius: 0.125rem;
+    line-height: 0.25rem;
+    color: #333333;
+    font-size: 0.14rem;
+    margin-top: 0.18rem;
+    background: #FFFFFF;
+    outline: none; 
+    margin-right: 0.14rem;
+    }
+    .weidenglu_tishi_bottom{
+        border-top: 1px solid rgb(230,230,230);
+        padding: 0.2rem 0.23rem;
+        margin-bottom: 0.2rem;       
+    }
+    .quexiaoBtn,.quedingBtn{
+        width: 1.2rem;
+        height: 0.4rem;
+        border: 1px solid rgb(255,221,16);
+        text-align: center;
+        line-height: 0.4rem;
+        float: left;
+        border-radius: 0.2rem;
+        margin-bottom: 0.2rem;
+        margin-left: 0.1rem;
+    }
+    .quedingBtn{
+        background:rgb(255,221,16);
+        margin-left: 0.4rem;        
+    }
+    .weidenglu_tishi_title_p1{
+        font-size: 0.18rem;
+        color: rgb(51,51,51);
+    }
+    .weidenglu_tishi_title_p2{
+        font-size: 0.12rem !important;
+        color: rgb(128,128,128) !important;
+        text-align: left;
+    }
+/*//字体 颜色*/
+    .font_12_color_51{
+         font-size: 0.12rem;
+             color: rgb(51,51,51);
+    }
+    .font_12_color_233{
+         font-size: 0.12rem;
+         color: rgb(233,5,77);
+    }
+    .font_12_color_190{
+         font-size: 0.12rem;
+         color: rgb(190,190,190);
+    }
+   .font_16_color_51{
+         font-size: 0.16rem !important;
+        color: rgb(51,51,51) !important;
+    }
+    .font_16_color_233_46{
+          font-size: 0.16rem ;
+        color: rgb(233,46,98);
+    }
+    .font_14_color_128{
+         font-size: 0.14rem !important;
+         color: rgb(128,128,128);
+    }
+    .font_14_color_51{
+         font-size: 0.14rem !important;
+         color: rgb(51,51,51);
+    }
+     .font_14_color_233{
+         font-size: 0.14rem !important;
+         color: rgb(233,5,77);
+    }
+    .font_14_color_190{
+         font-size: 0.14rem;
+         color: rgb(190,190,190);
+    }
+    .font_15_color_51{
+         font-size: 0.15rem !important;
+         color: rgb(51,51,51);
+    }
+    .font_15_color_233{
+         font-size: 0.15rem !important;
+         color: rgb(233,5,77);
+    }
+    .font_18_color_233{
+         font-size: 0.18rem !important;
+         color: rgb(233,5,77);
+    } 
+    .font_18_color_51{
+        font-size: 0.18rem !important;
+         color: rgb(51,51,51);
+    }
+    .font_14_color_179{
+         font-size: 0.14rem !important;
+         color: rgb(179,179,179) !important;
+    }
+    .font_18_color_190{
+         font-size: 0.18rem ;
+         color: rgb(190,190,190);
+    }
+    .font_22_color_51{
+        font-size: 0.22rem;
+         color: rgb(51,51,51);
+    }
+  /*  // 底边线*/
+    .bor_bottom{
+        border-bottom: 1px solid rgb(230,230,230);
+    }
+  /*下一步*/
+ .footer{
+     position: fixed;
+     left: 0px;
+     bottom: 0px;
+    /*margin-top: 0.1rem;*/
+     width: 100%;
+     height: 0.45rem;
+     background: rgb(255,221,16);
+     text-align: center;
+     line-height: 0.45rem;
+     font-size: 0.16rem;
+     color: rgb(51,51,51);
+ }
+/*向右的建号 */
+.xiangyoujianhao{
+    width: 0.1rem;
+    height: 0.199rem;
+    position: absolute;
+    right: 0.14rem;
+    top: 50%;
+    margin-top: -0.088rem;    
+}
+.xiangyoujianhao img{
+    width: 100%;
+}
+/*添加收货地址的图片*/
+.icon_add{
+    position: absolute;
+    left: 0.14rem;
+    top: 50%;
+    width: 0.48rem;
+    height: 0.48rem;
+    margin-top: -0.24rem;        
+}
+/*地址列表 */
+.dizhi_liebiao{
+    padding: 0.14rem;
+    padding-right: 0.53rem;
+    background: #FFFFFF;
+    margin-top: 0.1rem;  
+    position: relative;  
+}
+.xingmingshoujihao{
+    clear: both;
+}
+.xingmingshoujihao_p1{
+    float: left;
+    
+}
+.xingmingshoujihao_p2{
+    float: right;    
+}
+.xiangxidizhi{
+    clear: both;
+    margin-top: 0.25rem;    
+}
+.xiangxidizhi p{
+    line-height: .2rem;
+}
+.jianhao{
+    position: absolute;
+    right: 0.14rem;
+    top: 50%;
+    margin-top: -0.088rem;
+    width: 0.1rem;
+    height: 0.199rem;
+    display: block;
+}
+.jianhao img{
+    width: 100%;
+    display: block;
+}

@@ -1,0 +1,537 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html, body, .wrap {
+    width: 100%;
+    min-height: 100%;
+    background: #f4f4f4;
+}
+
+input, select, button, textarea {
+    -webkit-appearance: none;
+}
+
+li {
+    list-style: none;
+}
+
+.full {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+html {
+    font-size: 100px;
+}
+
+body, .wrap {
+    font-size: 14px;
+}
+
+
+/*------wrap-----------------*/
+
+.wrap {
+    width: 100%;
+    background: #f4f4f4;
+}
+
+.shangpinxinxi {
+    padding-bottom: 0.14rem;
+    margin-top: 0.1rem;
+    background: #FFFFFF;
+}
+
+.shangpinxinxi_name {
+    position: relative;
+    padding-top: 0.14rem;
+    /*padding-bottom: 0.14rem;*/
+    padding-left: 0.14rem;
+    padding-right: 0.14rem;
+}
+
+.shangpinxinxi_number {
+    /*padding-bottom: 0.14rem;*/
+    padding-left: 0.14rem;
+    padding-right: 0.14rem;
+}
+
+.shangpinxinxi_youxianqi {
+    padding-top: 0.14rem;
+    margin-bottom: 0.45rem;
+    padding-left: 0.14rem;
+    padding-right: 0.14rem;
+}
+
+.shangpinxinxi_erweima {
+    width: 45%;
+    margin: 0 auto;
+    padding-bottom: 0.4rem;
+}
+
+.shangpinxinxi_erweima img {
+    width: 100%;
+    margin-bottom: 0.13rem;
+}
+
+.shangpinxinxi_erweima_tupian {
+    position: relative;
+}
+
+.img_state {
+    width: 0.685rem;
+    position: absolute;
+    right: -0.3425rem;
+    bottom: 0rem;
+}
+
+.img_state img {
+    width: 100%;
+    height: 100%;
+}
+
+.shangpin_weizhi {
+    background: #FFFFFF;
+    margin-top: 0.1rem;
+}
+
+.dianming_mobile, .address {
+    padding-top: 0.14rem;
+    padding-bottom: 0.14rem;
+    position: relative;
+    padding-left: 0.21rem;
+}
+
+.dianming_mobile img, .address img {
+    width: 100%;
+}
+
+.dianming {
+    width: 76%;
+    height: 0.39rem;
+    padding-top: 0.13rem;
+    border-right: 1px solid #e6e6e6;
+}
+
+.mobile {
+    width: 0.191rem;
+    height: 0.2rem;
+    position: absolute;
+    right: 0.369rem;
+    top: 50%;
+    margin-top: -0.1rem;
+}
+
+.shangpin_weizhi_address {
+    position: relative;
+    border: none;
+    width: 90%;
+}
+
+.shangpin_weizhi_address p {
+    padding-left: 0.15rem;
+}
+
+.adress_icon {
+    width: 0.1rem;
+    height: 0.114rem;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -0.056rem;
+}
+
+.adress_icon img {
+    position: absolute;
+    left: 0px;
+    top: 2px;
+}
+
+.danhaoshijian_xiaohao {
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+    background: #FFFFFF;
+}
+
+.danhaoshijian {
+    padding: 0.18rem 0 0.18rem 0.14rem;
+}
+
+.danhaoshijian p:nth-of-type(1) {
+    margin-bottom: 0.14rem;
+}
+
+.xiaohao {
+    padding: 0.18rem 0.14rem 0.04rem 0.14rem;
+}
+
+.xiaohao div {
+    margin-bottom: 0.14rem;
+    position: relative;
+}
+
+.xiaohao_erdu {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.erweima_tishi {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 300;
+}
+
+.tishi_shangpinxinxi_erweima_tupian {
+    width: 72%;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 0.7rem;
+}
+
+.tishi_shangpinxinxi_erweima_tupian img {
+    width: 100%;
+}
+
+.erweima_name_tishi {
+    text-align: center;
+    margin-top: 0.215rem;
+    font-size: 0.18rem;
+    color: #FFFFFF;
+}
+
+.erweima_state_tishi {
+    text-align: center;
+    margin-top: 0.26rem;
+    font-size: 0.12rem;
+    /*color: #ffdd10;*/
+}
+
+.closeBtn {
+    margin: 0 auto;
+    width: 0.36rem;
+    height: 0.36rem;
+    margin-top: 0.9rem;
+}
+
+.closeBtn img {
+    width: 100%;
+    height: 100%;
+}
+
+#address {
+    padding-top: -0.1rem;
+}
+
+.shangpinxinxi_erweima {
+    padding-bottom: 0px;
+    width: 100%;
+}
+
+.erweima_tupian {
+    width: 100%;
+    height: 0.45rem;
+    margin-top: 0.1rem;
+    line-height: 0.45rem;
+    background: #ffffff;
+    padding-left: 0.14rem;
+    position: relative;
+}
+
+.img_state {
+    width: 0.5rem;
+    height: 0.5rem;
+    position: absolute;
+    right: 0.14rem;
+    bottom: 0rem;
+}
+
+.img_state img {
+    margin-bottom: 0px;
+}
+
+.shangpinxinxi_youxianqi {
+    padding-bottom: 0.14rem;
+    margin-bottom: 0px;
+}
+
+/*点击 电话 图标  显示 */
+
+.mobile_html {
+    width: 90%;
+    position: fixed;
+    bottom: -5rem;
+    left: 5%;
+    text-align: center;
+    z-index: 50;
+}
+
+.mobile_html div {
+    line-height: 0.48rem;
+    border-radius: 0.04rem;
+    background: #FFFFFF;
+    font-size: 0.15rem;
+}
+
+.mobile_number {
+    margin-bottom: 0.08rem;
+}
+
+.mobile_number a {
+    color: rgb(234, 0, 28) !important;
+}
+
+.mobile_quxiao_btn {
+    color: rgb(0, 118, 255);
+}
+
+/*修改 展示 二维码 图片   5.9*/
+
+.erweima_img_box {
+    width: 60% !important;
+    padding-top: 0.25rem;
+    margin-left: 20%;
+    position: relative;
+}
+
+.erweima_img {
+    width: 100%;
+    height: 100%;
+}
+
+.erweima_tishi_wenzhi {
+    padding-bottom: 0.4rem;
+    margin-top: 0.13rem;
+    text-align: center !important;
+}
+
+.wenxin_tishi {
+    width: 100%;
+    background: #FFFFFF;
+    padding: 0.14rem;
+}
+
+.wenxin_tishi_title {
+    color: rgb(51, 51, 51);
+    font-size: 0.16rem;
+    padding-bottom: 0.14rem;
+}
+
+.shangpinxinxi_erweima {
+    margin-top: 0px;
+    background: #ffffff;
+}
+
+/*一个二维码*/
+
+/*.img_state{
+  width: 0.7rem;
+  height: auto !important;
+  right: -0.2rem;
+  bottom: -0.2rem;
+}*/
+
+.erweima_name_tishi {
+    margin-top: 0.4rem;
+}
+
+.tishi_shangpinxinxi_erweima_tupian {
+    width: 75%;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 0.4rem;
+}
+
+.closeBtn {
+    margin: 0 auto;
+    width: 0.36rem;
+    height: 0.36rem;
+    margin-top: .6rem;
+}
+
+.bigerweima_btn {
+    border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+.bigerweima_btn:last-child {
+    border-bottom: none !important;
+}
+
+.erweima_state_tishi {
+    width: 30%;
+    height: 0.4rem;
+    border-radius: 0.2rem;
+    margin: 0 auto;
+    background: #ffdd10;
+    line-height: 0.4rem;
+    text-align: center;
+    margin-top: 0.2rem;
+}
+
+#img_statesmal {
+    width: 0.68rem;
+    height: auto;
+}
+
+.v3 {
+    width: 100%;
+    height: 100%;
+    background: #ccc;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: url("weixin/shop/pic/imgbg2.jpg") no-repeat;
+    background-size: 100% 100%;
+    display: none;
+}
+
+.V3show {
+    width: 40%;
+    height: 1.5rem;
+    border: 1px solid rgb(51, 51, 51);
+    position: absolute;
+    left: 30%;
+    bottom: .78rem;
+    color: rgb(51, 51, 51);
+    font-size: .16rem;
+    background: url("weixin/shop/pic/img_kong.png") no-repeat;
+    background-size: 100% 100%;
+    z-index: 10;
+}
+
+.V3show img {
+    width: 100%;
+}
+
+.colseV3 {
+    width: .4rem;
+    height: .4rem;
+    color: rgb(51, 51, 51);
+    font-size: .16rem;
+    border-radius: .04rem;
+    line-height: .4rem;
+    position: absolute;
+    right: .14rem;
+    top: .2rem;
+    text-align: center;
+    z-index: 10;
+}
+
+.colseV3 img {
+    width: 100%;
+    animation: myfirst .2s linear .2s infinite alternate;
+}
+
+@keyframes myfirst {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.colseV3p {
+    text-align: center;
+    margin-top: .4rem;
+}
+
+.v3mes {
+    width: .6rem;
+    height: .6rem;
+    /*background: red;*/
+    text-align: center;
+    font-size: .14rem;
+    position: absolute;
+    left: -.3rem;
+    top: -.3rem;
+    bottom: 1.08rem;
+    z-index: 10;
+}
+
+.v3mes img {
+    width: 100%;
+}
+
+.v3mesG {
+    color: rgb(9, 134, 17);
+}
+
+.v3mesR {
+    color: rgb(195, 9, 74);
+}
+
+.v3opacity {
+    width: 100%;
+    height: 3.5rem;
+    position: absolute;
+    left: 0%;
+    bottom: 0;
+    background: url("weixin/shop/pic/img_shade.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+@media screen and (min-width: 376px) and (max-width: 414px) {
+    .colseV3p {
+        text-align: center;
+        margin-top: .35rem;
+    }
+}
+
+.shimingzhi {
+    margin-top: .1rem;
+    margin-bottom: .1rem;
+    background: #ffffff;
+    padding: .1rem;
+    color: rgb(51, 51, 51);
+}
+
+.shimingzhi_box {
+    margin-top: .1rem;
+}
+
+.shimingzhi_box p {
+    margin-top: .05rem;
+}
+
+.shimingzhi_box p span:first-child {
+    margin-right: .5rem;
+}
+
+.shangpinxinxi_youxianqi {
+    padding-bottom: 0rem !important;
+    margin-bottom: 0px;
+}
+.ballList{
+    display: flex;
+}
+.ballList span:nth-child(1){
+    flex: 1;
+}
+.ballList span:nth-child(2){
+    flex: 3;
+}
+.ballList span:nth-child(3){
+    flex: 2;
+}

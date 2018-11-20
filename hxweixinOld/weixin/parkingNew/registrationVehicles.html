@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>停车管理</title>
+    <link rel="stylesheet" type="text/css" href="weixin/common/common.css" />
+    <link rel="stylesheet" type="text/css" href="weixin/parkingNew/css/registerationVehicles.css" />
+    <!-- 停车输入框  -->
+    <link rel="stylesheet" href="weixin/parkingNew/css/parkingInput.css" type="text/css">
+    <script src="weixin/parkingNew/js/jquery-1.8.2.min.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script src="weixin/common/md5.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+</head>
+<style>
+
+    html{
+        background: url("/weixin/parkingNew/picnew/img_bg2.png") no-repeat;
+        background-size: 100%;
+    }
+    .introduce {
+        width: 96%;
+        margin-top: .5rem;
+        margin-left: 2%;
+        position: static;
+        border-top: 1px solid #f2f2f2;
+        padding-top: .14rem;
+        color: rgb(185, 185, 185);
+        font-size: .14rem;
+        line-height: .22rem;
+        padding-bottom: .14rem;
+    }
+
+    #online {
+        background: rgb(255, 221, 16);
+    }
+
+    .delbtn {
+        width: .14rem;
+        height: .14rem;
+    }
+
+    .delbtn img {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #addplateNumber {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+        position: relative;
+    }
+
+    #online {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .addicon {
+        width: 100%;
+    }
+
+    /* 车牌号输入框 */
+    .parkingInputBox{
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+    }
+
+</style>
+
+<body>
+    <div class="wrap">
+        <div class="bannerImg">
+            <div class="addplateNumber carMin" id="addplateNumber"><img src="weixin/parkingNew/picnew/btn_add.png"/></div>
+        </div>
+
+        <div class="plateNumber">
+            <ul class="plateNumberBox">
+                <!-- <li class="plateNumberList"><span>京N12345</span><span>删除</span></li> -->
+            </ul>
+        </div>
+    </div>
+
+    <div class="trackMatte"></div>
+
+    <div class="shezhi_tishi">
+        <p></p>
+    </div>
+
+    <script>
+        var uid = "<?php echo $uid ?>";
+        var openid = "<?php echo $openid ?>";
+
+        // 获取车牌列表
+        getList();
+        /*一个  按钮的  */
+        function twoanniu(centen_wenzi, message, anniu_wenzi, anniu_wenziR) {
+            var tishikuang_html = "<div id='hidechuang' style='width: 90%;position: fixed;background: #ffffff; border-radius: 0.14rem; left: 5%;top: 0.69rem;z-index:50'>" +
+                "<div style='padding-top: 0.2rem;text-align: center;border-bottom: 1px solid rgb(230,230,203);color: rgb(51,51,51);font-size: 0.16rem;padding-bottom:.2rem'>" + centen_wenzi +
+                "<div style='margin:0.2rem 0 ;width: 80%;height: 0.4rem;border-radius: 0.2rem;font-size: 0.16rem;color: rgb(51,51,51);'><input type='text' style='width:100%;height:100%;margin-left:10%;border:1px solid rgb(227,227,227);height:.57rem;padding-left:.14rem;outline:none;font-size:.15rem' placeholder='请填写车牌号' id='carnumber' /></div>" +
+
+                "<div id='message' style='margin-left:10%;margin-right:10%;font-size: 0.14rem;color: rgb(210,10,35);text-align:left;margin-top:.3rem'>" + message +
+                "</div>" +
+                "</div>" +
+                "<div id='abolish' style='-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color: transparent;margin:0.2rem 0 ;width: 40%;float:left;margin-left: 7%;height: 0.4rem;border: 1px solid rgb(255,221,16);border-radius: 0.2rem;font-size: 0.16rem;color: rgb(51,51,51);text-align: center;line-height: 0.4rem;'>" +
+                anniu_wenzi +
+                "</div>" +
+
+                "<div id='confirm' style='-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color: transparent;margin:0.2rem 0 ;width: 40%;margin-right: 7%;height: 0.4rem;background: rgb(255,221,16);border-radius: 0.2rem;font-size: 0.16rem;color: rgb(51,51,51);text-align: center;line-height: 0.4rem; float:right;'>" +
+                anniu_wenziR +
+                "</div></div>";
+            $("body").append(tishikuang_html);
+        };
+
+        function twoanniu_mes(centen_wenziT, centen_wenzi, anniu_wenzil, anniu_wenzir) {
+            var tishikuang_html =
+                "<div style='width: 90%;position: fixed;background: #ffffff; border-radius: 0.04rem; left: 5%;top: 1.5rem;z-index:50' id='delBox'><div style='padding-top: 0.2rem;text-align: center;border-bottom: 1px solid rgb(230,230,203);font-size: 0.16rem;'>" +
+                "<p style='color: rgb(51,51,51);padding-top:.1rem' id='delmesT'>" + centen_wenziT + "</p>" +
+                "<p id='delmes' style='color: rgb(224,0,61);padding:.07rem .15rem .2rem .15rem;font-size: 0.12rem'>" + centen_wenzi + "</p>" +
+                "</div><div style='-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color: transparent;margin:0.2rem 0 ;width: 40%;float:left;margin-left: 7%;height: 0.4rem;border:1px solid rgb(255,221,16);border-radius: 0.2rem;font-size: 0.16rem;color: rgb(51,51,51);text-align: center;line-height: 0.4rem;' id='delNo'>" +
+                anniu_wenzil +
+                "</div><div style='-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color: transparent;margin:0.2rem 0 ;width: 40%;margin-right: 7%;height: 0.4rem;background: rgb(255,221,16);border-radius: 0.2rem;font-size: 0.16rem;color: rgb(51,51,51);text-align: center;line-height: 0.4rem; float:right;' id='delTrue'>" +
+                anniu_wenzir +
+                "</div></div>";
+            $("body").append(tishikuang_html)
+        }
+        /*一个  按钮的  */
+        function onanniu(centen_wenziT, centen_wenzi, anniu_wenzi) {
+            var tishikuang_html =
+                "<div style='width: 90%;position: fixed;background: #ffffff; border-radius: 0.04rem; left: 5%;top: 0.69rem;z-index:50'><div style='padding-top: 0.2rem;text-align: left;border-bottom: 1px solid rgb(230,230,203);color: rgb(51,51,51);font-size: 0.16rem;'>" +
+                "<p style='color: rgb(51,51,51);padding:.07rem .15rem .2rem .15rem'>" + centen_wenziT + "</p>" +
+                "<p style='color: rgb(51,51,51);padding:.07rem .15rem .2rem .15rem'>" + centen_wenzi + "</p>" +
+                "</div><div style='-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color: transparent;margin:0.2rem 0 ;width: 80%;margin-left: 10%;height: 0.4rem;background: rgb(255,221,16);border-radius: 0.2rem;font-size: 0.16rem;color: rgb(51,51,51);text-align: center;line-height: 0.4rem;'>" +
+                anniu_wenzi +
+                "</div></div>";
+            $("body").append(tishikuang_html)
+        }
+
+        // $(".trackMatte").show();
+        // onanniu("功能开启：账户积分足够时，车辆离场将自动使用积分抵扣，无需确认支付；","功能关闭：需在线支付后可驶离车场。","关闭");
+
+        twoanniu('请添加车牌号', "", '取消', '确定');
+        $("#hidechuang").hide();
+        // 添加车牌  灰色
+        var index = $(".plateNumberBox li").length;
+        if (index >= 3) {
+            $("#addplateNumber").removeClass("carMin");
+            $("#addplateNumber").addClass("carMax");
+            $("#addplateNumber").find("img").attr("src", "weixin/parkingNew/picnew/btn_add_gray.png");
+        };
+        if (index == 0) {
+            console.log("隐藏在线停车缴费");
+            $("#online").hide();
+        }
+
+        // 添加车牌号
+        $("#addplateNumber").on("click", function() {
+            $(this).css({
+                "-webkit-tap-highlight-color": "rgba(0,0,0,0)",
+                "-webkit-tap-highlight-color":   "transparent"
+            })
+            var clas = $(this).attr("class");
+            console.log(clas);
+            var tf = clas.indexOf("carMin");
+            console.log(tf);
+            if (parseInt(tf) == parseInt(-1)) {
+                console.log("您最多绑定三个这牌");
+            } else {
+                  window.location.href = WX_URL + "user.php?addCarNum=1";
+            }
+        })
+
+        //  取消添加
+        $("#abolish").on("click", function() {
+            $("#hidechuang").hide();
+            $(".trackMatte").hide();
+            $("#carnumber").val("");
+            $("#message").html("");
+        })
+
+        //  确定添加
+        $("#confirm").on("click", function() {
+            var val = $("#carnumber").val().replace(/ /g, '');
+            if (!(/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领a-zA-Z]{1}[a-zA-Z]{1}[a-zA-Z0-9]{4,5}[a-zA-Z0-9挂学警港澳]{1}$/.test(val))) {
+                $("#message").html("请输入正确的车牌号");
+                return false;
+            }
+            var result = bindingCar(uid, val, openid);
+            if (result.state == 0) {
+                console.log("添加车牌成功");
+                tishi("添加车牌成功");
+                $("#hidechuang").hide();
+                $(".trackMatte").hide();
+                $("#carnumber").val("");
+                $("#message").html("");
+                window.location.reload();
+            } else {
+                console.log(result.message);
+                $("#message").html(result.message);
+                console.log("添加车牌失败");
+            }
+            console.log(result);
+        })
+
+        function getList() {
+            console.log(uid);
+            var querycar = queryCar(uid);
+            console.log(querycar);
+            var html = "";
+            $.each(querycar.result, function(i, k) {
+                html += '<li class="plateNumberList"><span>' + k + '</span><span class="delbtn"  onclick="twoanniu_message(this)" carnumber="' + k + '"><img src="weixin/parkingNew/picnew/icon_delete.png"/></span></li>'
+            });
+            $(".plateNumberBox").html(html);
+            var index = $(".plateNumberBox li").length;
+            console.log(index)
+            if (index >= 3) {
+                $("#addplateNumber").removeClass("carMin");
+                $("#addplateNumber").addClass("carMax");
+                $("#addplateNumber").find("img").attr("src", "weixin/parkingNew/picnew/btn_add_gray.png");
+                $("#online").hide();
+            } else {
+                $("#addplateNumber").removeClass("carMax");
+                $("#addplateNumber").addClass("carMin");
+                $("#addplateNumber").find("img").attr("src", "weixin/parkingNew/picnew/btn_add.png");
+                $("#online").show();
+            }
+            if (index == 0) {
+                console.log("隐藏在线停车缴费");
+                $("#online").hide();
+            } else {
+                $("#online").show();
+            }
+        }
+
+        function twoanniu_message(that) {
+            $(".trackMatte").show();
+            var carnumber = $(that).attr("carnumber");
+            twoanniu_mes("确定删除车牌号" + carnumber + "吗？", "", "取消", "确定");
+            $("#delTrue").on("click", function() {
+                var delreturn = delcar(that);
+                if (parseInt(delreturn) != 0) {
+                    //    alert(delreturn);
+                    $("#delmesT").html(delreturn);
+                    $("#delTrue").hide();
+                    $("#delNo").html("关闭");
+                    $("#delNo").css("margin-left","30%")
+                } else {
+                    $(".trackMatte").hide();
+                    $("#delBox").remove();
+                }
+            })
+            $("#delNo").on("click", function() {
+                $(".trackMatte").hide();
+                $("#delBox").remove();
+            })
+        }
+
+        function delcar(that) {
+            var delstate = 0;
+            var carnumber = $(that).attr("carnumber");
+            var res = deleteCarNum(uid, carnumber);
+            console.log(res);
+            if (res.state == 0) {
+                console.log("删除成功");
+                getList();
+            } else {
+                delstate = res.message;
+                console.log("删除失败");
+            }
+            return delstate;
+        }
+
+        // 停车缴费
+        $("#online").on("click", function() {
+            $(this).css({
+                "-webkit-tap-highlight-color": "rgba(0,0,0,0)",
+                 
+                "-webkit-tap-highlight-color":   "transparent"
+            })
+            window.location.href = WX_URL + "user.php?onlinepayment=1";
+        })
+
+        //停车缴费
+        $("#parkingRecord").on("click", function() {
+            window.location.href = WX_URL + "user.php?parkingRecord=1";
+        })
+
+        //车场引导
+        $("#insetboot").on('click', function(event) {
+            window.location.href = WX_URL + "user.php?parkingguide=1";
+        });
+
+
+        var appId = '<?php echo APPID?>';
+        var nonceStr = '<?php echo $nonceStr;?>';
+        var timestamp = '<?php echo $timestamp;?>';
+        var signature = '<?php echo $signature;?>';
+        // 微信分享
+        wx.config({
+            debug: false,
+            appId: appId,
+            timestamp: timestamp,
+            nonceStr: nonceStr,
+            signature: signature,
+            jsApiList: ['checkJsApi', 'onMenuShareAppMessage']
+        });
+        wx.ready(function() {
+            wx.checkJsApi({
+                jsApiList: ['onMenuShareAppMessage'],
+                success: function(res) {
+                    console.log(res);
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: '吃喝玩乐 华熙LIVE一卡通', // 分享标题
+                desc: '会员停车，不花钱！', // 分享描述
+                link: WX_URL + 'user.php?parkingnew', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: WX_URL + 'tmp/title.png', // 分享图标
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function() {
+                    // 用户确认分享后执行的回调函数
+                    console.log("分享成功");
+                },
+                cancel: function() {
+                    // 用户取消分享后执行的回调函数
+                    console.log("取消分享");
+                }
+            });
+        });
+        wx.error(function(res) {
+            // console.log(res);
+        });
+
+    </script>
+</body>
+
+</html>

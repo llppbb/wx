@@ -1,0 +1,83 @@
+.wrap{
+    background: rgb(244,244,244);
+}
+    .dizhi{
+        display: block;
+        margin-top: 0.21rem;
+        height: auto;
+        padding-left: 0.43rem;
+        position: relative;
+    }
+    .dizhi_state{
+        padding: 0.14rem 0 !important;
+    }
+    .dizhi_state_left,.dizhi_state_left div{
+        float: left;        
+    }
+    .dizhi_state_left div{
+        background: rgb(255,50,1);  
+        color: #FFFFFF;    
+        padding: 0.03rem 0.1rem;          
+    }
+    .dizhi_state_right{
+        float: right; 
+        padding-bottom: 0.14rem;      
+    }
+    .dizhi_state_right div{
+        float: left;  
+        font-size: 0.14rem;
+        color:rgb(51,51,51)     
+    }
+    .dizhi_state_img_moren,.dizhi_state_img_bianji{
+        width: 0.15rem;
+        height: 0.15rem;
+       
+        margin-right: 0.07rem;
+    }
+    .bianjiBtn{      
+        font-size: 0.14rem;
+        color:rgb(51,51,51)
+    }
+    .xiangxidizhi p{
+        line-height: 0.2rem;
+    }
+    .tianjiadizhi{
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        height: 0.45rem;
+        margin-left: 0px;
+        border-radius: 0px;
+        line-height: 0.45rem;
+    }
+    
+    .moren_img{
+        position: absolute;
+        left: 0.14rem;
+        top: 45%;
+        width: 0.15rem;
+        height: 0.15rem;
+        
+    }
+    .img_img{
+        width: 100%;
+        height: 100%;
+    }
+    
+    /*修改的  编辑图片 的位置*/
+   .dizhi_state_img_bianji{
+       margin-top: 0.03rem;
+   }
+   .xingmingshoujihao p{
+        color: rgb(255,50,1);
+        margin-top:0.14rem; 
+        margin-bottom: 0.105rem;       
+    }
+    .xingmingshoujihao p:nth-of-type(2) {
+        float: right;
+        margin-right: 0.075rem;
+    }
+    .xiangxidizhi {   
+      padding-right: 0rem;     
+    }

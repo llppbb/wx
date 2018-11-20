@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>选号</title>
+    <link rel="stylesheet" type="text/css" href="weixin/common/common.css" />
+    <link rel="stylesheet" type="text/css" href="weixin/luckball/css/common.css" />
+    <style>
+    *{
+        margin: 0px;
+        padding:0px;
+    }
+    html{
+        font-size: 100px;
+    }
+    body{
+        font-size: 12px;
+    }
+    html,body{
+        width: 100%;
+    }
+    .bigbox{
+        margin: 0 .1rem 0 .1rem;
+        border: 1px solid #E6E6E6;
+        border-radius: .02rem;
+        padding: .2rem .29rem;
+    }
+    .backHomePage{
+      width:  .55rem;
+      height: .24rem;
+      line-height: .24rem;
+      border-radius: .12rem;
+      background:#FFE35E;
+      margin-top: .4rem;
+      margin-left: .1rem;
+      padding-left: .28rem;
+      padding-right: .1rem;
+      color: #BA9420;
+      font-size: .13rem;
+    }
+    .mes{
+        color: #706606;
+        font-size: .13rem;
+        margin-bottom: .1rem;
+    }
+   .radombtn{
+       margin-top: .2rem;
+       height: .3rem;
+       border-top: 1px solid #E6E6E6;
+       border-radius: .04rem;
+       padding-top: .2rem;
+   }
+    .radombtn p{
+        float: right;
+        height: .3rem;
+        line-height: .3rem;
+        border-radius: .02rem;
+        padding-left: .3rem;
+        padding-right: .1rem;
+        background: #FFC900;
+        color: #fff;
+    }
+    /*号码被占用*/
+    .errorshow{
+        display: none;
+        margin-top: .3rem;
+        text-align: center;
+    }
+    .icon_error{
+        width: .54rem;
+        margin: 0 auto;
+    }
+    /*没有订单的时候*/
+
+    .goupiaoNo {
+        width: 100%;
+        text-align: center;
+        padding-top: 0.825rem;
+    }
+
+    .goupiaoNo img {
+        height: 1.245rem;
+    }
+
+    .goupiaoNo h2 {
+        color: #9E9E9E;
+        font-size: 0.14rem;
+        font-weight: normal;
+        color: #808080;
+    }
+
+    .goupiaoNo div {
+        width: 50%;
+        height: 0.4rem;
+        line-height: 0.4rem;
+        margin-top: 0.14rem;
+        margin-left: 25%;
+        text-align: center;
+        background: #FFDD10;
+        font-size: 0.16rem;
+        border-radius: 0.2rem;
+    }
+    .jianhaonewLeft {
+        height: 0.14rem;
+        position: absolute;
+        left: 0.04rem;
+        top: 50%;
+        margin-top: -0.07rem;
+    }
+    .inputBall{
+        width: 150%;
+        height: .5rem;
+        position: absolute;
+        left:-50%;
+        top:0px;
+        opacity: 0;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-tap-highlight-color: transparent; /* For some Androids,个人感觉是低版本号的安卓，4.0下面 */
+        outline: none;
+    }
+    .footerccc{
+        background: #CCCCCC;
+        color: #FFFFFF;
+    }
+    .inputBallNum{
+         display: flex ;
+         position: relative;
+    }
+
+    .inputBalllist{
+        flex:  1;
+        height: .55rem;
+        border: 1px solid #ccc;
+        text-align: center;
+        /*vertical-align: middle;*/
+        line-height: .55rem;
+        font-size: .36rem;
+        color: #333;
+    }
+    .pointshowBox{
+                display: none;
+    }
+    .pointshow{
+        display: flex;
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+        color: #706606;
+        font-size: .13rem;
+        line-height: .4rem;
+        margin: .1rem;
+        border: 1px solid #E6E6E6;
+        border-radius: .02rem;
+        padding-left: .14rem;
+        padding-right: .14rem;
+    }
+    .pointshow span{
+        color: #FFC900;
+    }
+
+    .ballNum{
+        border: 1px solid #696327;
+        background: #FFFEEC;
+    }
+    .ballNumOn{
+        border: 1px solid #5699FF;
+    }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="backHomePage" style="position:relative">活动首页<img src="weixin/luckball/pic/icon_home.png" class="jianhaonewLeft"/></div>
+        <div class="bigbox">
+            <div class="mes">请输入0000~9999的四位号码</div>
+            <div class="inputBallNum">
+                <input type="number" id="ballnum" class="inputBall" maxlength="4" />
+                <div class="inputBalllist ballNum"></div>
+                <div class="inputBalllist ballNum" style="margin-left:.26rem;margin-right:.26rem"></div>
+                <div class="inputBalllist ballNum" style="margin-right:.26rem"></div>
+                <div class="inputBalllist ballNum"></div>
+            </div>
+            <div class="radombtn"><p id="radombtn" style="position:relative">系统随机号码<img src="weixin/luckball/pic/icon_change.png" class="jianhaonewLeft"/></p></div>
+        </div>
+        <div class="pointshowBox">
+            <div class="pointshow">
+                <div class="pointfont">花费积分</div>
+                <div class="pointnum"><span id="payPoint"></span> 积分</div>
+            </div>
+        </div>
+        <div class="errorshow">
+            <img src="weixin/luckball/pic/icon_error.png" class="icon_error"/>
+            <p class="mes">号码被占用，请重新选择</p>
+        </div>
+        <div class="footer">完成选号</div>
+    </div>
+    <div class="mongoliaLayer" style="display:none"></div>
+    <!--尚未开始-->
+    <div id="jifenNo" class="goupiaoNo" style="display: none;">
+    <img src="weixin/luckball/pic/icon_no_started.png" />
+    <h2>下期幸运球选号尚未开始<br/>敬请期待～</h2>
+   </div>
+   <div class="shezhi_tishi">
+       <p style="color:#fff"></p>
+   </div>
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script src="weixin/luckball/js/common.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+        var activityId="<?php echo $activityId?>";
+        var uid="<?php echo $uid?>";
+        var random=MathRand();
+        //判断选号是否结束
+        judgeActState(activityId,uid);
+        // 获取积分 判断兑换方式
+        changeType(uid);
+        // 随机选号
+        $("#radombtn").on("click",function(){
+            var sendUrl = APP_URL + 'HXXCLuckyBall/ball/require_ball_random.json';
+            var json={"activityId":activityId,"uid":uid,"random":random};
+            var sendDate = JSON.stringify(json);
+            javaFnAjax(sendUrl, sendDate, function(data) {
+                console.log(data);
+                if(data.state==0){
+                    $("#ballnum").val(data.result);
+                    var radomarr = data.result.split(""); //字符串转化为数组
+                    console.log(radomarr);
+                    for(var i=0;i<radomarr.length;i++){
+                        $(".inputBalllist").eq(i).html(radomarr[i]);
+                    }
+                }else{
+                     tishi(data.message);
+                }
+            },function() {console.log("error")})
+        })
+        $(".footer").on("click",function(){
+            var ballNo=$("#ballnum").val();
+           console.log(ballNo.length);
+           console.log(ballNo);
+            if(ballNo.length!=4){
+                 tishi("请输入4位数字！");
+            }else{
+                save_ball(activityId,uid,ballNo);
+            }
+        })
+        $(".backHomePage").on("click",function(){
+            window.location.href = WX_URL + "user.php?luckballact=1";
+        })
+        // 选球入库
+        function save_ball(activityId,uid,ballNo){
+            var sendUrl = APP_URL + 'HXXCLuckyBall/ball/require_save_ball.json';
+            var json={"activityId":activityId,"uid":uid,"ballNo":ballNo};
+            var sendDate = JSON.stringify(json);
+            javaFnAjax(sendUrl, sendDate, function(data) {
+                console.log(data);
+                if(data.state=="0"){
+                    window.location.href = WX_URL + "user.php?luckballsuccess=1&activityId="+activityId;
+                }else if(data.state=="1"){
+                    tishi(data.message);
+                }else if(data.state=="2"){
+                    $(".mongoliaLayer").show();
+                    onanniLuckball(data.message, "确定");
+                    // i_know 弹窗错误提示
+                    $(".i_know").on("click",function(){
+                        $(".mongoliaLayer").hide();
+                        $(".confirm_alert_onebtn").remove();
+                    })
+                }
+            },function() {console.log("error")})
+        }
+        // 创建随机数
+        function MathRand(){
+            var Num="";
+            for(var i=0;i<4;i++)
+            {
+              Num+=Math.floor(Math.random()*10);
+            }
+            return Num;
+        }
+
+        $('#ballnum').on("focus",function(event) {
+            $('#ballnum').val("");
+            for(var i=0;i<4;i++){
+                $(".inputBalllist").eq(i).html("");
+            }
+            $(".inputBalllist").eq(0).addClass('ballNumOn').siblings('').removeClass('ballNumOn');
+        });
+        $('#ballnum').on("blur",function(event) {
+            for(var i=0;i<4;i++){
+                $(".inputBalllist").eq(i).removeClass('ballNumOn');
+            }
+        });
+        $('#ballnum').on('keyup', function() {
+            var val=$(this).val();
+            // $(".inputBallNum").html(val);
+            if(val.length>4){
+                var sub=$(this).val().substring(0,4);
+                $(this).val(sub);
+                return false;
+            }else{
+                console.log(val.length);
+                $(".inputBalllist").eq(val.length).addClass('ballNumOn').siblings('').removeClass('ballNumOn');
+                showBallNum(val);
+            }
+        });
+
+        // 创建显示球号
+        function showBallNum(num){
+            var arr=numToarr(num);
+            var kongnum=4-arr.length;
+            if(arr.length!=4){
+                for(var i=0;i<kongnum;i++){
+                    arr.push("");
+                }
+            }
+            console.log(arr);
+            for(var i=0;i<arr.length;i++){
+                $(".inputBalllist").eq(i).html(arr[i]);
+            }
+        }
+        // 数字转数组
+        function numToarr(num){
+            var newnum=num.toString();
+            var obj2 = newnum.split(""); //字符串转化为数组
+            return obj2;
+        }
+        // 兑换方式
+        function changeType(uid){
+            var sendUrl = APP_URL + 'HXXCLuckyBall/ball/require_ball_item.json';
+            var json={"uid":uid};
+            var sendDate = JSON.stringify(json);
+            javaFnAjax(sendUrl, sendDate, function(data) {
+                console.log(data);
+                var datanew=data.result;
+                payPoint=datanew.activityModel.payPoint;
+                var reward_item_html='';
+                activityId=datanew.activityModel.activityId;
+                var footerHtml='免费领取幸运球';
+                if(datanew.isFree=="N"){
+                    $("#payPoint").html(payPoint);
+                    $(".footer").html("积分兑换");
+                    $(".pointshowBox").show();
+                }
+            }, function() {
+                console.log("error");
+            });
+        }
+        //判断选号是否结束
+        function judgeActState(activityId,uid){
+            var sendUrl = APP_URL + 'HXXCLuckyBall/ball/require_can_getBall.json';
+            var json={"activityId":activityId,"uid":uid};
+            var sendDate = JSON.stringify(json);
+            javaFnAjax(sendUrl, sendDate, function(data) {
+                console.log(data);
+                if(data.state==1){
+                    $("#jifenNo").show();
+                    $(".wrap").hide();
+                }else if(data.state==2){
+                    $(".mongoliaLayer").show();
+                    onanniLuckball(data.message, "查看我的幸运球");
+                    // i_know 弹窗错误提示
+                    $(".i_know").on("click",function(){
+                        $(".mongoliaLayer").hide();
+                        $(".confirm_alert_onebtn").remove();
+                         window.location.href = WX_URL + "user.php?luckballlist=1";
+                    })
+                }
+            },function() {console.log("error")});
+        }
+    </script>
+</body>
+</html>

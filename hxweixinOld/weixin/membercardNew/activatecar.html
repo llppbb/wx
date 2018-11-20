@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>用户信息</title>
+    <link rel="stylesheet" type="text/css" href="weixin/membercardNew/css/activatecar.css" />
+    <link rel="stylesheet" type="text/css" href="weixin/common/common.css" />
+    <style>
+        .wrap {
+            display: -webkit-flex;
+            -webkit-flex-direction: column;
+            font-size: .15rem;
+            padding: 0px;
+        }
+
+        .mobile {
+            display: flex;
+            -webkit-flex-direction: row;
+            background: #fff;
+            margin-top: .1rem;
+            border: none;
+            border-bottom: 1px solid rgb(227, 227, 227);
+        }
+
+        .mobile p {
+            padding: .2rem .19rem .19rem .1rem;
+        }
+
+        .carState {
+            margin-top: 1.5rem;
+            line-height: .45rem;
+            width: 60%;
+            margin-left: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="mobile">
+            <p>手机</p>
+            <input id="mobile" type="number" placeholder="请输入手机号" class="phone" />
+        </div>
+        <div class="mobile" id="nameBox">
+            <p>姓名</p>
+            <input type="text" placeholder="请输入姓名" id="name" />
+        </div>
+        <div class="mobile birthday">
+            <p>性别</p>
+            <select name="selecte" id="sex">
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </div>
+        <div class="mobile birthday">
+            <p>生日</p>
+            <div id="birthday"></div>
+        </div>
+        <div class="mobile birthday">
+            <p>详细地址</p>
+            <input id="address" type="text" placeholder="" />
+        </div>
+        <!-- <div class="intr">
+            <div class="checkbox" checked_="0"><img src="weixin/membercardNew/pic/selected.png" /></div>
+            <p>我已阅读并同意 <span id="directionuse">会员卡信息使用说明</span></p>
+        </div> -->
+        <div class="carState activate" id="activate" act="0">提交修改</div>
+    </div>
+    <div class="mengceng"></div>
+    <div class="shezhi_tishi">
+        <p></p>
+    </div>
+
+    <script src="weixin/membercardNew/js/jquery-1.8.2.min.js"></script>
+    <script src="weixin/membercardNew/js/fontSize.js"></script>
+    <script src="weixin/membercardNew/js/datePicker.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+
+    <script>
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+
+        $("#activate").on('click', function() {
+            $(".carState").removeClass('activate');
+            $(".carState").addClass('noactivate');
+            if ($(this).attr('act') == '0') {
+                activate();
+            } else {
+                $(".carState").addClass('activate');
+                $(".carState").removeClass('noactivate');
+                return false;
+            }
+        })
+
+        var cardId = getUrlParam('card_id');
+        var openid = getUrlParam('openid');
+
+        var jsonobj = getUseruid(openid);
+        var mobile = jsonobj.result.mobile;
+        var uid = jsonobj.result.uid;
+        // 加载用户手机号
+        $("#mobile").val(mobile);
+
+        // 加载回到主面按钮
+        // goHomeBtn("body");
+
+        var code = getUrlParam('encrypt_code');
+        if (code.length > 12) { // 来自微信
+            $.ajax({
+                url: WX_URL + 'requestAjax.php',
+                type: 'POST',
+                dataType: 'json',
+                async: false,
+                data: {
+                    "code": code,
+                    "identity": "decryptCode"
+                },
+                success: function(data) {
+                    if (data.errcode == 0) {
+                        code = data.code;
+                    }
+                },
+                error: function(res) {
+                    console.log(res);
+                }
+            })
+        }
+
+        // getUserMobile openid
+        function getUseruid(openid) {
+            var jsonobj = '';
+            $.ajax({
+                url: WX_URL + 'requestAjax.php',
+                type: 'POST',
+                dataType: 'json',
+                async: false,
+                data: {
+                    "openid": openid,
+                    "identity": "amalgamate"
+                },
+                success: function(data) {
+                    console.log(data);
+                    jsonobj = data;
+                },
+                error: function(res) {
+                    console.log(res);
+                }
+            })
+            return jsonobj;
+        }
+
+        $("#selfhelp").on("click", function() {
+            window.location.href = "selfhelp.html";
+        })
+
+        var calendar = new datePicker();
+        calendar.init({
+            'trigger': '#birthday',
+            /*按钮选择器，用于触发弹出插件*/
+            'type': 'date',
+            /*模式：date日期；datetime日期时间；time时间；ym年月；*/
+            'minDate': '1900-1-1',
+            /*最小日期*/
+            'maxDate': '2100-12-31',
+            /*最大日期*/
+            'onSubmit': function() { /*确认时触发事件*/
+                var theSelectData = calendar.value;
+                $("#birthday").html(theSelectData);
+            },
+            'onClose': function() { /*取消时触发事件*/ }
+        });
+
+        $("#directionuse").on("click", function() {
+            window.location.href = "directionuse.html";
+        })
+
+        //  0是 勾选上  1是没勾选上
+        $(".checkbox").toggle(
+            function() {
+                $(this).find("img").attr("src", "weixin/membercardNew/pic/selected_1.png");
+                $(this).attr("checked_", "0");
+                $(".carState").removeClass('activate');
+                $(".carState").addClass('noactivate');
+                $(".carState").attr("act", "1");
+                console.log($(this).attr("checked_"));
+            },
+            function() {
+                $(this).find("img").attr("src", "weixin/membercardNew/pic/selected.png");
+                $(this).attr("checked_", "1");
+                $(".carState").removeClass('noactivate');
+                $(".carState").addClass('activate');
+                $(".carState").attr("act", "0");
+                console.log($(this).attr("checked_"));
+            }
+        );
+
+        function activate() {
+            var phone = $('.phone').val();
+            var checked_ = $(".checkbox").attr("checked_");
+            console.log(phone + checked_);
+            var arr = {};
+            arr.mobile = $("#mobile").val();
+            arr.name = $("#name").val();
+            arr.sex = $("#sex").val();
+            arr.birthday = $("#birthday").val();
+            arr.address = $("#address").val();
+            arr.openid = openid;
+            arr.cardId = cardId;
+            console.log(arr.name + arr.birthday);
+            if (checkPhone(phone) == false || arr.name == "" || arr.birthday == "") {
+                tishi("请完善信息！");
+                $(".carState").addClass('activate');
+                $(".carState").removeClass('noactivate');
+                return false;
+            } else {
+                $.ajax({
+                    url: WX_URL + 'requestAjax.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: false,
+                    data: {
+                        'code': code,
+                        'dataArr': arr,
+                        'identity': 'active'
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        if (data.errcode == 0) {
+                            location.href = WX_URL + "user.php?center=1";
+                            return false;
+                        } else if (data.state == -1) {
+                            alert(data.result);
+                        }
+                    }
+                })
+            }
+        }
+
+        // 验证手机号
+        function checkPhone(phone) {
+            if (!(/^1[34578]\d{9}$/.test(phone))) {
+                tishi("手机号码有误，请重填");
+                return false;
+            }
+        }
+
+        // 绑定手机
+        //没有绑定手机号
+        $("#bmconfirm").on("click", function() {
+            var mobile_number = $("#bmmobilenum").val();
+            var mobile_number_peo = $("#bmauthcCode").val();
+            var yzm = checkMobileAndSMSCode(mobile_number, mobile_number_peo);
+            if (!yzm) {
+                tishi("验证码错误")
+                return false;
+            }
+            var result = bindMobile(uid, mobile_number, mobile_number_peo);
+            if (result.state != 0) {
+                tishi(result.message);
+                return false;
+            } else {
+                console.log(result.message);
+                tishi('绑定成功！');
+                window.location.reload();
+                return false;
+            }
+        });
+
+        //绑定手机号  获取验证码
+        $("#bmgetCode").on("click", function() {
+            var get_code = $("#bmgetCode");
+            var mobile_number = $("#bmmobilenum").val();
+            getyzm(mobile_number, get_code);
+        })
+    </script>
+</body>
+
+</html>

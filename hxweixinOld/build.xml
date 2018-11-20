@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="hxweixin" default="build">
+    <property environment="env"/>
+    <target name="build" depends="make_runtime"/>
+    <property name="version-m" value="1.1" />
+    <property name="version" value="1.1.0" />
+    <property name="stability" value="stable" />
+    <property name="releasenotes" value="" />
+    <property name="projectname" value="hxweixin"/>
+    <property name="buildnumber" value="${env.BUILD_NUMBER}" />
+    <property name="buildid" value="env.BUILD_ID" />
+    <property name="tarfile" value="${projectname}-${version}.tar.gz" />
+    <property name="distfile" value="dist/${tarfile}" />
+    <fileset id="hxweixin.tar.gz" dir=".">
+        <include name="barcode/**"/>
+        <include name="lib/**"/>
+        <include name="pay/**"/>
+        <include name="phpqrcode/**"/>
+        <include name="tmp/**"/>
+        <include name="weixin/**"/>
+        <include name="*.js"/>
+        <include name="*.txt"/>
+        <include name="favicon.ico"/>
+        <include name="*.php"/>
+        <include name="*.html"/>
+    </fileset>
+    <target name="make_runtime">
+        <mkdir dir="${project.basedir}/Runtime" />
+        <mkdir dir="${project.basedir}/build/logs" />
+    </target>
+    <target name="check" description="Check variables" >
+        <fail unless="version" message="Version not defined!" />
+        <fail unless="buildnumber" message="buildnumber not defined!" />
+        <fail unless="buildid" message="buildid not defined!" />
+        <delete dir="dist" failonerror="false" />
+        <mkdir dir="dist" />
+    </target>
+    <target name="tar" depends="check" description="Create tar file for release">
+        <echo>---- Creating distribution tar for ${version} ----</echo>
+        <delete file="${distfile}" failonerror="false"/>
+        <tar destfile="${distfile}" compression="gzip">
+            <fileset refid="hxweixin.tar.gz"/>
+        </tar>
+    </target>
+</project>

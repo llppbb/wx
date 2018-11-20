@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title></title>
+    <link rel="stylesheet" href="weixin/common/common.css">
+    <link rel="stylesheet" href="weixin/orderaddress/css/style.css">
+    <link rel="stylesheet" href="weixin/orderaddress/css/font-awesome.css">
+    <style>
+        .bianjidizhi {
+            display: block;
+        }
+
+        .footer1 {
+            display: block;
+        }
+
+        .tishiColor::-webkit-input-placeholder {
+            color: #E9054D;
+            font-family: "微软雅黑";
+        }
+
+        .header {
+            height: 0.4rem;
+            width: 100%;
+            text-align: center !important;
+            line-height: 0.4rem;
+            background: #FFFFFF;
+            margin-bottom: 0.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <p id="goods">
+                <?php echo $orderDetail['goodName']?>
+            </p>
+        </div>
+        <section class="section">
+            <div class="bianjidizhi">
+                <ul>
+                    <li>收货人：<input type="text" id="receiverName" value="<?php echo $orderDetail['receiverName']?>" /></li>
+                    <li>手机：<input type="number" id="receiverMobile" value="<?php echo $orderDetail['receiverMobile']?>" /></li>
+                    <li>详细地址：<input type="text" id="receiverAddress" value="<?php echo $orderDetail['receiverAddress']?>"></li>
+                </ul>
+            </div>
+        </section>
+        <footer class="footer1">保存</footer>
+    </div>
+    <div class="shezhi_tishi">
+        <P>设置成功</P>
+    </div>
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        var uid = "<?php echo $uid?>";
+        var orderNo = "<?php echo $orderDetail['beiTaiOrderNo']?>";
+        $(".footer1").click(function() {
+            var receiverName = $("#receiverName").val();
+            var receiverMobile = $("#receiverMobile").val();
+            var receiverAddress = $("#receiverAddress").val();
+            if (receiverName == "" && receiverMobile == "" && receiverAddress == "") {
+                tishi("请填写完整的信息！");
+                return false;
+            } else if (receiverName == '') {
+                tishi("请填写收货人姓名！");
+                return false;
+            } else if (!(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(receiverMobile))) {
+                tishi("请填写正确的手机号！");
+                return false;
+            } else if (receiverAddress == '') {
+                tishi("请填写收货地址！");
+                return false;
+            } else {
+                var data = {
+                    'uid': uid,
+                    'orderNo': orderNo,
+                    'receiverName': receiverName,
+                    'receiverMobile': receiverMobile,
+                    'receiverAddress': receiverAddress,
+                    'identity': 'editAddress'
+                }
+                $.post(WX_URL + 'requestAjax.php', data, function(res) {
+                    var res = eval('(' + res + ')');
+                    if (res.state == 0) {
+                        //跳转订单详情
+                        location.href = WX_URL + "user.php?beiTaiOrderNo=" + orderNo;
+                    } else {
+                        tishi(res.message);
+                        return;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

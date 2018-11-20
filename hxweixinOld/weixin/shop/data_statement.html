@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="email=no" />
+	<!--禁止页面缩放-->
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+	<title>数据报表</title>
+	<link rel="stylesheet" type="text/css" href="weixin/shop/css/data_statement.css" />
+</head>
+<style>
+	.nodata {
+		font-size: 0.16rem;
+		width: 100%;
+		text-align: center;
+		margin-top: 0.5rem;
+	}
+</style>
+
+<body>
+	<div class="wrap">
+		<div class="data">
+			<div class="nodata" style="display:none">
+				暂无数据
+			</div>
+			<!-- <div class="data_list">
+	   	        <div class="data_list_leftimg">
+	   	            <img src="pic/img_bg.png" />
+	   	        </div>
+	   	          <p class="name" id="name">卤肉饭套餐</p>
+	   	          <p class="time">有效期至：<span id="time">sdfgsdfgsdfg</span></p>
+	   	          <p class="number">订单数量：<span id="number">222</span></p>
+	   	          <p class="yihexiaoshu">已核销数：<span class="font_color" id="henumber">1234</span></p>
+
+	   	    </div> -->
+		</div>
+	</div>
+	<script src="weixin/common/jquery.js"></script>
+	<script src="weixin/common/fontSize.js"></script>
+	<script src="weixin/common/common.js"></script>
+	<script src="weixin/common/md5.js"></script>
+	<script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+	<script>
+		var tmp = Date.parse(new Date()).toString();
+		tmp = tmp.substr(0, 10);
+		var sign_tmp = "SDE45FHW6KL" + tmp;
+		var md5_sign_tmp = hex_md5(sign_tmp);
+		var openid = "<?php echo $openid?>";
+		var mobile = "<?php echo $mobile?>";
+		console.log(openid)
+		$.ajax({
+			type: "post",
+			url: COUPON_URL + "/Home/Requestajax/getDataReportList",
+			async: false,
+			dataType: "json",
+			data: {
+				"sign": md5_sign_tmp,
+				"timestamp": tmp,
+				"mobile": mobile
+			},
+			success: function(data) {
+				var arr = data.result;
+				var centen_html = "";
+				console.log(data);
+				if (data.state == 1) { // 数据 为空的时候
+					$(".nodata").show();
+				} else { // 有数据的时候
+					$.each(arr, function(i, k) {
+						centen_html += ' <div class="data_list" attr_productid=' + k.productid + '>' +
+							'<div class="data_list_leftimg">' +
+							'<img src="' + k.productimage + '"/>' +
+							'</div>' +
+							' <p class="name" id="name">' + k.productname + '</p>' +
+							'<p class="time">有效期至：<span id="time">' + k.enddate + '</span></p>' +
+							'<p class="number">订单数量：<span id="number">' + k.ordertotal + '</span></p>' +
+							'<p class="yihexiaoshu">已核券数量：<span class="font_color" id="henumber">' + k.verifynumber + '</span></p>' +
+							'</div>'
+					});
+					$(".data").append(centen_html);
+				}
+			},
+			error: function() {
+				console.log("错误")
+			}
+		})
+
+		// 进入  数据报表页面   显示全部的
+		$(".data_list").on("click", function() {
+			var productid = $(this).attr("attr_productid");
+			location.href = WX_URL + "user.php?hexiao_show_all=1&productid=" + productid;
+		})
+
+		// 返回  商城 主页
+		goHomeBtn('body');
+	</script>
+</body>
+
+</html>

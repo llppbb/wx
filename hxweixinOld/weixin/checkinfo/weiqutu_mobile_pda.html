@@ -1,0 +1,114 @@
+<!DOCTYPE doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width,initial-scale=1.0" name="viewport">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <title></title>
+    <link href="weixin/checkinfo/css/reset.css" rel="stylesheet">
+    <link href="weixin/checkinfo/css/style.css" rel="stylesheet">
+</head>
+<style>
+    .groups1 {
+        width: 33.33% !important;
+    }
+
+    table .groups1:before {
+        left: 0rem !important;
+    }
+
+    .describe {
+        height: auto !important;
+    }
+
+    .ptext {
+        margin-bottom: 0.14rem;
+    }
+
+    .shuaxin {
+        margin-top: -0.1rem;
+    }
+</style>
+
+<body>
+    <div class="infos">
+        <div class="header">
+            <div id="ruChange">
+                <div class="ruchang_btn" id="ruchang_btn">
+                    <p>入场式数据监测</p>
+                </div>
+                <div id="PDA_btn">
+                    <p class="btn_on">PDA数据查询</p>
+                </div>
+            </div>
+        </div>
+        <div class="division">
+        </div>
+        <div class="describe">
+            <p class="ptext">
+                <span class="programName"></span>
+            </p>
+            <div class="shuaxin" id="refresh_btn">
+                <img src="weixin/checkinfo/pic/icon_shx.png" />
+            </div>
+        </div>
+        <table>
+            <tr>
+                <th class="groups1">
+                    PDA字列号
+                </th>
+                <th class="groups1">
+                    用户
+                </th>
+                <th class="groups1">
+                    数据
+                </th>
+            </tr>
+            <tbody id="area_body">
+            </tbody>
+        </table>
+    </div>
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script>
+        $.ajax({
+            url: WX_URL + 'requestAjax.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                'programId': '57599',
+                'scheduleId': '252047',
+                'identity': 'checkTicketInfo'
+            },
+            success: function(res) {
+                // alert(JSON.stringify(res));
+                var data = JSON.parse(res.result);
+                var arr = data.pdaCheckData;
+                // alert(data.programName);
+                // alert(arr);
+                $(".programName").html(data.programName);
+                $.each(arr, function(i, k) {
+                    //   alert(k.pdaId);
+                    html_tr = '<tr class="groups"><td>' + k.pdaId + '</td><td>' + k.pdaName + '</td><td>' + k.checkNumber + '</td></tr>'
+                    $("#area_body").append(html_tr);
+                });
+            },
+            error: function() {
+                alter("请求失败")
+            }
+        })
+
+        $("#ruchang_btn").on("click", function() {
+            location.href = WX_URL + 'user.php?mobileCheckTicketInfo=1';
+        })
+        $("#refresh_btn").on("click", function() {
+            window.location.reload();
+        })
+    </script>
+</body>
+
+</html>

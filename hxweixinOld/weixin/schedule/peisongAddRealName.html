@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>编辑实名制信息</title>
+    <link rel="stylesheet" href="weixin/realname/css/boundmobile.css">
+    <link rel="stylesheet" href="weixin/realname/css/shimingzhixinxi.css">
+    <style>
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -o-user-select: none;
+        }
+
+        input {
+            -webkit-user-select: auto;
+        }
+
+        /*修改 2*/
+
+        #shoujihao,
+        #yanzhengmaBtn,
+        #cardName {
+            -webkit-user-select: auto !important;
+        }
+
+        .mengcengTishi {
+            width: 100%;
+            height: 100%;
+            background: #333333;
+            opacity: 0.9;
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            display: none;
+        }
+
+        .mengcengTishi p {
+            text-align: center;
+            margin-top: 60%;
+            color: #FFFFFF;
+            font-size: 0.2rem;
+        }
+
+        .yanzheng {
+            width: 100%;
+            height: 100%;
+            padding: 0.15rem;
+            padding-top: 0px;
+        }
+
+        .yangzhengChange {
+            background: #FFFFFF;
+        }
+
+        .boxImg {
+            width: 100%;
+            text-align: center;
+        }
+
+        .cenImg {
+            width: 0.76rem;
+            margin-bottom: 0.355rem;
+        }
+
+        .shoujihao,
+        .yanzhengma {
+            height: 0.57rem;
+            width: 100%;
+            margin-left: 0%;
+            padding: 0 0.15rem;
+        }
+
+        .yanzhengma,
+        .shoujihao {
+            border: none;
+        }
+
+        .shoujihao {
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .getyzm {
+            width: 1.015rem;
+            height: 0.25rem;
+            float: right;
+            text-align: center;
+            border: 1px solid #FFDD10;
+            border-radius: 0.125rem;
+            line-height: 0.25rem;
+            color: #333333;
+            font-size: 0.14rem;
+            margin-top: 0.18rem;
+            background: #FFFFFF;
+            outline: none;
+        }
+
+        .boundBtn {
+            width: 75%;
+            height: 0.45rem;
+            background: rgb(255, 221, 16);
+            color: #333333;
+            font-size: 0.16rem;
+            margin-top: 0.45rem;
+            margin-left: 12.5%;
+            border-radius: 0.225rem;
+            outline: none;
+            border: none;
+        }
+
+        .shoujihao #shoujihao {
+            font-size: 0.15rem;
+        }
+
+        .yanzhengma input {
+            font-size: 0.15rem;
+        }
+
+        #shoujihao,
+        .getyzm,
+        #yanzhengmaBtn,
+        #boundBtn {
+            outline: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        /*修改 2*/
+
+        #shoujihao,
+        #yanzhengmaBtn {
+            -webkit-user-select: auto !important;
+        }
+
+        .ceshi {
+            width: 100%;
+            height: 30px;
+        }
+
+        #shoujihao {
+            height: auto;
+        }
+
+        .yanzheng {
+            padding: 0px;
+        }
+
+        .p_title {
+            float: left;
+            padding-top: 0.23rem;
+            font-size: 0.15rem;
+            color: rgb(51, 51, 51);
+            opacity: 0.8;
+        }
+
+        .shoujihao input,
+        .yanzhengma input {
+            float: left;
+            color: rgb(51, 51, 51)
+        }
+
+        .section {
+            margin-top: 0.2rem;
+        }
+
+        .mengcengTishi {
+            width: 100%;
+            height: 100%;
+            background: #333333;
+            opacity: 0.9;
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            display: none;
+        }
+
+        .mengcengTishi p {
+            text-align: center;
+            margin-top: 60%;
+            color: #FFFFFF;
+            font-size: 0.2rem;
+        }
+
+        .weidenglu_tishi {
+            z-index: 30;
+            position: fixed;
+            left: 10%;
+            top: 17%;
+            width: 80%;
+            background: #FFFFFF;
+            border-radius: 0.14rem;
+        }
+
+        .weidenglu_tishi_title {
+            text-align: center;
+        }
+
+        .weidenglu_tishi_bottom {
+            border-top: 1px solid rgb(230, 230, 230);
+            padding: 0.2rem 0.23rem;
+        }
+
+        .i_know {
+            width: 80%;
+            height: 0.4rem;
+            border: 1px solid rgb(255, 221, 16);
+            text-align: center;
+            line-height: 0.4rem;
+            border-radius: 0.2rem;
+            margin: 0 auto;
+            background: rgb(255, 221, 16);
+        }
+
+        .weidenglu_tishi_mobile p {
+            text-align: center;
+            font-size: 0.24rem !important;
+            color: rgb(51, 51, 51);
+            padding: 0 0 0.2rem;
+        }
+
+        .weidenglu_tishi_title_p2 {
+            text-align: center;
+            font-size: 0.2rem !important;
+            color: rgb(51, 51, 51) !important;
+            padding: 0.35rem 0.49rem 0.35rem !important;
+            line-height: 0.21rem;
+        }
+
+        #cardName {
+            width: 50%;
+            float: left;
+            font-family: 微软雅黑;
+            font-size: 0.16rem;
+            margin-top: 0.2rem;
+            color: #A9A9A9;
+            border-width: initial;
+            border-style: none;
+            border-color: initial;
+            border-image: initial;
+            outline: none;
+            background: transparent;
+        }
+
+        .shoujihao,
+        .yanzhengma {
+            position: relative;
+        }
+
+        .TiShi {
+            position: absolute;
+            right: 0rem;
+            top: 50%;
+            margin-top: -0.15rem;
+            width: 1.35rem;
+            height: 0.3rem;
+            line-height: 0.3rem;
+            padding-top: 0.02rem;
+            color: #E9054D;
+            font-family: "微软雅黑";
+            clear: both;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <section class="section">
+            <div class="yanzheng">
+                <div class="yangzhengChange">
+                    <div class="shoujihao">
+                        <p class="p_title">姓名：</p>
+                        <input type="text" placeholder="请输入真实姓名" id="shoujihao" />
+                        <div class="TiShi">请输入真实姓名</div>
+                    </div>
+                    <div class="shoujihao">
+                        <p class="p_title">证件类型：</p>
+                        <select name="cardName" id="cardName">
+                            <option value="1">身份证</option>
+                            <option value="2">护照</option>
+                            <option value="3">军官证</option>
+                            <option value="4">士兵证</option>
+                            <option value="5">台胞证</option>
+                            <option value="6">回乡证</option>
+                            <option value="99">其它证件</option>
+                        </select>
+                    </div>
+                    <div class="yanzhengma">
+                        <p class="p_title">证件号码：</p>
+                        <input type="text" placeholder="请输入身份证号" id="yanzhengmaBtn" />
+                        <div class="TiShi">请输入正确的证件号码</div>
+                    </div>
+                </div>
+                <input type="button" value="保存" class="boundBtn" id="boundBtn" />
+            </div>
+        </section>
+        <div class="mengcengTishi"></div>
+        <div class="weidenglu_tishi zhifushibai" style="display: none;">
+            <div class="weidenglu_tishi_title">
+                <p class="weidenglu_tishi_title_p2">添加成功</p>
+            </div>
+            <div class="weidenglu_tishi_bottom">
+                <div class="i_know">我知道了</div>
+            </div>
+        </div>
+</body>
+<script src="weixin/schedule/js/jquery-1.8.2.min.js"></script>
+<script src="weixin/schedule/js/fontSize.js"></script>
+<script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+<script>
+    var WX_URL = "https://wx.dev.huaxiweiying.com/"; //定义URL
+    var uid = getUrlParam('uid');
+    var orderNo = getUrlParam('orderNo');
+
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+    $("#yanzhengmaBtn").focus(function(event) {
+        $(this).next().hide();
+    });
+
+    $("#boundBtn").click(function(event) {
+        var name = $("#shoujihao").val().trim();
+        var idCard = $("#yanzhengmaBtn").val().trim();
+        var cardName = $("#cardName").find("option:selected").text();
+        var cardType = $("#cardName").val();
+        if (name == '') {
+            $("#shoujihao").next().show();
+            return false;
+        } else {
+            var strExp = new RegExp(/^[\u4E00-\u9FA5]+$/);
+            if (!strExp.test(name)) {
+                $("#shoujihao").next().show();
+                return false;
+            }
+        }
+        if (idCard == '') {
+            $("#yanzhengmaBtn").next().show();
+            return;
+        }
+        if (cardType == 1) {
+            if (idCard.length == 15) {
+                isIDCard1 = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/;
+                var  reg = new RegExp(isIDCard1);
+                if (!reg.test(idCard)) {
+                    $("#yanzhengmaBtn").next().show();
+                    return;
+                }
+            } else if (idCard.length == 18) {
+                isIDCard2 = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+                var  reg = new RegExp(isIDCard2);
+                if (!reg.test(idCard)) {
+                    $("#yanzhengmaBtn").next().show();
+                    return;
+                }
+            } else {
+                $("#yanzhengmaBtn").next().show();
+                return;
+            }
+        }
+        $.ajax({
+                url: WX_URL + 'realName.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    'uid': uid,
+                    'name': name,
+                    'idCard': idCard,
+                    'cardName': cardName,
+                    'cardType': cardType,
+                    'identity': 'addUserContacts', //标识
+                }
+            })
+            .done(function(res) {
+                if (res.state == "0") {
+                    $(".mengcengTishi").show();
+                    $(".zhifushibai").show();
+                } else {
+                    tanchuchuang(res.message);
+                    $(".tanchu_centen").on("click", function() {
+                        $('.tanchu_chuang').hide();
+                        $(this).hide();
+                    })
+                    return;
+                }
+            })
+            .fail(function(res) {
+                tanchuchuang(error);
+                $(".tanchu_centen").on("click", function() {
+                    $('.tanchu_chuang').hide();
+                    $(this).hide();
+                });
+            });
+    });
+
+    $(".i_know").click(function(event) {
+        $(".zhifushibai").hide();
+        location.href = WX_URL + "chooseRealName.php?orderNo=" + orderNo;
+    });
+
+    function tanchuchuang(msg) {
+        var html =
+            '<div class="tanchu_chuang" style="width: 100%;height: 100%; position: fixed;left: 0%;top: 0%;background: #000000;opacity: 0.7;"></div>' +
+            '<div class="tanchu_centen" style=" width: 70%;height: 1.3rem;position: fixed;left: 15%;top: 30%;background: #FFFFFF;text-align: center;border-radius: 0.1rem;"><div style="padding-top:0.4rem;padding-bottom:0.4rem">' +
+            msg +
+            '</div><div class="nice_btn" style="height: 0.3rem;line-height: 0.3rem;text-align: center;border-top: 1px solid #CCCCCC;text-align: center;">好</div></div>';
+        $("body").append(html);
+        return;
+    }
+    // 禁用微信分享
+          function onBridgeReady() {
+                 WeixinJSBridge.call('hideOptionMenu');
+            }
+
+           if (typeof WeixinJSBridge == "undefined") {
+               if (document.addEventListener) {
+                   document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+               } else if (document.attachEvent) {
+                   document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                   document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+               }
+           } else {
+               onBridgeReady();
+           }
+</script>
+
+</html>

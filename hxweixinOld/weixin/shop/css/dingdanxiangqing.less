@@ -1,0 +1,230 @@
+*{
+	padding:0;
+	margin:0;
+}
+html,body,.wrap{
+	width:100%;
+	min-height:100%;
+
+   background:rgb(244,244,244);     
+}
+input,select,button,textarea{
+	-webkit-appearance:none;
+}
+li{ 
+ list-style:none;
+}
+
+.pos(r){
+	position:relative;
+}
+.pos(a){
+	position:absolute;
+}
+.pos(f){
+	position:fixed;
+}
+.bcolor(@color:red){
+	background:@color;
+}
+.full{
+  width:100%;
+  height:100%;
+  overflow: hidden;
+}
+.w(@n:100%){
+	width:@n;
+}
+.h(@n:100%){
+	height:@n;
+}
+.posL(@L:0,@T:0){
+    position:absolute;
+    left: @L;
+    top: @T;
+}
+.posR(@R:0,@T:0){
+    position:absolute;
+    right: @R;
+    top: @T;
+}
+*,*:after,*:before{
+	-webkit-box-sizing:border-box;
+}
+a{
+	 text-decoration: none;
+}
+li{
+	list-style:none;
+}
+html{
+        font-size:100px;        
+    }
+    body,.wrap{
+        font-size: 14px;
+    }
+ 
+/*------wrap-----------------*/
+.wrap{
+	width: 100%;
+	background:rgb(244,244,244); 	
+}
+.shangpinxinxi{
+    margin-top: 0.1rem;
+    background: #FFFFFF;
+}
+.shangpinxinxi_name{
+    padding-top: 0.14rem;  
+    padding-bottom: 0.14rem; 
+    padding-left: 0.14rem;
+    padding-right: 0.14rem; 
+}
+.shangpinxinxi_number{
+     padding-bottom: 0.14rem; 
+     padding-left: 0.14rem;
+    padding-right: 0.14rem; 
+}
+.shangpinxinxi_youxianqi{
+    padding-top: 0.14rem;
+    margin-bottom: 0.45rem;
+    padding-left: 0.14rem;
+    padding-right: 0.14rem;
+}
+.shangpinxinxi_erweima{
+    .w(45%);
+    margin: 0 auto;
+    padding-bottom: 0.4rem;     
+    img{
+        .w();
+        margin-bottom: 0.13rem;
+    }   
+}
+.shangpinxinxi_erweima_tupian{
+    .pos(r);
+}
+ .img_state {
+            width: 0.685rem;
+           
+            position: absolute;
+            right: -0.3425rem;
+            bottom:0rem;
+           
+           
+        }
+        
+        .img_state img {
+            width: 100%;
+            height: 100%;
+        }
+.shangpin_weizhi{
+    background: #FFFFFF;
+    margin-top: 0.1rem;  
+}
+.dianming_mobile,.address{
+    padding-top: 0.14rem;
+    padding-bottom: 0.14rem;
+    .pos(r);
+      padding-left: 0.21rem;
+      img{
+          width: 100%;
+      }
+}
+.dianming{  
+    width: 70%;
+    line-height: 0.39rem;
+    border-right: 1px solid rgb(230,230,230);  
+}
+.mobile{
+    width: 0.191rem;
+    height: 0.2rem;
+   
+    position: absolute;
+    right:0.369rem ;
+    top: 50%;
+    margin-top: -0.1rem;
+}
+.shangpin_weizhi_address{
+      .pos(r);
+      border: none;
+      p{
+          padding-left: 0.15rem;
+      }
+}
+.adress_icon{
+    .w(0.1rem);
+    .h(0.114rem);
+    .pos(a);
+    .posL(0,50%);
+    margin-top: -0.056rem;
+   img{
+       .pos(a);
+       left: 0px;
+       top: 2px;
+   }
+}
+.danhaoshijian_xiaohao{
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+    background: #FFFFFF;
+}
+.danhaoshijian{
+    padding:0.18rem 0 0.18rem 0.14rem;
+    p{
+       &:nth-of-type(1) {
+            margin-bottom: 0.14rem;
+       } 
+    }
+}
+.xiaohao{
+    padding: 0.18rem 0.14rem 0.04rem 0.14rem;
+    div{
+        margin-bottom: 0.14rem;
+        .pos(r);
+    }
+}
+.xiaohao_erdu{
+    .pos(a);
+    .posR(0,0)
+}
+.erweima_tishi{
+    .pos(f);
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%; 
+    z-index: 300;  
+   
+}
+.tishi_shangpinxinxi_erweima_tupian{
+    width: 72%;
+    position: relative;
+    margin: 0 auto; 
+    margin-top: 0.7rem;
+    img{
+        width: 100%;
+    }
+}
+.erweima_name_tishi{
+    text-align: center;
+    margin-top: 0.215rem;
+    font-size: 0.18rem;
+    color: #FFFFFF;
+}
+.erweima_state_tishi{
+     text-align: center;
+    margin-top: 0.26rem;
+    font-size: 0.12rem;
+    color: rgb(255,221,16);
+}
+.closeBtn{
+    margin: 0 auto;
+    width: 0.36rem;
+    height: 0.36rem;
+   
+    margin-top: 0.9rem;
+    img{
+        .w();
+        .h();
+    }
+}
+

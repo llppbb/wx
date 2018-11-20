@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="email=no" />
+	<!--禁止页面缩放-->
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+	<title>扫描结果</title>
+
+</head>
+<style>
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+
+	html,
+	body,
+	.wrap {
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		padding-top: 30px;
+	}
+
+	.p1 {
+		font-size: 18px;
+		text-align: center;
+		margin-top: 10px;
+
+	}
+
+	.p2 {
+		font-size: 14px;
+		text-align: center;
+		margin-top: 10px;
+
+	}
+
+	.p3 {
+		width: 100px;
+		height: 45px;
+		text-align: center;
+		line-height: 45px;
+		margin: 0 auto;
+		border: 1px solid #CCCCCC;
+		font-size: 14px;
+		text-align: center;
+		margin-top: 20px;
+		border-radius: 4px;
+	}
+</style>
+
+<body>
+	<div class="wrap">
+		<p class="p1">该优惠券已使用，不可重复领取</p>
+
+		<p class="p3" id="back">返回</p>
+	</div>
+	<script src="weixin/common/jquery.js"></script>
+	<script src="weixin/common/fontSize.js"></script>
+	<script src="weixin/common/common.js"></script>
+	<script src="weixin/common/md5.js"></script>
+	<script>
+		$("#back").on("click", function() {
+			location.href = WX_URL + "user.php?data_statement=1";
+		})
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>增加收货地址</title>
+    <link rel="stylesheet" href="weixin/addresslist/css/getadress.css">
+</head>
+<style>
+    .bianjidizhi {
+        display: block;
+    }
+
+    .footer1 {
+        display: block;
+    }
+
+    .tishiColor::-webkit-input-placeholder {
+        color: #E9054D;
+        font-family: "微软雅黑";
+    }
+
+    .header {
+        height: 0.4rem;
+        width: 100%;
+        text-align: center !important;
+        line-height: 0.4rem;
+        background: #FFFFFF;
+        margin-bottom: 0.1rem;
+    }
+
+    .mengcengTishi {
+        width: 100%;
+        height: 100%;
+        background: #333333;
+        opacity: 0.9;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        display: none;
+    }
+
+    .mengcengTishi p {
+        text-align: center;
+        margin-top: 60%;
+        color: #FFFFFF;
+        font-size: 0.2rem;
+    }
+
+    .weidenglu_tishi {
+        z-index: 30;
+        position: fixed;
+        left: 10%;
+        top: 17%;
+        width: 80%;
+        background: #FFFFFF;
+        border-radius: 0.14rem;
+    }
+
+    .weidenglu_tishi_title {
+        text-align: center;
+    }
+
+    .weidenglu_tishi_bottom {
+        border-top: 1px solid rgb(230, 230, 230);
+        padding: 0.2rem 0.23rem;
+    }
+
+    .i_know {
+        width: 80%;
+        height: 0.4rem;
+        border: 1px solid rgb(255, 221, 16);
+        text-align: center;
+        line-height: 0.4rem;
+        border-radius: 0.2rem;
+        margin: 0 auto;
+        background: rgb(255, 221, 16);
+    }
+
+    .weidenglu_tishi_mobile p {
+        text-align: center;
+        font-size: 0.24rem !important;
+        color: rgb(51, 51, 51);
+        padding: 0 0 0.2rem;
+    }
+
+    .weidenglu_tishi_title_p2 {
+        text-align: center;
+        font-size: 0.2rem !important;
+        color: rgb(51, 51, 51) !important;
+        padding: 0.35rem 0.49rem 0.35rem !important;
+        line-height: 0.21rem;
+    }
+
+    li input {
+        width: 75%;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <section class="section">
+            <div class="bianjidizhi">
+                <ul>
+                    <li>收货人：<input type="text" id="consignee" placeholder="请输入收货人姓名" /></li>
+                    <li>手机：<input type="number" id="mobile" placeholder="请输入11位手机号" /></li>
+                    <li>详细地址：<input type="text" id="address" placeholder="请输入详细地址信息" /></li>
+                </ul>
+            </div>
+        </section>
+        <div class="mengcengTishi"></div>
+        <div class="weidenglu_tishi zhifushibai" style="display: none;">
+            <div class="weidenglu_tishi_title">
+                <p class="weidenglu_tishi_title_p2">添加成功</p>
+            </div>
+            <div class="weidenglu_tishi_bottom">
+                <div class="i_know">我知道了</div>
+            </div>
+        </div>
+        <footer class="footer1">
+            <P>保存</P>
+        </footer>
+    </div>
+    <script src="weixin/schedule/js/jquery-1.8.2.min.js"></script>
+    <script src="weixin/schedule/js/fontSize.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        var WX_URL = "https://wx.dev.huaxiweiying.com/"; //定义URL
+        var uid = getUrlParam('uid');
+        var orderNo = getUrlParam('orderNo');
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+        $('#consignee').focus(function() {
+            $('#consignee').attr('placeholder', '');
+        })
+        $('#consignee').blur(function() {
+            if ($("#consignee").val() == "") {
+                $('#consignee').attr('placeholder', '请输入收货人姓名');
+                $("#consignee").addClass('tishiColor');
+            }
+        })
+        $('#mobile').focus(function() {
+            $('#mobile').attr('placeholder', '');
+        })
+        $('#mobile').blur(function() {
+            if ($('#mobile').val() == "") {
+                $('#mobile').attr('placeholder', '请输入11位手机号');
+                $('#mobile').addClass('tishiColor');
+            }
+        })
+        $('#address').focus(function() {
+            $('#address').attr('placeholder', '');
+        })
+        $('#address').blur(function() {
+            if ($('#address').val() == "") {
+                $('#address').attr('placeholder', '请输入详细地址信息');
+                $('#address').addClass('tishiColor');
+            }
+        })
+
+        //提交 非空
+        $(".footer1").click(function() {
+            var sMobile = $("#mobile").val();
+
+            if ($("#consignee").val() == "") {
+                $("#consignee").addClass('tishiColor');
+                return false;
+            }
+            if (!(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(sMobile))) {
+                $('#mobile').val('');
+                $('#mobile').attr('placeholder', '请输入11位手机号');
+                $('#mobile').addClass('tishiColor');
+                $(".footer1").attr("disabled", true);
+                return false;
+            }
+            if ($('#address').val() == "") {
+                $('#address').attr('placeholder', '请输入详细地址信息');
+                $('#address').addClass('tishiColor');
+                return false;
+            } else {
+                var data = {
+                    uid: getUrlParam('uid'),
+                    name: $('#consignee').val(),
+                    mobile: $('#mobile').val(),
+                    address: $('#address').val(),
+                    identity: 'addUserAddress',
+                }
+                $.post(WX_URL + 'addressList.php', data, function(res) {
+                    if (res.state == 0) {
+                        $(".mengcengTishi").show();
+                        $(".zhifushibai").show();
+                    } else {
+                        // alert(res.message);
+                        return;
+                    }
+                }, 'json');
+            }
+        })
+
+        $(".i_know").click(function(event) {
+            $(".zhifushibai").hide();
+            location.href = WX_URL + "chooseAddress.php?orderNo=" + orderNo;
+        });
+
+        // 禁用微信分享
+              function onBridgeReady() {
+                     WeixinJSBridge.call('hideOptionMenu');
+                }
+
+               if (typeof WeixinJSBridge == "undefined") {
+                   if (document.addEventListener) {
+                       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                   } else if (document.attachEvent) {
+                       document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                   }
+               } else {
+                   onBridgeReady();
+               }
+    </script>
+</body>
+
+</html>

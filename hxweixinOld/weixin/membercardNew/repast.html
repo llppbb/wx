@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>就餐取号</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        html {
+            font-size: 100px;
+        }
+
+        body {
+            font-size: 12px;
+        }
+
+        .wrap {
+            padding: .1rem 10%;
+            height: 100%;
+            background: rgb(255, 255, 255);
+        }
+
+        .rtitle {
+            width: 100%;
+            border-bottom: 1px solid rgb(230, 230, 230);
+            padding-bottom: .14rem;
+            margin-bottom: .14rem;
+        }
+
+        .rtitleH {
+            font-size: .18rem;
+            color: rgb(51, 51, 51);
+        }
+
+        .rtitleC {
+            font-size: .15rem;
+            color: rgb(51, 51, 51);
+            line-height: .22rem;
+        }
+
+        .rcenter {
+            font-size: .14rem;
+            color: rgb(153, 153, 153);
+            line-height: .22rem;
+        }
+
+        .skipbtn {
+            width: 30%;
+            margin-left: 35%;
+            margin-top: .26rem;
+            border-radius: .04rem;
+            border: 1px solid rgb(153, 153, 153);
+            color: rgb(153, 153, 153);
+            font-size: .14rem;
+            text-align: center;
+            height: .3rem;
+            line-height: .3rem;
+        }
+
+        .skipbtnMew {
+            font-size: .12rem;
+            color: rgb(182, 182, 182);
+            margin-top: .06rem;
+            text-align: center;
+        }
+
+        .codeImg {
+            width: 100%;
+            margin-top: .14rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+        <div class="rtitle">
+            <p class="rtitleH">尊敬的华熙会员</p>
+            <p class="rtitleC">建议您识别下方二维码关注华熙会员中心公众号，以接收消息通知，如餐饮排号信息、停车计费信息、积分变动信息等。您可按以下步骤使用该功能：</p>
+        </div>
+        <div class="rcenter">
+            <p>1.识别二维码关注公众号</p>
+            <p>2.点击公众号下方菜单“会员服务”</p>
+            <p>3.在“会员服务”中选择相应功能</p>
+            <img src="pic/weixinicon.png" class="codeImg" />
+        </div>
+        <div class="skipbtn">关闭</div>
+        <div class="skipbtnMew">关闭后想接收消息请自行关注华熙会员中心</div>
+    </div>
+
+    <script src="../common/jquery.js"></script>
+    <script src="js/fontSize.js"></script>
+    <script src="../common/common.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <script>
+        goHomeBtn("body");
+        $(".skipbtn").on("click", function() {
+            $.post(WX_URL + 'requestAjax.php', {
+                identity: 'closeSubscribeState'
+            }, function(data) {
+                console.log(data);
+            });
+            window.location.href = "https://api.mwee.cn/api/web/weixin/near.php?token=f6cddc2391f9a108d38116a4456ec0b35aa2a88d&mall=168650";
+        })
+    </script>
+</body>
+
+</html>

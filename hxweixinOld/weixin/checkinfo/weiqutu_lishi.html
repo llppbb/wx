@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<head>
+    <title>票区图</title>
+    <meta charset="UTF-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />-->
+    <link rel="stylesheet" href="weixin/checkinfo/css/piaoqutu.css" />
+</head>
+<style>
+    .common {
+        float: left;
+        margin-left: 13px;
+        height: 50px;
+    }
+
+    .common p,
+    .common select {
+        float: left;
+    }
+
+    .common select {
+        padding: 3px 5px;
+        padding-top: 2px;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <div class="top">
+
+            <div class="changguan common">
+                <p>场馆：</p>
+                <select name="">
+                    <option value="1">乐视体育生态中心</option>
+                    <option value="2">M空间</option>
+              </select>
+            </div>
+            <div class="changdi common">
+                <p>场地：</p>
+                <select name="">
+                    <option value="1">乐视体育生态中心演唱会</option>
+                    <option value="2">乐视体育生态中心篮球赛</option>
+                </select>
+            </div>
+            <div class="xiangmu common">
+                <p>项目：</p>
+                <select name="">
+                    <option value="1">张学友演唱会</option>
+                    <option value="2">张学友演唱会</option>
+                </select>
+            </div>
+            <div class="changci common">
+                <p>场次：</p>
+                <select name="">
+                    <option value="1">10月2日第一场</option>
+                    <option value="2">10月2日第一场</option>
+                </select>
+            </div>
+            <!--总比例-->
+            <table cellspacing="0" cellpadding="0" class="table_jinchang">
+                <thead>
+                    <tr>
+                        <th>入场数</th>
+                        <th>座位数</th>
+                        <th>已售票数</th>
+                        <th>上座率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="scheduleCheckCount">60</td>
+                        <td class="seatCount">100</td>
+                        <td>已售票数</td>
+                        <td class="zongbili">60%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="tab_now">
+            <div class="quyushuju tab_now_on" id="quyuBtn">区域数据</div>
+            <div class="pdashuju" id="PDABtn">PDA数据</div>
+            <div class="shujudaochu" id="PDABtn">数据导出</div>
+        </div>
+        <div class="centen">
+            <div class="centen_quyushuju">
+                <!--区域部分-->
+                <table cellspacing="0" cellpadding="0" class="table_quyu">
+                    <thead>
+                        <tr>
+                            <th>通道</th>
+                            <th>座位数</th>
+                            <th>出票数</th>
+                            <th>进场人数</th>
+                        </tr>
+                    </thead>
+                    <tbody id="area_body">
+                        <tr>
+                            <td>60</td>
+                            <td>100</td>
+                            <td>出票数</td>
+                            <td>22</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="centen_pdashuju" style="display: none;">
+                <table class="pda_table" border="1" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th>PDA序列号</th>
+                        <th>用户名</th>
+                        <th>数据</th>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>张三</td>
+                        <td>asdfa</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script>
+        $("#quyuBtn").on("click", function() {
+            $(this).addClass("tab_now_on");
+            $(this).siblings().removeClass("tab_now_on");
+            $(".centen_quyushuju").show();
+            $(".centen_pdashuju").hide();
+        })
+        $("#PDABtn").on("click", function() {
+            $(this).addClass("tab_now_on");
+            $(this).siblings().removeClass("tab_now_on");
+            $(".centen_pdashuju").show();
+            $(".centen_quyushuju").hide();
+        })
+    </script>
+</body>
+
+</html>

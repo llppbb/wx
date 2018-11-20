@@ -1,0 +1,462 @@
+<!DOCTYPE doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width,initial-scale=1.0" name="viewport">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title id="title"></title>
+    <link href="weixin/shop/css/reset.css" rel="stylesheet">
+    <link href="weixin/shop/css/shop_shangpin_xiangqing.css" rel="stylesheet">
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script src="weixin/common/md5.js"></script>
+    <script src="weixin/shop/js/common.js"></script>
+    <script language="javascript" src="weixin/shop/js/shop_shangpin_xiangqing.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+</head>
+<style>
+    .header_img img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+</style>
+
+<body>
+    <!--未登录 提示 -->
+    <div class="maskContent" style="display:none">
+        <div class="alertkuang">
+            <p class="palert">您需要先绑定手机才能领取优惠券</p>
+            <input type="button" class="yanzhengma" id="get_code" value="获取验证码" />
+            <input type="number" class="inp1" placeholder="请输入手机号">
+            <input type="number" class="inp2" placeholder="短信验证码">
+            <hr id="hrs">
+            <div class="quxiao" id="quxiao_btn">取消</div>
+            <div class="queding" id="queding_btn">确定</div>
+        </div>
+    </div>
+    <div class="header_img"><img src="" id="header_img_src" /></div>
+    <div class="jieshao">
+        <p class="ptitles" id="product_id"></p>
+        <p>
+            <span class="spanNum" id="product_price">0</span><span class="integral">积分</span>
+            <!-- <span class="element">20元</span><span class="heng"></span>-->
+            <!-- <span class="infos">仅限购票用户</span> -->
+            <hr>
+            <span class="dangqian">库存状态：</span><span class="numbers" id="product_surplusnumber">0</span>
+            <span class="times"><span id="times">有效期至：</span><span id="product_enddate">2017年2月28日</span></span>
+        </p>
+    </div>
+    <div class="fenge"></div>
+    <div class="shops">
+        <p class="lives"><span id="name"></span><span id="mobile_btn"><img src="weixin/shop/pic/icon_phone.png" alt="" class="imgs"></span></p>
+        <hr class="hr2">
+        <div class="jianhao_f" id="map_btn">
+            <div class="address">
+                <div class="address_before"></div><span id="address"></span></div>
+            <!-- <span class="jianhao"><img src="weixin/shop/pic/gengduo.png"/></span> -->
+        </div>
+    </div>
+
+    <div class="fenges"></div>
+    <div class="footers">
+        <p class="pshopings">商品详情</p>
+        <p class="pmiaoshu" id="product_productDesc"></p>
+    </div>
+    <div class="footers">
+        <p class="pshopings">温馨提示</p>
+        <p class="pmiaoshu" id="reminderText"></p>
+    </div>
+    <div class="footer_btn">免费领取</div>
+
+    <div class="mobile_html">
+        <!-- <div class="mobile_number">
+            <a href="tel:15711459478">15711459478</a>
+        </div>
+        <div class="mobile_number">
+            <a href="tel:15711459478">15711459478</a>
+        </div>
+        <div class="mobile_number">
+            <a href="tel:15711459478">15711459478</a>
+        </div> -->
+        <div class="mobile_quxiao_btn">取消</div>
+    </div>
+
+    <div class="shezhi_tishi">
+        <P>设置成功</P>
+    </div>
+    <script>
+        var productid = "<?php echo $productid?>";
+        var mobile = "<?php echo $mobile?>";
+        //console.log(productid);
+        var uid = "<?php echo $uid?>";
+        var false_ = true;
+        var sendUrl = COUPON_URL + "Home/Requestajax/getGoodsList";
+        var sendData = {
+            "sign": md5_sign_tmp,
+            "timestamp": tmp,
+            "productId": productid
+        };
+        var exchangetype = '';
+        fnAjax(sendUrl, sendData, function(data) {
+            //console.log(data);
+            var data = data.result[0].list[0];
+            console.log(data);
+            // 获取 已兑换 张数 要穿的  参数 项目 id
+            window.productId = data.productid;
+            window.producttype = data.producttype;
+            window.needrealname = data.needrealname;
+            // 获取 最大 限定 张数
+            window.exchangemaxnumber = data.exchangemaxnumber;
+            //console.log(data);
+            exchangetype = data.exchangetype;
+
+            // 添加 结构
+            add_html(data);
+            // 判断 是否 免费
+            judge_money(data);
+        }, null);
+
+        console.log(false_)
+
+        // 如果 false_ 为真的 时候 可以 点击   为 假的 的 时候  剩余 张数 不足
+        if (false_) {
+            // 获取 个人 兑换 总数
+            getUserExchangeNum();
+            $(".footer_btn").on("click", function() {
+                ///console.log(exchangetype);
+                var mobile = "<?php echo $mobile?>"; //0  没有绑定
+                if (mobile == 0) {
+                    no_bind_phone();
+                } else {
+                    // 免费
+                    if (exchangetype == "0") {
+                        //alert("mianfeilingqu")
+                        //免费兑换
+                        exchangetype_free();
+                    } else if (exchangetype == "1") {
+                        //积分 兑换
+                        exchangetype_integral();
+                    } else if (exchangetype == "2") {
+                        exchangetype_money();
+                    }
+                }
+            })
+        }
+
+        // 获取 个人 兑换 总数
+        function getUserExchangeNum() {
+            var sendUrl = COUPON_URL + "Home/Requestajax/getUserExchangeNum";
+            var sendData = {
+                "sign": md5_sign_tmp,
+                "timestamp": tmp,
+                "uid": uid,
+                "productId": productid,
+                "userMobile": mobile
+            };
+            fnAjax(sendUrl, sendData, function(data) {
+                //已购买总数
+                window.buytotalnumber = data.result.buytotalnumber;
+                //目前剩余总数
+                window.now_surplusnumber = data.result.surplusnumber;
+                //单个用户最大兑换数
+                window.now_exchangemaxnumber = data.result.exchangemaxnumber;
+                //用户历史购买数量
+                window.exchangenum = data.result.exchangenum;
+                //alert(exchangenum);
+                console.log(data);
+            }, null)
+        }
+
+        //页面结构
+        function add_html(data) {
+            $("#header_img_src").attr("src", data.productimage);
+            $("#product_id").html(data.productname);
+            $("#title").html(data.productname);
+            var surplusnumber=0;
+            if(data.surplusnumber==0){
+                surplusnumber="无货";
+            }else if(data.surplusnumber>0 && data.surplusnumber<=10){
+                surplusnumber="稀缺商品";
+            }else if(data.surplusnumber>10 && data.surplusnumber<=50){
+                    surplusnumber="库存紧张";
+            }else if(data.surplusnumber>50){
+                surplusnumber="库存充足";
+            }
+            $("#product_surplusnumber").html(surplusnumber);
+
+            $("#product_productDesc").html(data.productdesc);
+            $("#reminderText").html(data.remindertext);
+            $("#address").html(data.address);
+            $("#name").html(data.shopname);
+            console.log(data.phone.split(","));
+            var phone_arr = data.phone.split(",")
+            if (parseInt(data.producttype) == 13) {
+                $("#times").html("开始时间：");
+                $("#product_enddate").html(data.startdate);
+            } else {
+                $("#product_enddate").html(data.enddate);
+            }
+            for (var i = 0; i < phone_arr.length; i++) {
+                var phone_arr_html = '<div class="mobile_number">' +
+                    '<a href="tel:' + phone_arr[i] + '">' + phone_arr[i] + '</a>' +
+                    '</div>';
+                $(phone_arr_html).insertBefore('.mobile_quxiao_btn')
+            }
+        }
+        //判断剩余票数
+        function funSurplusnumber(surplusnumber) {
+            // 判断 剩余 的 张数
+            if (surplusnumber > 0) {
+                //alert("剩余票数大于0可以兑换")
+                $(".footer_btn").css({
+                    "background": "rgb(255, 221, 16)"
+                });
+            } else {
+                false_ = false;
+                return false;
+            }
+        }
+        // 判断 商品 类型
+        function judge_money(data) {
+            // 免费
+            if (data.exchangetype == 0) {
+                //  alert("maifei");
+                $("#product_price").html("免费");
+                $("#product_price").next().hide();
+                funSurplusnumber(data.surplusnumber);
+            }
+            //积分
+            else if (data.exchangetype == 1) {
+                //alert("jifen");  积分 换
+                $("#product_price").html(data.point);
+                $(".footer_btn").html("积分兑换");
+                funSurplusnumber(data.surplusnumber);
+            }
+            //花钱
+            else if (data.exchangetype == 2) {
+                $("#product_price").html(data.price);
+                $("#product_price").next().html("元");
+                $(".footer_btn").html("立即购买");
+                funSurplusnumber(data.surplusnumber);
+            }
+        }
+
+        //没有 绑定 手机
+        function no_bind_phone() {
+            show_mengceng();
+            $(".maskContent").show();
+            var obj = $("#get_code");
+            //获取验证码
+            $("#get_code").on("click", function() {
+                var mobile_number = $(".inp1").val();
+                //alert("mobile"+mobile_number);
+                getyzm(mobile_number, obj)
+            })
+            //绑定手机
+            $("#queding_btn").on("click", function() {
+                var mobile_number = $(".inp1").val();
+                var mobile_number_peo = $(".inp2").val();
+                var yzm = checkMobileAndSMSCode(mobile_number, mobile_number_peo);
+                if (!yzm) {
+                    alert("验证码错误")
+                    return false;
+                }
+                var result = bindMobile(uid, mobile_number, mobile_number_peo);
+                if (result.state != 0) {
+                    alert(result.message);
+                    return false;
+                } else {
+                    alert('绑定成功！');
+                    $(".dongtaimengceng").remove();
+                    $(".maskContent").hide();
+                    window.location.reload();
+                }
+            })
+        }
+
+        // 免费 兑换
+        function exchangetype_free() {
+            $("#product_price").html('免费');
+            $("#product_price").next().hide();
+            if (parseInt(exchangenum) >= parseInt(now_exchangemaxnumber) || (parseInt(exchangenum) + 1) > parseInt(now_exchangemaxnumber)) {
+                //提示框
+                show_mengceng();
+                onanniu('此商品只能兑换' + now_exchangemaxnumber + '次，您的次数已用完', '知道了');
+                i_konw_hide();
+                // 可兑换
+            } else {
+                // 商品 免费时 创建 订单
+                createOrder();
+            }
+        }
+
+        // 商品 免费时 创建 订单
+        function createOrder() {
+            //alert("md5_sign_tmp："+md5_sign_tmp+"|tmp："+tmp+"|uid:"+uid+"|productid:"+productid+"|mobile:"+mobile);
+            var sendUrl = COUPON_URL + "Home/Requestajax/createOrder";
+            var data = {
+                "uid": uid,
+                "productId": productid,
+                "userMobile": mobile
+            };
+            var sendData = createSign(data);
+            fnAjax(sendUrl, sendData, function(data) {
+                console.log(data);
+                var orderNo = data.result.orderNo;
+                if (data.state == 0) {
+                    // 判断 积分 是否 够
+                    location.href = WX_URL + "user.php?duihuan_success=1&shangxun_orderNo=" + orderNo;
+                } else {
+                    alert(data.result);
+                    return false;
+                }
+            }, null)
+        }
+
+        //  积分  兑换
+        function exchangetype_integral() {
+            // 不可兑换
+            if (getUserExchangeNum * 1 > exchangemaxnumber * 1) {
+                show_mengceng();
+
+                if (needrealname == 1) {
+                    onanniu('该场次每个用户限购' + exchangemaxnumber + '张', '确定');
+                } else {
+                    onanniu('此商品只能兑换' + exchangemaxnumber + '次，您的次数已用完', '知道了');
+                }
+                i_konw_hide();
+                // 可兑换
+            } else {
+                // 判断 积分 是否 够
+                jifen_fun();
+            }
+        }
+
+        //获取 个人积分  判断积分 是否够 兑换
+        function jifen_fun() {
+            console.log("uid: " + uid);
+            console.log("WX_URL: " + WX_URL);
+            var point = "";
+            var sendUrl = WX_URL + 'requestAjax.php';
+            var sendData = {
+                'uid': uid,
+                'identity': 'getUserPoint'
+            }
+            fnAjax(sendUrl, sendData, function(data) {
+                // 获取 个人积分  存在问题
+                //console.log(data)
+                point = data.result.point;
+                judge_point(point);
+            }, null)
+        }
+
+        // 判断 积分是否 充足
+        function judge_point(point) {
+            var product_price = $("#product_price").html();
+            if (point < product_price) {
+                //alert("积分不足");
+                show_mengceng();
+                onanniu('抱歉，您的积分不足', '知道了');
+                i_konw_hide();
+            } else {
+                if ( needrealname == 1) {
+                    location.href = WX_URL + "user.php?tijiaoCBA=1&productid=" + productid;
+                } else {
+                    location.href = WX_URL + "user.php?tijiao=1&productid=" + productid;
+                }
+            }
+        }
+
+        //付款
+        function exchangetype_money() {
+            if (parseInt(exchangenum) >= parseInt(now_exchangemaxnumber) || (parseInt(exchangenum) + 1) > parseInt(now_exchangemaxnumber)) {
+                //提示框
+                show_mengceng();
+                if (needrealname == 1) {
+                    onanniu('该场次每个用户限购' + exchangemaxnumber + '张', '确定');
+                } else {
+                    onanniu('此商品只能兑换' + exchangemaxnumber + '次，您的次数已用完', '知道了');
+                }
+                i_konw_hide();
+                // 可兑换
+            } else {
+                if ( needrealname == 1) {
+                    location.href = WX_URL + "user.php?tijiaoCBA=1&productid=" + productid;
+                } else {
+                    location.href = WX_URL + "user.php?tijiao=1&productid=" + productid;
+                }
+            }
+        }
+
+        //  绑定手机 弹窗 点击  取消
+        $("#quxiao_btn").on("click", function() {
+            $(".inp1").val("");
+            $(".inp2").val("");
+            $(".maskContent").hide();
+            $(".dongtaimengceng").remove();
+        })
+
+        // 已兑换次数 超过 最大兑换数  提示框
+        function i_konw_hide() {
+            setTimeout(function() {
+                console.log($(".i_konw"));
+                $(".i_konw").on("click", function() {
+                    $(this).parent().remove();
+                    $(".dongtaimengceng").remove();
+                })
+            }, 1000);
+        }
+
+        //设置头图的样式
+        var W = $("#header_img_src").width();
+        var H = (W / 1.05);
+
+        $("#header_img_src").css("height", H + "px");
+        var HH = $("#header_img_src").height();
+
+        if (W == 320) {
+            $("#header_img_src").css("height", 304 + "px");
+            var HH1 = $("#header_img_src").height();
+        }
+
+        $("#mobile_btn").on('click', function() {
+            //alert(3);
+            show_mengceng();
+            $(".mobile_html").css({
+                "bottom": "0.1rem",
+                "transition": " bottom 0.5s",
+                "-moz-transition": " bottom 0.5s",
+                /* Firefox 4 */
+                "-webkit-transition": "bottom 0.5s",
+                /* Safari 和 Chrome */
+                "-o-transition": " bottom 0.5s",
+            })
+        })
+        $(".mobile_quxiao_btn").on("click", function() {
+            $(".mobile_html").css({
+                "bottom": "-5rem",
+                "transition": " bottom 0.5s",
+                "-moz-transition": " bottom 0.5s",
+                /* Firefox 4 */
+                "-webkit-transition": "bottom 0.5s",
+                /* Safari 和 Chrome */
+                "-o-transition": " bottom 0.5s",
+            })
+            $(".dongtaimengceng").remove();
+        })
+
+        // 回到首页
+        goHomeBtn("body");
+        $("#back_shop").css('bottom', '0.6rem');
+    </script>
+
+</body>
+
+</html>

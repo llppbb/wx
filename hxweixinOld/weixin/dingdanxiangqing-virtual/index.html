@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>订单详情</title>
+    <link rel="stylesheet" href="weixin/dingdanxiangqing-virtual/css/style.css">
+</head>
+<style>
+    .erhangsuojin {
+        padding-right: 0.38rem;
+        padding-left: 0.1rem;
+    }
+
+    .mobilehao {
+        margin-right: 0.45rem;
+    }
+
+    .lister {
+        height: 0.84rem;
+        line-height: 0.84rem;
+        position: relative;
+        padding-top: 0.12rem;
+    }
+
+    .xiadanshijian {
+        position: absolute;
+        left: 0.08rem;
+        top: -0.15rem;
+        font-size: 0.12rem !important;
+        color: #808080;
+    }
+
+    .peisong ul li {
+        line-height: 0.2rem;
+    }
+
+    .peisong ul li p {
+        font-family: "微软雅黑";
+        color: #333333;
+        font-size: 0.18rem;
+    }
+
+    .peisong ul li p span {
+        font-family: "微软雅黑";
+        color: #ED3771;
+        font-size: 0.18rem;
+    }
+
+    .tishiP {
+        padding-top: 0.43rem;
+        font-size: 0.12rem;
+        color: #808080;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <section class="section">
+            <div class="xiangqing">
+                <h3><?php echo $orderDetail['goodName']?></h3>
+                <div class="jianshuqian lister">数量:<span class="jianSpan"><?php echo $orderDetail['quantity']?></span><span> 件</span><span class="three"><?php echo $orderDetail['score']?></span><span> 金币</span>
+                    <div class="xiadanshijian">
+                        <p>下单时间：<span><?php echo $orderDetail['orderDateTime']?></span></p>
+                    </div>
+                </div>
+                <div class="peisong">
+                    <ul>
+                        <li>
+                            <p>兑换码：<span><?php echo $orderDetail['giftCode']?></span></p>
+                        </li>
+                        <li>
+                            <p>卡号：<span><?php echo $orderDetail['cardNum']?></span></p>
+                        </li>
+                        <li>
+                            <p>密码：<span><?php echo $orderDetail['cardCode']?></span></p>
+                        </li>
+                        <li>
+                            <p>有效期至：<span><?php echo $orderDetail['expTime']?></span></p>
+                        </li>
+                    </ul>
+                    <P class="tishiP">请妥善保存您的卡号和密码，请勿泄露。并在有效期内使用。</P>
+                </div>
+                <div class="dingdanhao">
+                    <p>订单号：<span><?php echo $orderDetail['orderNo']?></span></p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="weixin/common/zepto.min.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+</body>
+
+</html>

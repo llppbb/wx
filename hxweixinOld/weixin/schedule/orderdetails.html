@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <!--禁止页面缩放-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <title>订单详情</title>
+    <link rel="stylesheet" href="weixin/schedule/FontAwesome/css/simple.switch.three.css" type="text/css">
+    <link rel="stylesheet" href="weixin/schedule/FontAwesome/css/css.css" type="text/css">
+    <link rel="stylesheet" href="weixin/schedule/FontAwesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="weixin/schedule/css/zhifu.css">
+    <link rel="stylesheet" href="weixin/schedule/css/common.css">
+        <style>
+            .shezhi_tishinew {
+                /*width: 3rem;*/
+                border-radius: 0.04rem;
+                background: #000000;
+                opacity: 0.7;
+                position: fixed;
+                padding: 0.07rem 0.14rem;
+                left: 0px;
+                top: 30%;
+                color: #FFFFFF;
+                text-align: center;
+                display: none;
+            }
+            .deletebtn img{
+                width: .11rem;
+            }
+            .seats{
+                width: 90%;
+                margin-left: 5%;
+                margin-bottom: .1rem;
+                padding: .13rem;
+                background: #ffffff;
+            }
+            .seatslist{
+                margin-bottom: .07rem;
+                font-size: .18rem;
+                color: #333333;
+            }
+            .realNamelist{
+                width: 100%;
+                font-size: .14rem;
+                color: #808080;
+            }
+        </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <div class="addressmes" style="display:none">
+        </div>
+
+        <div class="personmobile spaceBetween borrad" style="margin-bottom:.1rem">
+            <div>购票人手机号</div>
+            <div><?php echo $mobile?></div>
+        </div>
+         <div class="seats borrad"></div>
+        <div class="titcketmes borrad">
+            <div class="tmproduct bordas">
+                <div class="productName"></div>
+                <div class="productTime"></div>
+            </div>
+            <div class="tmNumMoney spaceBetween bordas">
+                <div class="fontL ticketCount"></div>
+                <div class="tmMoney payAmount"></div>
+            </div>
+            <div class="tmsendtype spaceBetween bordas">
+                <div class="fontL">快递费</div>
+                <div><span class="freight"></span>元</div>
+            </div>
+            <div class="tmsendtype spaceBetween">
+                <div class="fontL">积分抵扣</div>
+                <div><span class="payPoint"></span>元</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mengceng"></div>
+    <div class="weidenglu_tishi">
+        <div class="weidenglu_tishi_title">
+            <p class="weidenglu_tishi_title_p2">支付失败！订单会为您保留10分钟，请您尽快支付</p>
+        </div>
+        <div class="weidenglu_tishi_bottom">
+            <div class="i_know">我知道了</div>
+        </div>
+    </div>
+
+    <script src="weixin/common/jquery.js"></script>
+    <script src="weixin/common/fontSize.js"></script>
+    <script src="weixin/common/common.js"></script>
+    <script src="https://www.jq22.com/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="weixin/schedule/js/simple.switch.js"></script>
+    <script type="text/javascript" src="https://pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500338441"></script>
+    <!--修改-->
+    <script>
+        var uid = "<?php echo $uid?>";;
+        var openId = "<?php echo $openid?>";
+        var orderNo = "<?php echo $orderNo?>";
+        // var ticketType = "<?php echo $lockInfo['ticketType']?>";
+        var ticketType = 0;
+        var realNameStatus = "";
+        var surplus = ""; // 订单剩余支付时间（秒）
+        var timezone = $("#timezone");
+        var jsApiParameters = ""; //支付签名
+
+        getTicketOrderDetail(uid,orderNo);
+        /*按钮插件*/
+        $(".c6").simpleSwitch({
+            "theme": "Green"
+        });
+
+        $(function() {
+            var intDiff = parseInt(surplus); //倒计时总秒数量
+            // var intDiff = 60; //倒计时总秒数量
+            function changeType() {
+                $('.zhifuBtn').text('订单已取消');
+                $('.zhifuBtn').css('background', 'gray');
+                // location.href = WX_URL + "user.php?ticketList=1";
+                return;
+            }
+            if (intDiff <= 1) {
+                return false;
+            } else {
+                timer(intDiff, timezone, changeType);
+            }
+        });
+
+        $(".zhifuBtn").click(function(event) {
+            var usePoint = $("#usePoint").prop('checked');
+            var buyerNumber = "";
+            var receiverName, receiverMobile, receiverAddress;
+            if (ticketType == 0) {
+                receiverName = "";
+                receiverMobile = "";
+                receiverAddress = "";
+            }
+            var ticketNum = "";
+            var viewers = new Array();
+            if (realNameStatus != 0) {
+                var shenfenzhenghao = $(".idCard");
+                var name_name = $(".relnameListName");
+                var cardNames = $(".cardName");
+                var cardTypes = $(".cardType");
+                for (var i in shenfenzhenghao) {
+                    var id = shenfenzhenghao[i].innerHTML;
+                    var name = name_name[i].innerHTML;
+                    var cardName = cardNames[i].innerHTML;
+                    var cardType = cardTypes[i].innerHTML;
+                    if (name == undefined && id == undefined) {
+                        break;
+                    }
+                    viewers.push(new ObjStory(name, id, cardName, cardType));
+                }
+                if (viewers.length == 0) {
+                    tishinew("请添加实名制信息！");
+                    return;
+                }
+                if (viewers.length != ticketNum) {
+                    tishinew("您购买了" + ticketNum + '张票' + ',需要' + ticketNum + '个实名信息！');
+                    return;
+                }
+            }
+        });
+
+
+        function getTicketOrderDetail(uid,orderNo){
+            $.ajax({
+                    url: WX_URL + 'requestAjax.php',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        'uid': "2016615195885",
+                        'orderNo': "30012018012611120100955201394650",
+                        'identity': 'getTicketOrderDetail'
+                   },
+                    async:false,
+                    success:function(data){
+                        console.log(data);
+                        $(".productName").html(data.result.cnName);
+                        $(".productTime").html(data.result.playTime);
+                        $(".ticketCount").html(data.result.ticketNumber+"张");
+                        $(".payAmount").html(data.result.totalAmount+"元");
+                        $(".freight").html(data.result.freight);
+                        $(".payPoint").html(data.result.payPoint);
+                        $(".payPoint").html(data.result.payPoint);
+                        // 实际支付金额
+                        $("#totalAmout").html(data.result.payAmount+"元");
+                       if(data.result.ticketType==0){
+                          //    需要地址
+                         $(".addressmes").show();
+                          if(data.result.ticketOrderAddress){
+                              var html='<div class="hasaddress">'+
+                                  '<div class="addressNmae">收货人：<span>'+data.result.ticketOrderAddress.name+' </span></div>'+
+                                  '<div class="addressMobile">收货人手机号：<span>'+data.result.ticketOrderAddress.mobile+'</span></div>'+
+                                  '<div class="addressDetailed">收货人地址：<span>'+data.result.ticketOrderAddress.address+'</span></div>'+
+                              '</div>';
+                              $(".addressmes").html(html);
+                          }
+                       }
+                       var seatshtml='';
+                       var realname='';
+                    //    realNameStatus  1实名制  0非实名制
+                    //    realNameType  1一票一证  0一单一证
+                     $.each(data.result.ticketLockInfoIdCards,function(i, k) {
+                         if(data.result.realNameStatus==1){
+                             realname='<div class="realNamelist spaceBetween">'+
+                               '<div>'+k.ticketPriceId+'元</div>'+
+                               '<div>实名制信息'+k.idCard+'</div>'+
+                             '</div>';
+                         }
+                         seatshtml+='<div class="seatslist">'+
+                         '<span style="margin-right:.1rem">'+k.venueAreaName+'</span>'+
+                         '<span>'+k.lineno+'</span>'+
+                         '<span>'+k.rankno+'</span>'+
+                         '</div>'+realname;
+                     });
+                      $(".seats").html(seatshtml);
+                    }
+                })
+        }
+
+    </script>
+</body>
+
+</html>

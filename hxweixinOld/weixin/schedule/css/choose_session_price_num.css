@@ -1,0 +1,541 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body,
+.wrap {
+    width: 100%;
+    min-height: 100%;
+    background: #f4f4f4;
+}
+
+input,
+select,
+button,
+textarea {
+    -webkit-appearance: none;
+}
+
+li {
+    list-style: none;
+}
+
+.full {
+    width: 100%;
+}
+
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+html {
+    font-size: 100px;
+}
+
+body,
+.wrap {
+    font-size: 12px;
+}
+
+
+/*------wrap-----------------*/
+
+.wrap {
+    width: 100%;
+    min-height: 100%;
+    background: #f4f4f4 !important;
+    padding-bottom: 0.7rem;
+}
+
+.header {
+    border-top: 1px solid #e6e6e6;
+}
+
+.header p {
+    font-size: 0.16rem;
+    color: #808080;
+    /*padding: 0.14rem;*/
+    /*background: #FFFFFF;*/
+}
+
+.choose {
+    margin-top: 0.1rem;
+    background: #FFFFFF;
+}
+
+.choose_title {
+    font-size: 0.12rem;
+    color: #808080;
+    padding: 0.14rem 0.14rem;
+}
+
+.choose_seesion_centen {
+    padding-left: 0.14rem;
+    padding-right: 0.14rem;
+}
+
+.choose_seesion_price {
+    color: #808080;
+    -webkit-column-width: 100%;
+    -moz-column-width: 100%;
+    -webkit-column-gap: 5px;
+    -moz-column-gap: 5px;
+    float: left;
+    border: 1px solid #b3b3b3;
+    border-radius: 0.04rem;
+    text-align: center;
+    margin-right: 0.14rem;
+    margin-bottom: 0.15rem;
+    padding: 0.085rem 0.225rem;
+}
+
+/*.choose_seesion_time {
+    height: 0.31rem;
+    border: 1px solid #b3b3b3;
+    border-radius: 0.04rem;
+    text-align: center;
+    line-height: 0.31rem;
+    margin-right: 0.14rem;
+    margin-bottom: 0.15rem;
+}*/
+
+.choose_seesion_time_on,
+.choose_seesion_price_on {
+    border: 1px solid #E8BA02 !important;
+    color: #E8BA02 !important;
+}
+
+.choose_seesion_price_W {
+    width: 45%;
+}
+
+.choose_num_span {
+    color: #808080;
+    margin-left: 0.07rem;
+}
+
+.choose_seesion_jisuan {
+    width: 0.35rem;
+    height: 0.275rem;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+    line-height: 0.275rem;
+    float: left;
+    font-size: 0.25rem;
+    margin-top: 0.16rem;
+}
+
+.choose_seesion_jian {
+    color: #e6e6e6;
+}
+
+.choose_seesion_number {
+    border: none;
+    color: #e9064e;
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+}
+
+.choose_seesion_add {
+    color: #e6e6e6;
+    border: 1px solid #333333;
+    color: #333333;
+}
+
+.allprice {
+    margin-top: 0.16rem;
+    float: right;
+}
+
+.allprice p {
+    float: left;
+}
+
+.allprice p:nth-of-type(1) {
+    font-size: 0.12rem;
+    color: #808080;
+    margin-right: 0.07rem;
+    margin-top: 0.03rem;
+}
+
+#price {
+    font-size: 0.2rem;
+    color: #ed3771;
+}
+
+.allprice p:nth-of-type(2) span:nth-of-type(2) {
+    color: #808080;
+    font-size: 0.12rem;
+    margin-left: 0.07rem;
+}
+
+.footerNext {
+    text-align: center;
+    line-height: 0.45rem;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background: #ffdd10;
+}
+
+.choose_seesion_NOprice {
+    position: relative;
+    border: 1px solid #E6E6E6;
+    color: #E6E6E6;
+    padding-top: 0.025rem;
+    padding-bottom: 0.145rem;
+}
+
+.mengceng {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #666666;
+    opacity: 0.7;
+}
+
+.dengluchenggong_tishi {
+    display: none;
+    border-radius: 0.04rem;
+    width: 40%;
+    height: 0.52rem;
+    background: #000000;
+    opacity: 0.6;
+    position: fixed;
+    left: 30%;
+    top: 40%;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 0.52rem;
+}
+
+.flex {
+    width: 100%;
+    height: 0.42rem;
+    clear: both;
+}
+
+/*.choose_seesion_time {
+    line-height: 0.2rem !important;
+    height: auto;
+    padding-top: 0.05rem;
+    padding-bottom: 0.05rem;
+}*/
+
+.choose_seesion_centen_flex {
+    padding: 0.14rem;
+    height: auto;
+    padding-bottom: 0.25rem;
+}
+
+.choose_seesion_centen_jisuan {
+    height: 0.85rem;
+}
+
+.weidenglu_tishi {
+    position: absolute;
+    left: 5%;
+    top: 7%;
+    width: 90%;
+    background: #FFFFFF;
+    border-radius: 0.14rem;
+}
+
+.weidenglu_tishi_title {
+    text-align: center;
+    padding: .15rem 0.14rem .19rem 0.14rem;
+}
+
+.yangzhengChange {
+    margin: 0 0.14rem;
+    border: 1px solid #e6e6e6;
+}
+
+.shoujihao,
+.yanzhengma {
+    height: 0.57rem;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.numberShoujihao,
+.yazhengmaIput {
+    margin-top: 0.2rem;
+    padding-left: 0.14rem;
+    border: none;
+    outline: none;
+    font-size: 0.15rem;
+    width: 0.9rem;
+}
+
+.getyzm {
+    width: 1.015rem;
+    height: 0.25rem;
+    float: right;
+    text-align: center;
+    border: 1px solid #FFDD10;
+    border-radius: 0.125rem;
+    line-height: 0.25rem;
+    color: #333333;
+    font-size: 0.14rem;
+    margin-top: 0.18rem;
+    background: #FFFFFF;
+    outline: none;
+    margin-right: 0.14rem;
+}
+
+.weidenglu_tishi_bottom {
+    border-top: 1px solid #e6e6e6;
+    padding: 0.2rem 0.23rem;
+    margin-bottom: 0.2rem;
+}
+
+.quexiaoBtn,
+.quedingBtn {
+    width: 1.2rem;
+    height: 0.4rem;
+    border: 1px solid #ffdd10;
+    text-align: center;
+    line-height: 0.4rem;
+    float: left;
+    border-radius: 0.2rem;
+    margin-bottom: 0.2rem;
+    margin-left: 0.1rem;
+}
+
+.quedingBtn {
+    background: #ffdd10;
+    margin-left: 0.4rem;
+}
+
+.weidenglu_tishi_title_p1 {
+    font-size: 0.18rem;
+    color: #333333;
+}
+
+.weidenglu_tishi_title_p2 {
+    font-size: 0.12rem !important;
+    color: #808080 !important;
+    text-align: left;
+}
+
+.choose_seesion_price_box {
+    position: relative;
+    -webkit-column-width: 210px;
+    -moz-column-width: 210px;
+    -webkit-column-gap: 5px;
+    -moz-column-gap: 5px;
+    height: auto;
+    padding-bottom: 0px;
+}
+
+.choose_seesion_price,
+.choose_seesion_time {
+    float: left;
+}
+
+/*.choose_seesion_time {
+    width: 100% !important;
+}*/
+
+.choose_seesion_price_W {
+    width: 45% !important;
+}
+
+.yidenglu_tihsi {
+    position: fixed;
+    left: 5%;
+    top: 7%;
+    width: 90%;
+    background: #FFFFFF;
+    border-radius: 0.14rem;
+}
+
+.yidenglu_tihsi_title {
+    text-align: center;
+    padding: .15rem 0.14rem .19rem 0.14rem;
+}
+
+.yangzhengChange {
+    margin: 0 0.14rem;
+    border: 1px solid #e6e6e6;
+}
+
+.shoujihao,
+.yanzhengma {
+    height: 0.57rem;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.numberShoujihao,
+.yazhengmaIput {
+    margin-top: 0.2rem;
+    padding-left: 0.14rem;
+    border: none;
+    outline: none;
+    font-size: 0.15rem;
+    width: 0.9rem;
+}
+
+.getyzm {
+    width: 1.015rem;
+    height: 0.25rem;
+    float: right;
+    text-align: center;
+    border: 1px solid #FFDD10;
+    border-radius: 0.125rem;
+    line-height: 0.25rem;
+    color: #333333;
+    font-size: 0.14rem;
+    margin-top: 0.18rem;
+    background: #FFFFFF;
+    outline: none;
+    margin-right: 0.14rem;
+}
+
+.yidenglu_tihsi_bottom {
+    border-top: 1px solid #e6e6e6;
+    padding: 0.2rem 0.23rem;
+    margin-bottom: 0.2rem;
+}
+
+#ViewUnpaidOrders {
+    width: 1.2rem;
+    height: 0.4rem;
+    border: 1px solid #ffdd10;
+    text-align: center;
+    line-height: 0.4rem;
+    float: left;
+    border-radius: 0.2rem;
+    margin-bottom: 0.2rem;
+    margin-left: 0.1rem;
+}
+
+#ViewUnpaidOrders {
+    background: #ffdd10;
+    margin-left: 0.4rem;
+}
+
+.yidenglu_tihsi_title_p1 {
+    font-size: 0.18rem;
+    color: #333333;
+}
+
+.yidenglu_tihsi_title_p2 {
+    font-size: 0.16rem !important;
+    color: #808080 !important;
+    text-align: left;
+}
+
+.yidenglu_tihsi_mobile p {
+    text-align: center;
+    font-size: 0.24rem !important;
+    color: #333333;
+    padding: 0rem 0 0.2rem 0;
+}
+
+.quehuodengji {
+    position: absolute;
+    left: 50%;
+    bottom: 0.01rem;
+    font-size: 0.1rem;
+    margin-left: -0.19rem;
+    color: #ed3771;
+    -webkit-transform: scale(0.95, 0.95);
+}
+
+
+/*修改 加减号 */
+
+.choose_seesion_jian p {
+    width: 0.35rem;
+    height: 0.275rem;
+    line-height: 0.275rem;
+    text-align: center;
+}
+
+.numberShoujihao {
+    width: 55%;
+    color: rgb(128, 128, 128);
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    outline: none;
+    background: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.getyzm,
+.yazhengmaIput {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.shezhi_tishi {
+    border-radius: 0.04rem;
+    background: #000000;
+    opacity: 0.6;
+    position: fixed;
+    left: 36%;
+    top: 30%;
+    padding: 0 0.1rem;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 0.32rem;
+}
+
+.mengceng {
+    display: none;
+}
+
+.weidenglu_tishi {
+    display: none;
+}
+
+.pricearea {
+    display: none;
+}
+
+#removeBtn {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.weidenglu_tishi_mobile p {
+    text-align: center;
+    font-size: 0.24rem !important;
+    color: rgb(51, 51, 51);
+    padding: 0rem 0 0.2rem 0;
+}
+.weizhifudingdan_tihsi{
+        top: 17%;
+    }
+
+.weizhifudingdan_tihsi_title_p2{
+    padding-top: 0.3rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    color: rgb(51,51,51) !important;
+}
+.choose_seesion_time {
+    border: 1px solid #E6E6E6;
+    color: #808080;
+    border-radius: 0.04rem;
+    margin-right: 0.14rem;
+    margin-bottom: 0.15rem;
+    padding: 0.085rem 0.2rem;
+}
