@@ -1,9 +1,0 @@
-log/*
-pay/logs/*
-.ftpconfig
-.ftpignore
-local_conf.php
-/weixin/game/*
-/weixin/gamesmenu/*
-*/.tags
-*/.tags_sorted_by_file
